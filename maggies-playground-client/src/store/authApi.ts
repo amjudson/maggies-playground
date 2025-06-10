@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 interface LoginRequest {
   email: string;
@@ -30,11 +30,11 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_BASE_API_URL,
     prepareHeaders: (headers) => {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token')
       if (token) {
-        headers.set('authorization', `Bearer ${token}`);
+        headers.set('authorization', `Bearer ${token}`)
       }
-      return headers;
+      return headers
     },
   }),
   endpoints: (builder) => ({
@@ -53,6 +53,6 @@ export const authApi = createApi({
       }),
     }),
   }),
-});
+})
 
-export const { useLoginMutation, useRegisterMutation } = authApi; 
+export const { useLoginMutation, useRegisterMutation } = authApi 

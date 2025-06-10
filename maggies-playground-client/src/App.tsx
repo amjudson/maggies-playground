@@ -1,9 +1,9 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import { store } from './store/store';
-import AppRoutes from './routes/AppRoutes';
-import './App.scss';
+import React from 'react'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
+import { store } from './store/store'
+import AppRoutes from './routes/AppRoutes'
+import './App.scss'
 
 const App: React.FC = () => {
     return (
@@ -12,7 +12,7 @@ const App: React.FC = () => {
                 <AppRoutes />
             </BrowserRouter>
         </Provider>
-    );
-};
+    )
+}
 
-export default App;
+export default App

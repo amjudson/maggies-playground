@@ -5,6 +5,8 @@ import './Auth.scss';
 
 const Register: React.FC = () => {
     const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
@@ -21,10 +23,26 @@ const Register: React.FC = () => {
             return;
         }
 
+        if (!firstName.trim() || !lastName.trim()) {
+            setError('First name and last name are required');
+            return;
+        }
+
         try {
-            const result = await register({ email, password, confirmPassword }).unwrap();
-            localStorage.setItem('token', result.token);
-            navigate('/dashboard'); // or wherever you want to redirect after registration
+            await register({ 
+                email, 
+                password, 
+                confirmPassword,
+                firstName: firstName.trim(),
+                lastName: lastName.trim()
+            }).unwrap();
+            
+            // Redirect to login page after successful registration
+            navigate('/login', { 
+                state: { 
+                    message: 'Registration successful! Please log in with your new account.' 
+                }
+            });
         } catch (err) {
             setError('Registration failed. Please try again.');
         }
@@ -36,6 +54,28 @@ const Register: React.FC = () => {
                 <h2>Register</h2>
                 {error && <div className="error-message">{error}</div>}
                 
+                <div className="form-group">
+                    <label htmlFor="firstName">First Name</label>
+                    <input
+                        type="text"
+                        id="firstName"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="lastName">Last Name</label>
+                    <input
+                        type="text"
+                        id="lastName"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        required
+                    />
+                </div>
+
                 <div className="form-group">
                     <label htmlFor="email">Email</label>
                     <input

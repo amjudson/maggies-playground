@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '../../store/authApi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { loginSuccess } from '../../store/authSlice';
 import './Auth.scss';
 
 const Login: React.FC = () => {
@@ -8,8 +10,13 @@ const Login: React.FC = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
+    const location = useLocation();
+    const dispatch = useDispatch();
     
     const [login, { isLoading }] = useLoginMutation();
+
+    // Get success message from location state if it exists
+    const successMessage = location.state?.message;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -18,7 +25,8 @@ const Login: React.FC = () => {
         try {
             const result = await login({ email, password }).unwrap();
             localStorage.setItem('token', result.token);
-            navigate('/dashboard'); // or wherever you want to redirect after login
+            dispatch(loginSuccess(result));
+            navigate('/');
         } catch (err) {
             setError('Invalid email or password');
         }
@@ -28,6 +36,7 @@ const Login: React.FC = () => {
         <div className="auth-container">
             <form onSubmit={handleSubmit} className="auth-form">
                 <h2>Login</h2>
+                {successMessage && <div className="success-message">{successMessage}</div>}
                 {error && <div className="error-message">{error}</div>}
                 
                 <div className="form-group">

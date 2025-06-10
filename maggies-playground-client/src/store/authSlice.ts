@@ -1,13 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AuthResponse } from './authApi';
 
 interface AuthState {
     isAuthenticated: boolean;
-    user: string | null;
+    token: string | null;
+    user: AuthResponse['user'] | null;
     error: string | null;
 }
 
 const initialState: AuthState = {
     isAuthenticated: false,
+    token: null,
     user: null,
     error: null,
 };
@@ -19,9 +22,10 @@ const authSlice = createSlice({
         loginStart: (state: AuthState) => {
             state.error = null;
         },
-        loginSuccess: (state: AuthState, action: PayloadAction<string>) => {
+        loginSuccess: (state: AuthState, action: PayloadAction<AuthResponse>) => {
             state.isAuthenticated = true;
-            state.user = action.payload;
+            state.token = action.payload.token;
+            state.user = action.payload.user;
             state.error = null;
         },
         loginFailure: (state: AuthState, action: PayloadAction<string>) => {
@@ -29,6 +33,7 @@ const authSlice = createSlice({
         },
         logout: (state: AuthState) => {
             state.isAuthenticated = false;
+            state.token = null;
             state.user = null;
             state.error = null;
         },

@@ -6,9 +6,7 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
+    "plugin:@typescript-eslint/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -19,19 +17,12 @@
     "sourceType": "module"
   },
   "plugins": [
-    "react",
     "@typescript-eslint"
   ],
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
   "rules": {
     "quotes": ["error", "single"],
     "semi": ["error", "never"],
     "comma-dangle": ["warn", "always-multiline"],
-    "react/react-in-jsx-scope": "off",
     "jsx-quotes": ["error", "prefer-single"]
   }
 }

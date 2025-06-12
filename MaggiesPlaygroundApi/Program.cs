@@ -20,6 +20,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Register services
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IClientTypeService, ClientTypeService>();
+builder.Services.AddScoped<IRaceService, RaceService>();
+builder.Services.AddScoped<IGenderService, GenderService>();
+builder.Services.AddScoped<IPersonTypeService, PersonTypeService>();
 
 // Configure Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()

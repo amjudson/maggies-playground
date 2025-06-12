@@ -13,6 +13,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
 	public DbSet<Client> Clients { get; set; } = null!;
 	public DbSet<ClientType> ClientTypes { get; set; } = null!;
+	public DbSet<Race> Races { get; set; } = null!;
+	public DbSet<Gender> Genders { get; set; } = null!;
+	public DbSet<PersonType> PersonTypes { get; set; } = null!;
 
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
@@ -46,6 +49,39 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 			entity.Property(e => e.Name).HasMaxLength(255);
 			entity.Property(e => e.EnteredBy).HasMaxLength(100);
 			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+		});
+		
+		// Configure Race
+		builder.Entity<Race>(entity =>
+		{
+			entity.Property(e => e.Name).HasMaxLength(255);
+			entity.Property(e => e.Description).HasMaxLength(255);
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+		});
+		
+		// Configure Gender
+		builder.Entity<Gender>(entity =>
+		{
+			entity.Property(e => e.Name).HasMaxLength(255);
+			entity.Property(e => e.Description).HasMaxLength(255);
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+		});
+		
+		// Configure PersonType
+		builder.Entity<PersonType>(entity =>
+		{
+			entity.Property(e => e.Name).HasMaxLength(255);
+			entity.Property(e => e.Description).HasMaxLength(255);
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+			
+			// Add foreign key relationship to Client
+			entity.HasOne<Client>()
+				.WithMany()
+				.HasForeignKey(p => p.ClientId)
+				.OnDelete(DeleteBehavior.SetNull);
 		});
 	}
 }

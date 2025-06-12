@@ -24,15 +24,20 @@ const Sidebar: React.FC = () => {
         navigate('/')
     }
 
+    const handleClientListClick = () => {
+        navigate('/clients')
+    }
+
     const displayName = user ? `${user.firstName} ${user.lastName}`.trim() || user.email : ''
 
     return (
         <div className='sidebar'>
             <div className='sidebar__title'>Maggie&apos;s Playground</div>
             <div className='sidebar__content'>
-                {/* Add your navigation items here */}
                 <ul className='sidebar__list'>
-                    <li><i className={'bi bi-bank'}></i> Client List</li>
+                    <li onClick={handleClientListClick} className='sidebar__list-item'>
+                        <i className='bi bi-bank'></i> Client List
+                    </li>
                 </ul>
             </div>
             <div className='sidebar__footer'>

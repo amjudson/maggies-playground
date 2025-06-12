@@ -1,0 +1,77 @@
+.client-list {
+  padding: 2rem;
+  height: 100%;
+  background-color: #f5f6fa;
+}
+.client-list__header {
+  margin-bottom: 2rem;
+}
+.client-list__header h1 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin: 0;
+}
+.client-list__table-container {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.client-list__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.client-list__table th, .client-list__table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #edf2f7;
+}
+.client-list__table th {
+  background-color: #f8fafc;
+  font-weight: 600;
+  color: #4a5568;
+}
+.client-list__table tbody tr {
+  transition: background-color 0.2s ease;
+}
+.client-list__table tbody tr:hover {
+  background-color: #f8fafc;
+}
+.client-list__row--inactive {
+  background-color: #fff5f5;
+  color: #718096;
+}
+.client-list__status {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.client-list__status.active {
+  background-color: #c6f6d5;
+  color: #2f855a;
+}
+.client-list__status.inactive {
+  background-color: #fed7d7;
+  color: #c53030;
+}
+.client-list__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 1.2rem;
+  color: #4a5568;
+}
+.client-list__error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 1.2rem;
+  color: #e53e3e;
+}
+
+/*# sourceMappingURL=ClientList.css.map */

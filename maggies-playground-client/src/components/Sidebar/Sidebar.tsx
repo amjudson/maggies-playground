@@ -29,22 +29,30 @@ const Sidebar: React.FC = () => {
     return (
         <div className='sidebar'>
             <div className='sidebar__title'>Maggie&apos;s Playground</div>
-            <div className='sidebar__nav'>
+            <div className='sidebar__content'>
+                {/* Add your navigation items here */}
+                <ul className='sidebar__list'>
+                    <li><i className={'bi bi-bank'}></i> Client List</li>
+                </ul>
+            </div>
+            <div className='sidebar__footer'>
                 {!isAuthenticated ? (
                     <>
                         <button className='sidebar__button' onClick={handleLogin}>Login</button>
                         <button className='sidebar__button' onClick={handleRegister}>Register</button>
                     </>
                 ) : (
-                    <button className='sidebar__button' onClick={handleLogout}>Logout</button>
+                    <>
+                        {user && (
+                            <div className='sidebar__user-info'>
+                                <div className='sidebar__user-name'>{displayName}</div>
+                                <div className='sidebar__user-email'>{user.email}</div>
+                            </div>
+                        )}
+                        <button className='sidebar__button' onClick={handleLogout}>Logout</button>
+                    </>
                 )}
             </div>
-            {isAuthenticated && user && (
-                <div className='sidebar__user-info'>
-                    <div className='sidebar__user-name'>{displayName}</div>
-                    <div className='sidebar__user-email'>{user.email}</div>
-                </div>
-            )}
         </div>
     )
 }

@@ -94,10 +94,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 			entity.Property(e => e.EnteredBy).HasMaxLength(100);
 			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 			
-			// Add foreign key relationship to Client
-			entity.HasOne<Client>()
+			// Configure the Client relationship
+			entity.HasOne(pt => pt.Client)
 				.WithMany()
-				.HasForeignKey(p => p.ClientId)
+				.HasForeignKey(pt => pt.ClientId)
 				.OnDelete(DeleteBehavior.SetNull);
 
 			entity.HasData(

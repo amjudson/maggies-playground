@@ -20,17 +20,21 @@ public class ClientsController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<IEnumerable<ClientDto>>> GetClients([FromQuery] ClientQueryParameters queryParams)
+    public async Task<ActionResult<PaginatedResponseDto<ClientDto>>> GetClients([FromQuery] ClientQueryParameters queryParams)
     {
         try
         {
             var (clients, totalCount) = await clientService.GetClientsAsync(queryParams);
             
-            Response.Headers.Append("X-Total-Count", totalCount.ToString());
-            Response.Headers.Append("X-Page-Size", queryParams.PageSize.ToString());
-            Response.Headers.Append("X-Current-Page", queryParams.PageNumber.ToString());
+            var response = new PaginatedResponseDto<ClientDto>
+            {
+                TotalCount = totalCount,
+                PageSize = queryParams.PageSize,
+                CurrentPage = queryParams.PageNumber,
+                Items = clients
+            };
             
-            return Ok(clients);
+            return Ok(response);
         }
         catch (Exception ex)
         {

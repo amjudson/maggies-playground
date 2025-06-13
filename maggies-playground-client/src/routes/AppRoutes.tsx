@@ -4,6 +4,7 @@ import MainLayout from '../layouts/MainLayout'
 import Login from '../components/Auth/Login'
 import Register from '../components/Auth/Register'
 import ClientList from '../components/Clients/ClientList'
+import PeopleList from '../components/People/PeopleList'
 
 const AppRoutes: React.FC = () => {
     return (
@@ -27,6 +28,14 @@ const AppRoutes: React.FC = () => {
                 element={
                     <MainLayout>
                         <ClientList />
+                    </MainLayout>
+                }
+            />
+            <Route
+                path='/people'
+                element={
+                    <MainLayout>
+                        <PeopleList />
                     </MainLayout>
                 }
             />

@@ -22,12 +22,30 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 	{
 		base.OnModelCreating(builder);
 
+		var seedDate = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
 		// Configure ApplicationUser
 		builder.Entity<ApplicationUser>(entity =>
 		{
 			entity.Property(e => e.FirstName).HasMaxLength(100);
 			entity.Property(e => e.LastName).HasMaxLength(100);
 			entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+		});
+
+		// Configure ClientType
+		builder.Entity<ClientType>(entity =>
+		{
+			entity.Property(e => e.Name).HasMaxLength(255);
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+			entity.HasData(
+				new ClientType { ClientTypeId = 1, Name = "Corporate", Active = true, CreatedDate = seedDate, EnteredBy = "System" },
+				new ClientType { ClientTypeId = 2, Name = "Small Business", Active = true, CreatedDate = seedDate, EnteredBy = "System" },
+				new ClientType { ClientTypeId = 3, Name = "Startup", Active = true, CreatedDate = seedDate, EnteredBy = "System" },
+				new ClientType { ClientTypeId = 4, Name = "Non-Profit", Active = true, CreatedDate = seedDate, EnteredBy = "System" },
+				new ClientType { ClientTypeId = 5, Name = "Government", Active = true, CreatedDate = seedDate, EnteredBy = "System" }
+			);
 		});
 
 		// Configure Client
@@ -42,18 +60,32 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 				.WithMany()
 				.HasForeignKey(c => c.ClientTypeId)
 				.OnDelete(DeleteBehavior.Restrict);
-		});
-		
-		// Configure ClientType
-		builder.Entity<ClientType>(entity =>
-		{
-			entity.Property(e => e.Name).HasMaxLength(255);
-			entity.Property(e => e.EnteredBy).HasMaxLength(100);
-			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+			entity.HasData(
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000001"), ClientName = "Acme Corporation", Active = true, ClientTypeId = 1, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000002"), ClientName = "TechStart Inc", Active = true, ClientTypeId = 3, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000003"), ClientName = "Local Bakery", Active = true, ClientTypeId = 2, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000004"), ClientName = "City Health Department", Active = true, ClientTypeId = 5, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000005"), ClientName = "Green Earth Foundation", Active = true, ClientTypeId = 4, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000006"), ClientName = "Global Industries", Active = true, ClientTypeId = 1, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000007"), ClientName = "Innovate Labs", Active = true, ClientTypeId = 3, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000008"), ClientName = "Family Restaurant", Active = true, ClientTypeId = 2, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000009"), ClientName = "County Education Board", Active = true, ClientTypeId = 5, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000010"), ClientName = "Community Outreach", Active = true, ClientTypeId = 4, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000011"), ClientName = "MegaCorp International", Active = true, ClientTypeId = 1, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000012"), ClientName = "Future Tech", Active = true, ClientTypeId = 3, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000013"), ClientName = "Neighborhood Cafe", Active = true, ClientTypeId = 2, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000014"), ClientName = "State Transportation", Active = true, ClientTypeId = 5, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000015"), ClientName = "Youth Development", Active = true, ClientTypeId = 4, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000016"), ClientName = "Enterprise Solutions", Active = true, ClientTypeId = 1, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000017"), ClientName = "NextGen Innovations", Active = true, ClientTypeId = 3, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000018"), ClientName = "Artisan Crafts", Active = true, ClientTypeId = 2, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000019"), ClientName = "Public Safety", Active = true, ClientTypeId = 5, CreatedDate = seedDate, EnteredBy = "System" },
+				new Client { ClientId = Guid.Parse("00000000-0000-0000-0000-000000000020"), ClientName = "Cultural Heritage", Active = true, ClientTypeId = 4, CreatedDate = seedDate, EnteredBy = "System" }
+			);
 		});
 		
 		// Configure Race
-		var seedDate = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 		builder.Entity<Race>(entity =>
 		{
 			entity.Property(e => e.Name).HasMaxLength(255);

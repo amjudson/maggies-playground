@@ -10,6 +10,10 @@ const Sidebar: React.FC = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const handleHomeClick = () => {
+        navigate('/')
+    }
+
     const handleLogin = () => {
         navigate('/login')
     }
@@ -28,18 +32,27 @@ const Sidebar: React.FC = () => {
         navigate('/clients')
     }
 
+    const handlePeopleListClick = () => {
+        navigate('/people')
+    }
+
     const displayName = user ? `${user.firstName} ${user.lastName}`.trim() || user.email : ''
 
     return (
         <div className='sidebar'>
-            <div className='sidebar__title'>Maggie&apos;s Playground</div>
-            <div className='sidebar__content'>
-                <ul className='sidebar__list'>
-                    <li onClick={handleClientListClick} className='sidebar__list-item'>
-                        <i className='bi bi-bank'></i> Client List
-                    </li>
-                </ul>
-            </div>
+            <div className='sidebar__title' onClick={handleHomeClick} style={{ cursor: 'pointer' }}>Maggie&apos;s Playground</div>
+            {isAuthenticated && (
+                <div className='sidebar__content'>
+                    <ul className='sidebar__list'>
+                        <li onClick={handleClientListClick} className='sidebar__list-item'>
+                            <i className='bi bi-bank'></i> Client List
+                        </li>
+                        <li onClick={handlePeopleListClick} className='sidebar__list-item'>
+                            <i className='bi bi-people'></i> People List
+                        </li>
+                    </ul>
+                </div>
+            )}
             <div className='sidebar__footer'>
                 {!isAuthenticated ? (
                     <>

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MaggiesPlaygroundApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250612212443_AddRacesGendersPersonTypes")]
-    partial class AddRacesGendersPersonTypes
+    [Migration("20250613130543_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -206,6 +206,282 @@ namespace MaggiesPlaygroundApi.Migrations
                     b.HasKey("GenderId");
 
                     b.ToTable("Genders");
+
+                    b.HasData(
+                        new
+                        {
+                            GenderId = 1,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Male",
+                            EnteredBy = "System",
+                            Name = "Male"
+                        },
+                        new
+                        {
+                            GenderId = 2,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Female",
+                            EnteredBy = "System",
+                            Name = "Female"
+                        },
+                        new
+                        {
+                            GenderId = 3,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Other/Unspecified",
+                            EnteredBy = "System",
+                            Name = "Other"
+                        });
+                });
+
+            modelBuilder.Entity("MaggiesPlaygroundApi.Models.Person", b =>
+                {
+                    b.Property<Guid>("PersonId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Alias")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("EnteredBy")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar");
+
+                    b.Property<int>("GenderId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("MiddleName")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar");
+
+                    b.Property<int>("PersonTypeId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Prefix")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar");
+
+                    b.Property<int>("RaceId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Suffix")
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar");
+
+                    b.HasKey("PersonId");
+
+                    b.HasIndex("GenderId");
+
+                    b.HasIndex("PersonTypeId");
+
+                    b.HasIndex("RaceId");
+
+                    b.ToTable("People");
+
+                    b.HasData(
+                        new
+                        {
+                            PersonId = new Guid("00000000-0000-0000-0000-000000000001"),
+                            Alias = "jsmith",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateOfBirth = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnteredBy = "System",
+                            FirstName = "John",
+                            GenderId = 1,
+                            LastName = "Smith",
+                            MiddleName = "A",
+                            PersonTypeId = 1,
+                            RaceId = 1
+                        },
+                        new
+                        {
+                            PersonId = new Guid("00000000-0000-0000-0000-000000000002"),
+                            Alias = "ejohnson",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateOfBirth = new DateTime(1985, 2, 2, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnteredBy = "System",
+                            FirstName = "Emily",
+                            GenderId = 2,
+                            LastName = "Johnson",
+                            MiddleName = "B",
+                            PersonTypeId = 2,
+                            RaceId = 2
+                        },
+                        new
+                        {
+                            PersonId = new Guid("00000000-0000-0000-0000-000000000003"),
+                            Alias = "mwilliams",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateOfBirth = new DateTime(1978, 3, 3, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnteredBy = "System",
+                            FirstName = "Michael",
+                            GenderId = 1,
+                            LastName = "Williams",
+                            MiddleName = "C",
+                            PersonTypeId = 3,
+                            RaceId = 3
+                        },
+                        new
+                        {
+                            PersonId = new Guid("00000000-0000-0000-0000-000000000004"),
+                            Alias = "sbrown",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateOfBirth = new DateTime(1992, 4, 4, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnteredBy = "System",
+                            FirstName = "Sarah",
+                            GenderId = 2,
+                            LastName = "Brown",
+                            MiddleName = "D",
+                            PersonTypeId = 4,
+                            RaceId = 4
+                        },
+                        new
+                        {
+                            PersonId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            Alias = "djones",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateOfBirth = new DateTime(1980, 5, 5, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnteredBy = "System",
+                            FirstName = "David",
+                            GenderId = 1,
+                            LastName = "Jones",
+                            MiddleName = "E",
+                            PersonTypeId = 1,
+                            RaceId = 5
+                        },
+                        new
+                        {
+                            PersonId = new Guid("00000000-0000-0000-0000-000000000006"),
+                            Alias = "jgarcia",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateOfBirth = new DateTime(1995, 6, 6, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnteredBy = "System",
+                            FirstName = "Jessica",
+                            GenderId = 2,
+                            LastName = "Garcia",
+                            MiddleName = "F",
+                            PersonTypeId = 2,
+                            RaceId = 6
+                        },
+                        new
+                        {
+                            PersonId = new Guid("00000000-0000-0000-0000-000000000007"),
+                            Alias = "cmiller",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateOfBirth = new DateTime(1988, 7, 7, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnteredBy = "System",
+                            FirstName = "Chris",
+                            GenderId = 1,
+                            LastName = "Miller",
+                            MiddleName = "G",
+                            PersonTypeId = 3,
+                            RaceId = 1
+                        },
+                        new
+                        {
+                            PersonId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            Alias = "adavis",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateOfBirth = new DateTime(1991, 8, 8, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnteredBy = "System",
+                            FirstName = "Ashley",
+                            GenderId = 2,
+                            LastName = "Davis",
+                            MiddleName = "H",
+                            PersonTypeId = 4,
+                            RaceId = 2
+                        },
+                        new
+                        {
+                            PersonId = new Guid("00000000-0000-0000-0000-000000000009"),
+                            Alias = "mmartinez",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateOfBirth = new DateTime(1983, 9, 9, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnteredBy = "System",
+                            FirstName = "Matthew",
+                            GenderId = 1,
+                            LastName = "Martinez",
+                            MiddleName = "I",
+                            PersonTypeId = 1,
+                            RaceId = 3
+                        },
+                        new
+                        {
+                            PersonId = new Guid("00000000-0000-0000-0000-000000000010"),
+                            Alias = "ahernandez",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateOfBirth = new DateTime(1993, 10, 10, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnteredBy = "System",
+                            FirstName = "Amanda",
+                            GenderId = 2,
+                            LastName = "Hernandez",
+                            MiddleName = "J",
+                            PersonTypeId = 2,
+                            RaceId = 4
+                        },
+                        new
+                        {
+                            PersonId = new Guid("00000000-0000-0000-0000-000000000011"),
+                            Alias = "jlopez",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateOfBirth = new DateTime(1987, 11, 11, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnteredBy = "System",
+                            FirstName = "Joshua",
+                            GenderId = 1,
+                            LastName = "Lopez",
+                            MiddleName = "K",
+                            PersonTypeId = 3,
+                            RaceId = 5
+                        },
+                        new
+                        {
+                            PersonId = new Guid("00000000-0000-0000-0000-000000000012"),
+                            Alias = "bgonzalez",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateOfBirth = new DateTime(1996, 12, 12, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnteredBy = "System",
+                            FirstName = "Brittany",
+                            GenderId = 2,
+                            LastName = "Gonzalez",
+                            MiddleName = "L",
+                            PersonTypeId = 4,
+                            RaceId = 6
+                        },
+                        new
+                        {
+                            PersonId = new Guid("00000000-0000-0000-0000-000000000050"),
+                            Alias = "tyoung",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DateOfBirth = new DateTime(1990, 12, 31, 0, 0, 0, 0, DateTimeKind.Utc),
+                            EnteredBy = "System",
+                            FirstName = "Taylor",
+                            GenderId = 3,
+                            LastName = "Young",
+                            MiddleName = "AX",
+                            PersonTypeId = 2,
+                            RaceId = 2
+                        });
                 });
 
             modelBuilder.Entity("MaggiesPlaygroundApi.Models.PersonType", b =>
@@ -252,6 +528,44 @@ namespace MaggiesPlaygroundApi.Migrations
                     b.HasIndex("ClientId1");
 
                     b.ToTable("PersonTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            PersonTypeId = 1,
+                            ClientOption = false,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Employee",
+                            EnteredBy = "System",
+                            Name = "Employee"
+                        },
+                        new
+                        {
+                            PersonTypeId = 2,
+                            ClientOption = false,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Contractor",
+                            EnteredBy = "System",
+                            Name = "Contractor"
+                        },
+                        new
+                        {
+                            PersonTypeId = 3,
+                            ClientOption = false,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Customer",
+                            EnteredBy = "System",
+                            Name = "Customer"
+                        },
+                        new
+                        {
+                            PersonTypeId = 4,
+                            ClientOption = false,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Vendor",
+                            EnteredBy = "System",
+                            Name = "Vendor"
+                        });
                 });
 
             modelBuilder.Entity("MaggiesPlaygroundApi.Models.Race", b =>
@@ -285,6 +599,56 @@ namespace MaggiesPlaygroundApi.Migrations
                     b.HasKey("RaceId");
 
                     b.ToTable("Races");
+
+                    b.HasData(
+                        new
+                        {
+                            RaceId = 1,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "White",
+                            EnteredBy = "System",
+                            Name = "White"
+                        },
+                        new
+                        {
+                            RaceId = 2,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Black or African American",
+                            EnteredBy = "System",
+                            Name = "Black or African American"
+                        },
+                        new
+                        {
+                            RaceId = 3,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Asian",
+                            EnteredBy = "System",
+                            Name = "Asian"
+                        },
+                        new
+                        {
+                            RaceId = 4,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Native American or Alaska Native",
+                            EnteredBy = "System",
+                            Name = "Native American"
+                        },
+                        new
+                        {
+                            RaceId = 5,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Native Hawaiian or Other Pacific Islander",
+                            EnteredBy = "System",
+                            Name = "Pacific Islander"
+                        },
+                        new
+                        {
+                            RaceId = 6,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Description = "Other/Unspecified",
+                            EnteredBy = "System",
+                            Name = "Other"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -426,6 +790,33 @@ namespace MaggiesPlaygroundApi.Migrations
                         .HasForeignKey("ClientTypeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("MaggiesPlaygroundApi.Models.Person", b =>
+                {
+                    b.HasOne("MaggiesPlaygroundApi.Models.Gender", "Gender")
+                        .WithMany()
+                        .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MaggiesPlaygroundApi.Models.PersonType", "PersonType")
+                        .WithMany()
+                        .HasForeignKey("PersonTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MaggiesPlaygroundApi.Models.Race", "Race")
+                        .WithMany()
+                        .HasForeignKey("RaceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Gender");
+
+                    b.Navigation("PersonType");
+
+                    b.Navigation("Race");
                 });
 
             modelBuilder.Entity("MaggiesPlaygroundApi.Models.PersonType", b =>

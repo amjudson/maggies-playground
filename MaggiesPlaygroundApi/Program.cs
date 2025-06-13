@@ -23,6 +23,7 @@ builder.Services.AddScoped<IClientTypeService, ClientTypeService>();
 builder.Services.AddScoped<IRaceService, RaceService>();
 builder.Services.AddScoped<IGenderService, GenderService>();
 builder.Services.AddScoped<IPersonTypeService, PersonTypeService>();
+builder.Services.AddScoped<IPersonService, PersonService>();
 
 // Configure Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()

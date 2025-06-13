@@ -6,6 +6,11 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    z-index: 1000;
 
     &__list {
         list-style: none;

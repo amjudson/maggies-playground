@@ -21,7 +21,7 @@ export const store = configureStore({
             clientsApi.middleware,
             clientTypesApi.middleware,
             peopleApi.middleware,
-            lookupApi.middleware
+            lookupApi.middleware,
         ),
 })
 

@@ -1,34 +1,72 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
+export interface PersonType {
+    personTypeId: number
+    description: string
+    clientId: string | null
+    name: string
+    clientOption: boolean
+    createdDate: string
+    enteredBy: string
+}
+
+export interface Race {
+    raceId: number
+    description: string
+    name: string
+    createdDate: string
+    enteredBy: string
+}
+
+export interface Gender {
+    genderId: number
+    description: string
+    name: string
+    createdDate: string
+    enteredBy: string
+}
+
 export interface Person {
-    personId: string;
-    lastName: string;
-    firstName: string;
-    middleName?: string;
-    suffix?: string;
-    prefix?: string;
-    personTypeId: number;
-    alias: string;
-    raceId: number;
-    dateOfBirth: string;
-    genderId: number;
+    personId: string
+    lastName: string
+    firstName: string
+    middleName?: string
+    suffix?: string
+    prefix?: string
+    personTypeId: number
+    alias: string
+    raceId: number
+    dateOfBirth: string
+    genderId: number
+    createdDate: string
+    enteredBy: string
+    personType: PersonType
+    race: Race
+    gender: Gender
 }
 
 export interface CreatePersonRequest {
-    lastName: string;
-    firstName: string;
-    middleName?: string;
-    suffix?: string;
-    prefix?: string;
-    personTypeId: number;
-    alias: string;
-    raceId: number;
-    dateOfBirth: string;
-    genderId: number;
+    lastName: string
+    firstName: string
+    middleName?: string
+    suffix?: string
+    prefix?: string
+    personTypeId: number
+    alias: string
+    raceId: number
+    dateOfBirth: string
+    genderId: number
 }
 
 export interface UpdatePersonRequest extends CreatePersonRequest {
-    personId: string;
+    personId: string
+}
+
+export interface PaginatedResponse<T> {
+    totalCount: number
+    pageSize: number
+    currentPage: number
+    items: T[]
 }
 
 export const peopleApi = createApi({
@@ -45,8 +83,12 @@ export const peopleApi = createApi({
     }),
     tagTypes: ['Person'],
     endpoints: (builder) => ({
-        getPeople: builder.query<Person[], void>({
-            query: () => '/api/People/GetPeople',
+        getPeople: builder.query<PaginatedResponse<Person>, { page: number; pageSize: number }>({
+            query: ({ page, pageSize }) => ({
+                url: '/api/People/GetPeople',
+                params: { page, pageSize },
+            }),
+            transformResponse: (response: PaginatedResponse<Person>) => response,
             providesTags: ['Person'],
         }),
         getPerson: builder.query<Person, string>({

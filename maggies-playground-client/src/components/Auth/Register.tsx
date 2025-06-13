@@ -9,6 +9,7 @@ const Register: React.FC = () => {
     const [lastName, setLastName] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [role, setRole] = useState('User')
     const [error, setError] = useState<string | null>(null)
     const navigate = useNavigate()
     
@@ -35,6 +36,7 @@ const Register: React.FC = () => {
                 confirmPassword,
                 firstName: firstName.trim(),
                 lastName: lastName.trim(),
+                role,
             }).unwrap()
             
             // Redirect to login page after successful registration
@@ -55,10 +57,10 @@ const Register: React.FC = () => {
                 {error && <div className='error-message'>{error}</div>}
                 
                 <div className='form-group'>
-                    <label htmlFor='firstName'>First Name</label>
                     <input
                         type='text'
                         id='firstName'
+                        placeholder='First Name'
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         required
@@ -66,10 +68,10 @@ const Register: React.FC = () => {
                 </div>
 
                 <div className='form-group'>
-                    <label htmlFor='lastName'>Last Name</label>
                     <input
                         type='text'
                         id='lastName'
+                        placeholder='Last Name'
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         required
@@ -77,10 +79,10 @@ const Register: React.FC = () => {
                 </div>
 
                 <div className='form-group'>
-                    <label htmlFor='email'>Email</label>
                     <input
                         type='email'
                         id='email'
+                        placeholder='Email'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
@@ -88,10 +90,25 @@ const Register: React.FC = () => {
                 </div>
 
                 <div className='form-group'>
-                    <label htmlFor='password'>Password</label>
+                    <label htmlFor='role'>Role</label>
+                    <select
+                        id='role'
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                        required
+                    >
+                        <option value='User'>User</option>
+                        <option value='Viewer'>Viewer</option>
+                        <option value='Admin'>Admin</option>
+                        <option value='SuperAdmin'>SuperAdmin</option>
+                    </select>
+                </div>
+
+                <div className='form-group'>
                     <input
                         type='password'
                         id='password'
+                        placeholder='Password'
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
@@ -99,10 +116,10 @@ const Register: React.FC = () => {
                 </div>
 
                 <div className='form-group'>
-                    <label htmlFor='confirmPassword'>Confirm Password</label>
                     <input
                         type='password'
                         id='confirmPassword'
+                        placeholder='Confirm Password'
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required

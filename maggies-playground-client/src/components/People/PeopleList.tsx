@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useGetPeopleQuery, Person } from '../../store/peopleApi'
-import { useGetPersonTypesQuery } from '../../store/lookupApi'
+import Pagination from '../common/Pagination/Pagination'
 import './PeopleList.scss'
 
 const PeopleList: React.FC = () => {
-    const { data: people, isLoading: isLoadingPeople, error: peopleError } = useGetPeopleQuery()
-    const { data: personTypes, isLoading: isLoadingTypes } = useGetPersonTypesQuery()
+    const [page, setPage] = useState(1)
+    const [pageSize, setPageSize] = useState(10)
 
-    const isLoading = isLoadingPeople || isLoadingTypes
+    const { data: peopleResponse, isLoading: isLoadingPeople, error: peopleError } = useGetPeopleQuery({
+        page,
+        pageSize,
+    })
+
+    const isLoading = isLoadingPeople
     const error = peopleError
 
     if (isLoading) {
@@ -16,11 +21,6 @@ const PeopleList: React.FC = () => {
 
     if (error) {
         return <div className='people-list__error'>Error loading people</div>
-    }
-
-    const getPersonTypeName = (personTypeId: number): string => {
-        const personType = personTypes?.find(pt => pt.personTypeId === personTypeId)
-        return personType?.name || 'Unknown Type'
     }
 
     const formatFullName = (person: Person): string => {
@@ -32,6 +32,15 @@ const PeopleList: React.FC = () => {
             person.suffix,
         ].filter(Boolean)
         return parts.join(' ')
+    }
+
+    const handlePageChange = (newPage: number) => {
+        setPage(newPage)
+    }
+
+    const handlePageSizeChange = (newPageSize: number) => {
+        setPageSize(newPageSize)
+        setPage(1) // Reset to first page when changing page size
     }
 
     return (
@@ -47,20 +56,35 @@ const PeopleList: React.FC = () => {
                             <th>Alias</th>
                             <th>Date of Birth</th>
                             <th>Person Type</th>
+                            <th>Race</th>
+                            <th>Gender</th>
+                            <th>Created Date</th>
+                            <th>Entered By</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {people?.map((person) => (
+                        {peopleResponse?.items.map((person) => (
                             <tr key={person.personId}>
                                 <td>{formatFullName(person)}</td>
                                 <td>{person.alias}</td>
                                 <td>{new Date(person.dateOfBirth).toLocaleDateString()}</td>
-                                <td>{getPersonTypeName(person.personTypeId)}</td>
+                                <td>{person.personType.name}</td>
+                                <td>{person.race.name}</td>
+                                <td>{person.gender.name}</td>
+                                <td>{new Date(person.createdDate).toLocaleDateString()}</td>
+                                <td>{person.enteredBy}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
+            <Pagination
+                totalCount={peopleResponse?.totalCount || 0}
+                pageSize={peopleResponse?.pageSize || pageSize}
+                currentPage={peopleResponse?.currentPage || page}
+                onPageChange={handlePageChange}
+                onPageSizeChange={handlePageSizeChange}
+            />
         </div>
     )
 }

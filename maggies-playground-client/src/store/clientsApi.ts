@@ -1,22 +1,29 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export interface Client {
-    clientId: string;
-    clientName: string;
-    active: boolean;
-    createdDate: string;
-    enteredBy: string;
-    clientTypeId: number;
+    clientId: string
+    clientName: string
+    active: boolean
+    createdDate: string
+    enteredBy: string
+    clientTypeId: number
 }
 
 export interface CreateClientRequest {
-    clientName: string;
-    active: boolean;
-    clientTypeId: number;
+    clientName: string
+    active: boolean
+    clientTypeId: number
 }
 
 export interface UpdateClientRequest extends CreateClientRequest {
-    clientId: string;
+    clientId: string
+}
+
+export interface PaginatedResponse<T> {
+    totalCount: number
+    pageSize: number
+    currentPage: number
+    items: T[]
 }
 
 export const clientsApi = createApi({
@@ -33,8 +40,12 @@ export const clientsApi = createApi({
     }),
     tagTypes: ['Client'],
     endpoints: (builder) => ({
-        getClients: builder.query<Client[], void>({
-            query: () => '/api/Clients/GetClients',
+        getClients: builder.query<PaginatedResponse<Client>, { page: number; pageSize: number }>({
+            query: ({ page, pageSize }) => ({
+                url: '/api/Clients/GetClients',
+                params: { page, pageSize },
+            }),
+            transformResponse: (response: PaginatedResponse<Client>) => response,
             providesTags: ['Client'],
         }),
         getClient: builder.query<Client, string>({

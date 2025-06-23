@@ -74,7 +74,7 @@ export const peopleApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_BASE_API_URL,
         prepareHeaders: (headers) => {
-            const token = localStorage.getItem('token')
+            const token = sessionStorage.getItem('token')
             if (token) {
                 headers.set('authorization', `Bearer ${token}`)
             }
@@ -84,12 +84,24 @@ export const peopleApi = createApi({
     tagTypes: ['Person'],
     endpoints: (builder) => ({
         getPeople: builder.query<PaginatedResponse<Person>, { page: number; pageSize: number }>({
-            query: ({ page, pageSize }) => ({
-                url: '/api/People/GetPeople',
-                params: { page, pageSize },
-            }),
-            transformResponse: (response: PaginatedResponse<Person>) => response,
-            providesTags: ['Person'],
+            query: ({ page, pageSize }) => {
+                console.log('People API query called with:', { page, pageSize })
+                return {
+                    url: '/api/People/GetPeople',
+                    params: { page, pageSize },
+                }
+            },
+            transformResponse: (response: PaginatedResponse<Person>) => {
+                console.log('People API response:', response)
+                return response
+            },
+            providesTags: (result) =>
+                result 
+                    ? [
+                        ...result.items.map(({ personId }) => ({ type: 'Person' as const, id: personId })),
+                        { type: 'Person' as const, id: 'LIST' }
+                    ]
+                    : [{ type: 'Person' as const, id: 'LIST' }],
         }),
         getPerson: builder.query<Person, string>({
             query: (personId) => `/api/People/GetPerson/${personId}`,

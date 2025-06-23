@@ -26,6 +26,8 @@ const Pagination: React.FC<PaginationProps> = ({
     const startItem = totalCount === 0 ? 0 : (currentPage - 1) * pageSize + 1
     const endItem = Math.min(currentPage * pageSize, totalCount)
 
+    console.log('Pagination props:', { totalCount, pageSize, currentPage, totalPages })
+
     const getPageNumbers = () => {
         const pages = []
         const maxVisiblePages = 5
@@ -41,6 +43,17 @@ const Pagination: React.FC<PaginationProps> = ({
         return pages
     }
 
+    const handlePageChange = (newPage: number) => {
+        console.log('Pagination handlePageChange called with:', newPage)
+        console.log('Current page before change:', currentPage)
+        onPageChange(newPage)
+    }
+
+    const handlePageSizeChange = (newSize: number) => {
+        console.log('Pagination handlePageSizeChange called with:', newSize)
+        onPageSizeChange(newSize)
+    }
+
     return (
         <div className='pagination'>
             <div className='pagination__main-row'>
@@ -49,7 +62,7 @@ const Pagination: React.FC<PaginationProps> = ({
                     <select
                         className='pagination__page-size-select'
                         value={pageSize}
-                        onChange={(e) => onPageSizeChange(Number(e.target.value))}
+                        onChange={(e) => handlePageSizeChange(Number(e.target.value))}
                         aria-label='Rows per page'
                     >
                         {pageSizeOptions.map((size) => (
@@ -64,7 +77,7 @@ const Pagination: React.FC<PaginationProps> = ({
                 <div className='pagination__navigation'>
                     <button
                         className='pagination__button'
-                        onClick={() => { console.log('First page clicked'); onPageChange(1) }}
+                        onClick={() => handlePageChange(1)}
                         disabled={currentPage === 1}
                         aria-label='First Page'
                         type='button'
@@ -73,7 +86,7 @@ const Pagination: React.FC<PaginationProps> = ({
                     </button>
                     <button
                         className='pagination__button'
-                        onClick={() => { console.log('Previous page clicked'); onPageChange(currentPage - 1) }}
+                        onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1}
                         aria-label='Previous Page'
                         type='button'
@@ -84,17 +97,16 @@ const Pagination: React.FC<PaginationProps> = ({
                         <button
                             key={page}
                             className={`pagination__button${currentPage === page ? ' active' : ''}`}
-                            onClick={() => { console.log(`Page ${page} clicked`); onPageChange(page) }}
+                            onClick={() => handlePageChange(page)}
                             aria-label={`Page ${page}`}
                             type='button'
-                            disabled={page === currentPage}
                         >
                             {page}
                         </button>
                     ))}
                     <button
                         className='pagination__button'
-                        onClick={() => { console.log('Next page clicked'); onPageChange(currentPage + 1) }}
+                        onClick={() => handlePageChange(currentPage + 1)}
                         disabled={currentPage === totalPages}
                         aria-label='Next Page'
                         type='button'
@@ -103,7 +115,7 @@ const Pagination: React.FC<PaginationProps> = ({
                     </button>
                     <button
                         className='pagination__button'
-                        onClick={() => { console.log('Last page clicked'); onPageChange(totalPages) }}
+                        onClick={() => handlePageChange(totalPages)}
                         disabled={currentPage === totalPages}
                         aria-label='Last Page'
                         type='button'

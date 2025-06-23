@@ -8,13 +8,14 @@ const ClientList: React.FC = () => {
     const [page, setPage] = useState(1)
     const [pageSize, setPageSize] = useState(10)
 
+    console.log('ClientList state:', { page, pageSize })
+
     const { data: clientsResponse, isLoading: isLoadingClients, error: clientsError } = useGetClientsQuery({
         page,
         pageSize,
     })
 
-    console.log(`ClientList get clients: page=${page}, pageSize=${pageSize}`)
-    console.log(`ClientList: clientsResponse=${clientsResponse}`)
+    console.log('ClientList API response:', clientsResponse)
     const { data: clientTypes, isLoading: isLoadingTypes, error: typesError } = useGetClientTypesQuery()
 
     const isLoading = isLoadingClients || isLoadingTypes
@@ -34,15 +35,17 @@ const ClientList: React.FC = () => {
     }
 
     const handlePageChange = (newPage: number) => {
+        console.log('ClientList handlePageChange called with:', newPage)
+        console.log('ClientList current page before change:', page)
         setPage(newPage)
     }
 
     const handlePageSizeChange = (newPageSize: number) => {
+        console.log('ClientList handlePageSizeChange called with:', newPageSize)
         setPageSize(newPageSize)
         setPage(1) // Reset to first page when changing page size
     }
 
-    console.log(`ClientList: currentPage=${clientsResponse?.currentPage}`)
     return (
         <div className='client-list'>
             <div className='client-list__header'>
@@ -78,8 +81,8 @@ const ClientList: React.FC = () => {
             </div>
             <Pagination
                 totalCount={clientsResponse?.totalCount || 0}
-                pageSize={clientsResponse?.pageSize || pageSize}
-                currentPage={clientsResponse?.currentPage || page}
+                pageSize={pageSize}
+                currentPage={page}
                 onPageChange={handlePageChange}
                 onPageSizeChange={handlePageSizeChange}
             />

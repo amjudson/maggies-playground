@@ -31,7 +31,7 @@ export const clientsApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_BASE_API_URL,
         prepareHeaders: (headers) => {
-            const token = localStorage.getItem('token')
+            const token = sessionStorage.getItem('token')
             if (token) {
                 headers.set('authorization', `Bearer ${token}`)
             }
@@ -41,12 +41,23 @@ export const clientsApi = createApi({
     tagTypes: ['Client'],
     endpoints: (builder) => ({
         getClients: builder.query<PaginatedResponse<Client>, { page: number; pageSize: number }>({
-            query: ({ page, pageSize }) => ({
-                url: '/api/Clients/GetClients',
-                params: { page, pageSize },
-            }),
-            transformResponse: (response: PaginatedResponse<Client>) => response,
-            providesTags: ['Client'],
+            query: ({ page, pageSize }) => {
+                console.log('Clients API query called with:', { page, pageSize })
+                return {
+                    url: '/api/Clients/GetClients',
+                    params: { page, pageSize },
+                }
+            },
+            transformResponse: (response: PaginatedResponse<Client>) => {
+                console.log('Clients API response:', response)
+                return response
+            },
+            providesTags: (result) =>
+                result 
+                    ? [
+                        ...result.items.map(({ clientId }) => ({ type: 'Client' as const, id: clientId })),
+                        { type: 'Client' as const, id: 'LIST' }                    ]
+                    : [{ type: 'Client' as const, id: 'LIST' }],
         }),
         getClient: builder.query<Client, string>({
             query: (clientId) => `/api/Clients/GetClient/${clientId}`,

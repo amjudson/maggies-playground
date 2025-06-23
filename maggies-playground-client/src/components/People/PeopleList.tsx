@@ -7,10 +7,14 @@ const PeopleList: React.FC = () => {
     const [page, setPage] = useState(1)
     const [pageSize, setPageSize] = useState(10)
 
+    console.log('PeopleList state:', { page, pageSize })
+
     const { data: peopleResponse, isLoading: isLoadingPeople, error: peopleError } = useGetPeopleQuery({
         page,
         pageSize,
     })
+
+    console.log('PeopleList API response:', peopleResponse)
 
     const isLoading = isLoadingPeople
     const error = peopleError
@@ -35,10 +39,13 @@ const PeopleList: React.FC = () => {
     }
 
     const handlePageChange = (newPage: number) => {
+        console.log('PeopleList handlePageChange called with:', newPage)
+        console.log('PeopleList current page before change:', page)
         setPage(newPage)
     }
 
     const handlePageSizeChange = (newPageSize: number) => {
+        console.log('PeopleList handlePageSizeChange called with:', newPageSize)
         setPageSize(newPageSize)
         setPage(1) // Reset to first page when changing page size
     }
@@ -80,8 +87,8 @@ const PeopleList: React.FC = () => {
             </div>
             <Pagination
                 totalCount={peopleResponse?.totalCount || 0}
-                pageSize={peopleResponse?.pageSize || pageSize}
-                currentPage={peopleResponse?.currentPage || page}
+                pageSize={pageSize}
+                currentPage={page}
                 onPageChange={handlePageChange}
                 onPageSizeChange={handlePageSizeChange}
             />

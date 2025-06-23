@@ -99,8 +99,7 @@ export const peopleApi = createApi({
                 result 
                     ? [
                         ...result.items.map(({ personId }) => ({ type: 'Person' as const, id: personId })),
-                        { type: 'Person' as const, id: 'LIST' }
-                    ]
+                        { type: 'Person' as const, id: 'LIST' }                    ]
                     : [{ type: 'Person' as const, id: 'LIST' }],
         }),
         getPerson: builder.query<Person, string>({

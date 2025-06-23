@@ -45,7 +45,7 @@ export const clientsApi = createApi({
                 console.log('Clients API query called with:', { page, pageSize })
                 return {
                     url: '/api/Clients/GetClients',
-                    params: { page, pageSize },
+                    params: { PageNumber: page, PageSize: pageSize },
                 }
             },
             transformResponse: (response: PaginatedResponse<Client>) => {

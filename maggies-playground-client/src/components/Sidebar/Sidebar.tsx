@@ -1,14 +1,18 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { RootState } from '../../store/store'
-import { logout } from '../../store/authSlice'
+import {useNavigate} from 'react-router-dom'
+import {logout} from '../../store/authSlice'
 import './Sidebar.scss'
+import {
+    useAppDispatch,
+    useAppSelector
+} from '../../store/hooks'
 
 const Sidebar: React.FC = () => {
-    const { isAuthenticated, user } = useSelector((state: RootState) => state.auth)
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const { isAuthenticated, user } = useAppSelector(state => state.auth)
+    // console.log('Sidebar state:', { isAuthenticated, user })
+
+    const dispatch = useAppDispatch()
 
     const handleHomeClick = () => {
         navigate('/')
@@ -23,7 +27,7 @@ const Sidebar: React.FC = () => {
     }
 
     const handleLogout = () => {
-        localStorage.removeItem('token')
+        sessionStorage.removeItem('token')
         dispatch(logout())
         navigate('/')
     }

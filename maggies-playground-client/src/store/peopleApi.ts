@@ -88,7 +88,7 @@ export const peopleApi = createApi({
                 console.log('People API query called with:', { page, pageSize })
                 return {
                     url: '/api/People/GetPeople',
-                    params: { page, pageSize },
+                    params: { PageNumber: page, PageSize: pageSize },
                 }
             },
             transformResponse: (response: PaginatedResponse<Person>) => {

@@ -8,14 +8,11 @@ const ClientList: React.FC = () => {
     const [page, setPage] = useState(1)
     const [pageSize, setPageSize] = useState(10)
 
-    console.log('ClientList state:', { page, pageSize })
-
     const { data: clientsResponse, isLoading: isLoadingClients, error: clientsError } = useGetClientsQuery({
         page,
         pageSize,
     })
 
-    console.log('ClientList API response:', clientsResponse)
     const { data: clientTypes, isLoading: isLoadingTypes, error: typesError } = useGetClientTypesQuery()
 
     const isLoading = isLoadingClients || isLoadingTypes
@@ -35,13 +32,10 @@ const ClientList: React.FC = () => {
     }
 
     const handlePageChange = (newPage: number) => {
-        console.log('ClientList handlePageChange called with:', newPage)
-        console.log('ClientList current page before change:', page)
         setPage(newPage)
     }
 
     const handlePageSizeChange = (newPageSize: number) => {
-        console.log('ClientList handlePageSizeChange called with:', newPageSize)
         setPageSize(newPageSize)
         setPage(1) // Reset to first page when changing page size
     }
@@ -49,7 +43,7 @@ const ClientList: React.FC = () => {
     return (
         <div className='client-list'>
             <div className='client-list__header'>
-                <h1>Client List</h1>
+                <h1>Client List 1</h1>
             </div>
             <div className='client-list__table-container'>
                 <table className='client-list__table'>

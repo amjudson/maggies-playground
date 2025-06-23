@@ -7,14 +7,10 @@ const PeopleList: React.FC = () => {
     const [page, setPage] = useState(1)
     const [pageSize, setPageSize] = useState(10)
 
-    console.log('PeopleList state:', { page, pageSize })
-
     const { data: peopleResponse, isLoading: isLoadingPeople, error: peopleError } = useGetPeopleQuery({
         page,
         pageSize,
     })
-
-    console.log('PeopleList API response:', peopleResponse)
 
     const isLoading = isLoadingPeople
     const error = peopleError
@@ -39,13 +35,10 @@ const PeopleList: React.FC = () => {
     }
 
     const handlePageChange = (newPage: number) => {
-        console.log('PeopleList handlePageChange called with:', newPage)
-        console.log('PeopleList current page before change:', page)
         setPage(newPage)
     }
 
     const handlePageSizeChange = (newPageSize: number) => {
-        console.log('PeopleList handlePageSizeChange called with:', newPageSize)
         setPageSize(newPageSize)
         setPage(1) // Reset to first page when changing page size
     }
@@ -60,7 +53,6 @@ const PeopleList: React.FC = () => {
                     <thead>
                         <tr>
                             <th>Full Name</th>
-                            <th>Alias</th>
                             <th>Date of Birth</th>
                             <th>Person Type</th>
                             <th>Race</th>
@@ -73,7 +65,6 @@ const PeopleList: React.FC = () => {
                         {peopleResponse?.items.map((person) => (
                             <tr key={person.personId}>
                                 <td>{formatFullName(person)}</td>
-                                <td>{person.alias}</td>
                                 <td>{new Date(person.dateOfBirth).toLocaleDateString()}</td>
                                 <td>{person.personType.name}</td>
                                 <td>{person.race.name}</td>

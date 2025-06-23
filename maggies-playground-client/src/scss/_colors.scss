@@ -1,0 +1,20 @@
+// All color variables are now CSS custom properties defined in _theme-light.scss and _theme-dark.scss
+
+// Purple-based modern palette
+$primary: #6c3eb6; // Main purple
+$primary-dark: #4b256b;
+$primary-light: #a084e8;
+$secondary: #8e44ad; // Button purple
+$accent: #e84393; // Magenta accent
+$background: #f8f6fc; // Light background
+$background-dark: #2d223a; // Card/section background
+$text: #2d223a; // Main text
+$text-light: #fff;
+$text-muted: #a0a0b2;
+$border: #e0d7f3;
+$error-bg: #fee2e2;
+$error: #c0392b;
+$success-bg: #dcfce7;
+$success: #16a34a;
+$button-hover: #5e338e;
+$button-disabled: #b8a9c9; 

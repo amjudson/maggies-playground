@@ -4,8 +4,9 @@ import {logout} from '../../store/authSlice'
 import './Sidebar.scss'
 import {
     useAppDispatch,
-    useAppSelector
+    useAppSelector,
 } from '../../store/hooks'
+import {Login, PersonAdd, Logout} from '@mui/icons-material'
 
 const Sidebar: React.FC = () => {
     const navigate = useNavigate()
@@ -60,8 +61,14 @@ const Sidebar: React.FC = () => {
             <div className='sidebar__footer'>
                 {!isAuthenticated ? (
                     <>
-                        <button className='sidebar__button' onClick={handleLogin}>Login</button>
-                        <button className='sidebar__button' onClick={handleRegister}>Register</button>
+                        <button className='sidebar__button' onClick={handleLogin}>
+                            <Login />
+                            Login
+                        </button>
+                        <button className='sidebar__button' onClick={handleRegister}>
+                            <PersonAdd />
+                            Register
+                        </button>
                     </>
                 ) : (
                     <>
@@ -71,7 +78,10 @@ const Sidebar: React.FC = () => {
                                 <div className='sidebar__user-email'>{user.email}</div>
                             </div>
                         )}
-                        <button className='sidebar__button' onClick={handleLogout}>Logout</button>
+                        <button className='sidebar__button' onClick={handleLogout}>
+                            <Logout />
+                            Logout
+                        </button>
                     </>
                 )}
             </div>

@@ -1,3 +1,5 @@
+@import './_theme-light.scss';
+@import './_colors.scss';
 // Import the Sass files as usual
 //@import 'bootstrap-icons/font/bootstrap-icons';
 
@@ -17,4 +19,13 @@ body {
 
 button {
     font-family: inherit;
+}
+
+:root, .theme-light {
+  // Light theme variables (already imported)
+}
+
+.theme-dark {
+  @import './_theme-dark.scss';
+  @import './_colors.scss';
 } 

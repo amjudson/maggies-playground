@@ -1,10 +1,18 @@
-import React from 'react'
-import { useGetClientsQuery } from '../../store/clientsApi'
-import { useGetClientTypesQuery } from '../../store/clientTypesApi'
+import React, {useState} from 'react'
+import {useGetClientsQuery} from '../../store/clientsApi'
+import {useGetClientTypesQuery} from '../../store/clientTypesApi'
+import Pagination from '../common/Pagination/Pagination'
 import './ClientList.scss'
 
 const ClientList: React.FC = () => {
-    const { data: clients, isLoading: isLoadingClients, error: clientsError } = useGetClientsQuery()
+    const [page, setPage] = useState(1)
+    const [pageSize, setPageSize] = useState(10)
+
+    const { data: clientsResponse, isLoading: isLoadingClients, error: clientsError } = useGetClientsQuery({
+        page,
+        pageSize,
+    })
+
     const { data: clientTypes, isLoading: isLoadingTypes, error: typesError } = useGetClientTypesQuery()
 
     const isLoading = isLoadingClients || isLoadingTypes
@@ -23,10 +31,19 @@ const ClientList: React.FC = () => {
         return clientType?.name || 'Unknown Type'
     }
 
+    const handlePageChange = (newPage: number) => {
+        setPage(newPage)
+    }
+
+    const handlePageSizeChange = (newPageSize: number) => {
+        setPageSize(newPageSize)
+        setPage(1) // Reset to first page when changing page size
+    }
+
     return (
         <div className='client-list'>
             <div className='client-list__header'>
-                <h1>Client List</h1>
+                <h1>Client List 1</h1>
             </div>
             <div className='client-list__table-container'>
                 <table className='client-list__table'>
@@ -40,7 +57,7 @@ const ClientList: React.FC = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {clients?.map((client) => (
+                        {clientsResponse?.items.map((client) => (
                             <tr key={client.clientId} className={!client.active ? 'client-list__row--inactive' : ''}>
                                 <td>{client.clientName}</td>
                                 <td>
@@ -56,6 +73,13 @@ const ClientList: React.FC = () => {
                     </tbody>
                 </table>
             </div>
+            <Pagination
+                totalCount={clientsResponse?.totalCount || 0}
+                pageSize={pageSize}
+                currentPage={page}
+                onPageChange={handlePageChange}
+                onPageSizeChange={handlePageSizeChange}
+            />
         </div>
     )
 }

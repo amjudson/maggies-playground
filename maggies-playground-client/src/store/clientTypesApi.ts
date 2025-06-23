@@ -12,7 +12,7 @@ export const clientTypesApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_BASE_API_URL,
         prepareHeaders: (headers) => {
-            const token = localStorage.getItem('token')
+            const token = sessionStorage.getItem('token')
             if (token) {
                 headers.set('authorization', `Bearer ${token}`)
             }

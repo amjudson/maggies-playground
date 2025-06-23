@@ -3,6 +3,7 @@ using System;
 using MaggiesPlaygroundApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MaggiesPlaygroundApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250613152200_AddClientTypesAndClientsSeed")]
+    partial class AddClientTypesAndClientsSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,7 +150,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "Acme Corporation",
                             ClientTypeId = 1,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -156,7 +159,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "TechStart Inc",
                             ClientTypeId = 3,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -165,7 +168,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "Local Bakery",
                             ClientTypeId = 2,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -174,7 +177,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "City Health Department",
                             ClientTypeId = 5,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -183,7 +186,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "Green Earth Foundation",
                             ClientTypeId = 4,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -192,7 +195,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "Global Industries",
                             ClientTypeId = 1,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -201,7 +204,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "Innovate Labs",
                             ClientTypeId = 3,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -210,7 +213,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "Family Restaurant",
                             ClientTypeId = 2,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -219,7 +222,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "County Education Board",
                             ClientTypeId = 5,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -228,7 +231,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "Community Outreach",
                             ClientTypeId = 4,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -237,7 +240,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "MegaCorp International",
                             ClientTypeId = 1,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -246,7 +249,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "Future Tech",
                             ClientTypeId = 3,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -255,7 +258,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "Neighborhood Cafe",
                             ClientTypeId = 2,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -264,7 +267,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "State Transportation",
                             ClientTypeId = 5,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -273,7 +276,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "Youth Development",
                             ClientTypeId = 4,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -282,7 +285,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "Enterprise Solutions",
                             ClientTypeId = 1,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -291,7 +294,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "NextGen Innovations",
                             ClientTypeId = 3,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -300,7 +303,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "Artisan Crafts",
                             ClientTypeId = 2,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -309,7 +312,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "Public Safety",
                             ClientTypeId = 5,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         },
                         new
@@ -318,7 +321,7 @@ namespace MaggiesPlaygroundApi.Migrations
                             Active = true,
                             ClientName = "Cultural Heritage",
                             ClientTypeId = 4,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System"
                         });
                 });
@@ -358,7 +361,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         {
                             ClientTypeId = 1,
                             Active = true,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System",
                             Name = "Corporate"
                         },
@@ -366,7 +369,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         {
                             ClientTypeId = 2,
                             Active = true,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System",
                             Name = "Small Business"
                         },
@@ -374,7 +377,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         {
                             ClientTypeId = 3,
                             Active = true,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System",
                             Name = "Startup"
                         },
@@ -382,7 +385,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         {
                             ClientTypeId = 4,
                             Active = true,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System",
                             Name = "Non-Profit"
                         },
@@ -390,7 +393,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         {
                             ClientTypeId = 5,
                             Active = true,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             EnteredBy = "System",
                             Name = "Government"
                         });
@@ -432,7 +435,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         new
                         {
                             GenderId = 1,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             Description = "Male",
                             EnteredBy = "System",
                             Name = "Male"
@@ -440,7 +443,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         new
                         {
                             GenderId = 2,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             Description = "Female",
                             EnteredBy = "System",
                             Name = "Female"
@@ -448,7 +451,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         new
                         {
                             GenderId = 3,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             Description = "Other/Unspecified",
                             EnteredBy = "System",
                             Name = "Other"
@@ -1268,7 +1271,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         {
                             PersonTypeId = 1,
                             ClientOption = false,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             Description = "Employee",
                             EnteredBy = "System",
                             Name = "Employee"
@@ -1277,7 +1280,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         {
                             PersonTypeId = 2,
                             ClientOption = false,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             Description = "Contractor",
                             EnteredBy = "System",
                             Name = "Contractor"
@@ -1286,7 +1289,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         {
                             PersonTypeId = 3,
                             ClientOption = false,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             Description = "Customer",
                             EnteredBy = "System",
                             Name = "Customer"
@@ -1295,7 +1298,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         {
                             PersonTypeId = 4,
                             ClientOption = false,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             Description = "Vendor",
                             EnteredBy = "System",
                             Name = "Vendor"
@@ -1338,7 +1341,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         new
                         {
                             RaceId = 1,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             Description = "White",
                             EnteredBy = "System",
                             Name = "White"
@@ -1346,7 +1349,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         new
                         {
                             RaceId = 2,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             Description = "Black or African American",
                             EnteredBy = "System",
                             Name = "Black or African American"
@@ -1354,7 +1357,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         new
                         {
                             RaceId = 3,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             Description = "Asian",
                             EnteredBy = "System",
                             Name = "Asian"
@@ -1362,7 +1365,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         new
                         {
                             RaceId = 4,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             Description = "Native American or Alaska Native",
                             EnteredBy = "System",
                             Name = "Native American"
@@ -1370,7 +1373,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         new
                         {
                             RaceId = 5,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             Description = "Native Hawaiian or Other Pacific Islander",
                             EnteredBy = "System",
                             Name = "Pacific Islander"
@@ -1378,7 +1381,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         new
                         {
                             RaceId = 6,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            CreatedDate = new DateTime(2025, 6, 13, 15, 21, 59, 993, DateTimeKind.Utc).AddTicks(2451),
                             Description = "Other/Unspecified",
                             EnteredBy = "System",
                             Name = "Other"

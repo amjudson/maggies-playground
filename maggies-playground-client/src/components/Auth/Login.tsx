@@ -24,7 +24,6 @@ const Login: React.FC = () => {
 
         try {
             const result = await login({ email, password }).unwrap()
-            localStorage.setItem('token', result.token)
             dispatch(loginSuccess(result))
             navigate('/')
         } catch {

@@ -11,11 +11,19 @@ namespace MaggiesPlaygroundApi.Controllers;
 public class PeopleController(IPersonService personService) : ControllerBase
 {
     [HttpGet("[action]")]
-    public async Task<ActionResult<IEnumerable<PersonDto>>> GetPeople([FromQuery] PersonQueryParameters queryParams)
+    public async Task<ActionResult<PaginatedResponseDto<PersonDto>>> GetPeople([FromQuery] PersonQueryParameters queryParams)
     {
         var (people, totalCount) = await personService.GetPeopleAsync(queryParams);
-        Response.Headers.Append("X-Total-Count", totalCount.ToString());
-        return Ok(people);
+        
+        var response = new PaginatedResponseDto<PersonDto>
+        {
+            TotalCount = totalCount,
+            PageSize = queryParams.PageSize,
+            CurrentPage = queryParams.PageNumber,
+            Items = people
+        };
+        
+        return Ok(response);
     }
 
     [HttpGet("[action]/{id}")]

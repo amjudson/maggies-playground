@@ -1,14 +1,22 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { RootState } from '../../store/store'
-import { logout } from '../../store/authSlice'
+import {useNavigate} from 'react-router-dom'
+import {logout} from '../../store/authSlice'
 import './Sidebar.scss'
+import {
+    useAppDispatch,
+    useAppSelector
+} from '../../store/hooks'
 
 const Sidebar: React.FC = () => {
-    const { isAuthenticated, user } = useSelector((state: RootState) => state.auth)
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const { isAuthenticated, user } = useAppSelector(state => state.auth)
+    // console.log('Sidebar state:', { isAuthenticated, user })
+
+    const dispatch = useAppDispatch()
+
+    const handleHomeClick = () => {
+        navigate('/')
+    }
 
     const handleLogin = () => {
         navigate('/login')
@@ -19,7 +27,7 @@ const Sidebar: React.FC = () => {
     }
 
     const handleLogout = () => {
-        localStorage.removeItem('token')
+        sessionStorage.removeItem('token')
         dispatch(logout())
         navigate('/')
     }
@@ -28,18 +36,27 @@ const Sidebar: React.FC = () => {
         navigate('/clients')
     }
 
+    const handlePeopleListClick = () => {
+        navigate('/people')
+    }
+
     const displayName = user ? `${user.firstName} ${user.lastName}`.trim() || user.email : ''
 
     return (
         <div className='sidebar'>
-            <div className='sidebar__title'>Maggie&apos;s Playground</div>
-            <div className='sidebar__content'>
-                <ul className='sidebar__list'>
-                    <li onClick={handleClientListClick} className='sidebar__list-item'>
-                        <i className='bi bi-bank'></i> Client List
-                    </li>
-                </ul>
-            </div>
+            <div className='sidebar__title' onClick={handleHomeClick} style={{ cursor: 'pointer' }}>Maggie&apos;s Playground</div>
+            {isAuthenticated && (
+                <div className='sidebar__content'>
+                    <ul className='sidebar__list'>
+                        <li onClick={handleClientListClick} className='sidebar__list-item'>
+                            <i className='bi bi-bank'></i> Client List
+                        </li>
+                        <li onClick={handlePeopleListClick} className='sidebar__list-item'>
+                            <i className='bi bi-people'></i> People List
+                        </li>
+                    </ul>
+                </div>
+            )}
             <div className='sidebar__footer'>
                 {!isAuthenticated ? (
                     <>

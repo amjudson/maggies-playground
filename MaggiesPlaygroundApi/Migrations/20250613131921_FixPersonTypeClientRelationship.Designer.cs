@@ -3,6 +3,7 @@ using System;
 using MaggiesPlaygroundApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MaggiesPlaygroundApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250613131921_FixPersonTypeClientRelationship")]
+    partial class FixPersonTypeClientRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,188 +142,6 @@ namespace MaggiesPlaygroundApi.Migrations
                     b.HasIndex("ClientTypeId");
 
                     b.ToTable("Clients");
-
-                    b.HasData(
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            Active = true,
-                            ClientName = "Acme Corporation",
-                            ClientTypeId = 1,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            Active = true,
-                            ClientName = "TechStart Inc",
-                            ClientTypeId = 3,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000003"),
-                            Active = true,
-                            ClientName = "Local Bakery",
-                            ClientTypeId = 2,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000004"),
-                            Active = true,
-                            ClientName = "City Health Department",
-                            ClientTypeId = 5,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000005"),
-                            Active = true,
-                            ClientName = "Green Earth Foundation",
-                            ClientTypeId = 4,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            Active = true,
-                            ClientName = "Global Industries",
-                            ClientTypeId = 1,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000007"),
-                            Active = true,
-                            ClientName = "Innovate Labs",
-                            ClientTypeId = 3,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            Active = true,
-                            ClientName = "Family Restaurant",
-                            ClientTypeId = 2,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            Active = true,
-                            ClientName = "County Education Board",
-                            ClientTypeId = 5,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            Active = true,
-                            ClientName = "Community Outreach",
-                            ClientTypeId = 4,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000011"),
-                            Active = true,
-                            ClientName = "MegaCorp International",
-                            ClientTypeId = 1,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000012"),
-                            Active = true,
-                            ClientName = "Future Tech",
-                            ClientTypeId = 3,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000013"),
-                            Active = true,
-                            ClientName = "Neighborhood Cafe",
-                            ClientTypeId = 2,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000014"),
-                            Active = true,
-                            ClientName = "State Transportation",
-                            ClientTypeId = 5,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000015"),
-                            Active = true,
-                            ClientName = "Youth Development",
-                            ClientTypeId = 4,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000016"),
-                            Active = true,
-                            ClientName = "Enterprise Solutions",
-                            ClientTypeId = 1,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000017"),
-                            Active = true,
-                            ClientName = "NextGen Innovations",
-                            ClientTypeId = 3,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000018"),
-                            Active = true,
-                            ClientName = "Artisan Crafts",
-                            ClientTypeId = 2,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000019"),
-                            Active = true,
-                            ClientName = "Public Safety",
-                            ClientTypeId = 5,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        },
-                        new
-                        {
-                            ClientId = new Guid("00000000-0000-0000-0000-000000000020"),
-                            Active = true,
-                            ClientName = "Cultural Heritage",
-                            ClientTypeId = 4,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System"
-                        });
                 });
 
             modelBuilder.Entity("MaggiesPlaygroundApi.Models.ClientType", b =>
@@ -352,48 +173,6 @@ namespace MaggiesPlaygroundApi.Migrations
                     b.HasKey("ClientTypeId");
 
                     b.ToTable("ClientTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            ClientTypeId = 1,
-                            Active = true,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System",
-                            Name = "Corporate"
-                        },
-                        new
-                        {
-                            ClientTypeId = 2,
-                            Active = true,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System",
-                            Name = "Small Business"
-                        },
-                        new
-                        {
-                            ClientTypeId = 3,
-                            Active = true,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System",
-                            Name = "Startup"
-                        },
-                        new
-                        {
-                            ClientTypeId = 4,
-                            Active = true,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System",
-                            Name = "Non-Profit"
-                        },
-                        new
-                        {
-                            ClientTypeId = 5,
-                            Active = true,
-                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            EnteredBy = "System",
-                            Name = "Government"
-                        });
                 });
 
             modelBuilder.Entity("MaggiesPlaygroundApi.Models.Gender", b =>

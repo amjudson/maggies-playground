@@ -1,0 +1,89 @@
+.pagination {
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #e0e0e0;
+    padding: 0.5rem 0 0.5rem 0;
+
+    &__main-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__info-row {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1rem;
+        color: #111;
+        font-weight: 400;
+    }
+
+    &__count {
+        font-size: 1rem;
+    }
+
+    &__page-size-select {
+        margin: 0 0.25rem;
+        padding: 0.15rem 0.5rem;
+        border: 1px solid #bbb;
+        border-radius: 4px;
+        background: #fff;
+        font-size: 1rem;
+        font-weight: 400;
+        min-width: 48px;
+    }
+
+    &__per-page-label {
+        margin-left: 0.25rem;
+        font-size: 1rem;
+    }
+
+    &__showing {
+        margin-left: 1rem;
+        font-size: 1rem;
+    }
+
+    &__navigation {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    &__button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 32px;
+        height: 32px;
+        padding: 0 8px;
+        border: none;
+        border-radius: 6px;
+        background: transparent;
+        color: #222;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s;
+
+        svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        &:hover:not(:disabled):not(.active) {
+            background: #f0f4fa;
+        }
+
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        &.active {
+            background: #1976d2;
+            color: #fff;
+            font-weight: 600;
+        }
+    }
+} 

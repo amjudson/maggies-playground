@@ -11,6 +11,7 @@ interface RegisterRequest {
   confirmPassword: string;
   firstName: string;
   lastName: string;
+  role: string;
 }
 
 export interface User {
@@ -30,7 +31,7 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_BASE_API_URL,
     prepareHeaders: (headers) => {
-      const token = localStorage.getItem('token')
+      const token = sessionStorage.getItem('token')
       if (token) {
         headers.set('authorization', `Bearer ${token}`)
       }

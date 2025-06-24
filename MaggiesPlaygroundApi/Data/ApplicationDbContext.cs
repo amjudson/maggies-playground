@@ -24,6 +24,16 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 	public DbSet<EmailType> EmailTypes { get; set; } = null!;
 	public DbSet<Email> Emails { get; set; } = null!;
 	public DbSet<State> States { get; set; } = null!;
+	
+	// Lookup tables for Client associations
+	public DbSet<ClientAddress> ClientAddresses { get; set; } = null!;
+	public DbSet<ClientPhone> ClientPhones { get; set; } = null!;
+	public DbSet<ClientEmail> ClientEmails { get; set; } = null!;
+	
+	// Lookup tables for Person associations
+	public DbSet<PersonAddress> PersonAddresses { get; set; } = null!;
+	public DbSet<PersonPhone> PersonPhones { get; set; } = null!;
+	public DbSet<PersonEmail> PersonEmails { get; set; } = null!;
 
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
@@ -384,6 +394,114 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 				new State { StateId = 49, Abbreviation = "WI", Name = "Wisconsin" },
 				new State { StateId = 50, Abbreviation = "WY", Name = "Wyoming" }
 			);
+		});
+
+		// Configure ClientAddress lookup table
+		builder.Entity<ClientAddress>(entity =>
+		{
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+			
+			// Configure foreign key relationships
+			entity.HasOne(ca => ca.Client)
+				.WithMany()
+				.HasForeignKey(ca => ca.ClientId)
+				.OnDelete(DeleteBehavior.Cascade);
+				
+			entity.HasOne(ca => ca.Address)
+				.WithMany()
+				.HasForeignKey(ca => ca.AddressId)
+				.OnDelete(DeleteBehavior.Cascade);
+		});
+
+		// Configure ClientPhone lookup table
+		builder.Entity<ClientPhone>(entity =>
+		{
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+			
+			// Configure foreign key relationships
+			entity.HasOne(cp => cp.Client)
+				.WithMany()
+				.HasForeignKey(cp => cp.ClientId)
+				.OnDelete(DeleteBehavior.Cascade);
+				
+			entity.HasOne(cp => cp.Phone)
+				.WithMany()
+				.HasForeignKey(cp => cp.PhoneId)
+				.OnDelete(DeleteBehavior.Cascade);
+		});
+
+		// Configure ClientEmail lookup table
+		builder.Entity<ClientEmail>(entity =>
+		{
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+			
+			// Configure foreign key relationships
+			entity.HasOne(ce => ce.Client)
+				.WithMany()
+				.HasForeignKey(ce => ce.ClientId)
+				.OnDelete(DeleteBehavior.Cascade);
+				
+			entity.HasOne(ce => ce.Email)
+				.WithMany()
+				.HasForeignKey(ce => ce.EmailId)
+				.OnDelete(DeleteBehavior.Cascade);
+		});
+
+		// Configure PersonAddress lookup table
+		builder.Entity<PersonAddress>(entity =>
+		{
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+			
+			// Configure foreign key relationships
+			entity.HasOne(pa => pa.Person)
+				.WithMany()
+				.HasForeignKey(pa => pa.PersonId)
+				.OnDelete(DeleteBehavior.Cascade);
+				
+			entity.HasOne(pa => pa.Address)
+				.WithMany()
+				.HasForeignKey(pa => pa.AddressId)
+				.OnDelete(DeleteBehavior.Cascade);
+		});
+
+		// Configure PersonPhone lookup table
+		builder.Entity<PersonPhone>(entity =>
+		{
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+			
+			// Configure foreign key relationships
+			entity.HasOne(pp => pp.Person)
+				.WithMany()
+				.HasForeignKey(pp => pp.PersonId)
+				.OnDelete(DeleteBehavior.Cascade);
+				
+			entity.HasOne(pp => pp.Phone)
+				.WithMany()
+				.HasForeignKey(pp => pp.PhoneId)
+				.OnDelete(DeleteBehavior.Cascade);
+		});
+
+		// Configure PersonEmail lookup table
+		builder.Entity<PersonEmail>(entity =>
+		{
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+			
+			// Configure foreign key relationships
+			entity.HasOne(pe => pe.Person)
+				.WithMany()
+				.HasForeignKey(pe => pe.PersonId)
+				.OnDelete(DeleteBehavior.Cascade);
+				
+			entity.HasOne(pe => pe.Email)
+				.WithMany()
+				.HasForeignKey(pe => pe.EmailId)
+				.OnDelete(DeleteBehavior.Cascade);
 		});
 	}
 }

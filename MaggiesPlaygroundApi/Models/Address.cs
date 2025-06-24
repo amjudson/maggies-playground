@@ -28,4 +28,10 @@ public class Address
     
     [Required]
     public int AddressTypeId { get; set; }
+    
+    [ForeignKey("AddressTypeId")]
+    public AddressType? AddressType { get; set; }
+    
+    [ForeignKey("StateId")]
+    public State? State { get; set; }
 } 

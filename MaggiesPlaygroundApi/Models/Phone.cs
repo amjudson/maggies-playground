@@ -17,4 +17,7 @@ public class Phone
     
     [Required]
     public int PhoneTypeId { get; set; }
+    
+    [ForeignKey("PhoneTypeId")]
+    public PhoneType? PhoneType { get; set; }
 } 

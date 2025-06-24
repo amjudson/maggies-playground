@@ -14,4 +14,7 @@ public class Email
     
     [Required]
     public int EmailTypeId { get; set; }
+    
+    [ForeignKey("EmailTypeId")]
+    public EmailType? EmailType { get; set; }
 } 

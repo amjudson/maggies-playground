@@ -17,6 +17,23 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 	public DbSet<Gender> Genders { get; set; } = null!;
 	public DbSet<PersonType> PersonTypes { get; set; } = null!;
 	public DbSet<Person> People { get; set; } = null!;
+	public DbSet<AddressType> AddressTypes { get; set; } = null!;
+	public DbSet<Address> Addresses { get; set; } = null!;
+	public DbSet<PhoneType> PhoneTypes { get; set; } = null!;
+	public DbSet<Phone> Phones { get; set; } = null!;
+	public DbSet<EmailType> EmailTypes { get; set; } = null!;
+	public DbSet<Email> Emails { get; set; } = null!;
+	public DbSet<State> States { get; set; } = null!;
+	
+	// Lookup tables for Client associations
+	public DbSet<ClientAddress> ClientAddresses { get; set; } = null!;
+	public DbSet<ClientPhone> ClientPhones { get; set; } = null!;
+	public DbSet<ClientEmail> ClientEmails { get; set; } = null!;
+	
+	// Lookup tables for Person associations
+	public DbSet<PersonAddress> PersonAddresses { get; set; } = null!;
+	public DbSet<PersonPhone> PersonPhones { get; set; } = null!;
+	public DbSet<PersonEmail> PersonEmails { get; set; } = null!;
 
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
@@ -224,5 +241,406 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 				new Person { PersonId = new Guid("00000000-0000-0000-0000-000000000050"), LastName = "Morris", FirstName = "Margaret", MiddleName = "AX", Suffix = null, Prefix = null, PersonTypeId = 2, Alias = "mmorris", RaceId = 2, DateOfBirth = DateTime.SpecifyKind(new DateTime(1990, 12, 31), DateTimeKind.Utc), GenderId = 3, CreatedDate = peopleSeedDate, EnteredBy = "System" }
 			);
 		});
+
+		// Configure AddressType
+		builder.Entity<AddressType>(entity =>
+		{
+			entity.Property(e => e.Description).HasMaxLength(255);
+			entity.Property(e => e.Name).HasMaxLength(255);
+			entity.Property(e => e.ClientId).HasMaxLength(255);
+
+			entity.HasData(
+				new AddressType { AddressTypeId = 1, Description = "Home address", Name = "Home", ClientId = null, ClientOption = false },
+				new AddressType { AddressTypeId = 2, Description = "Work address", Name = "Work", ClientId = null, ClientOption = false },
+				new AddressType { AddressTypeId = 3, Description = "Billing address", Name = "Billing", ClientId = null, ClientOption = false },
+				new AddressType { AddressTypeId = 4, Description = "Shipping address", Name = "Shipping", ClientId = null, ClientOption = false },
+				new AddressType { AddressTypeId = 5, Description = "Mailing address", Name = "Mailing", ClientId = null, ClientOption = false }
+			);
+		});
+
+		// Configure Address
+		builder.Entity<Address>(entity =>
+		{
+			entity.Property(e => e.AddressLine1).HasMaxLength(255);
+			entity.Property(e => e.AddressLine2).HasMaxLength(255);
+			entity.Property(e => e.City).HasMaxLength(255);
+			entity.Property(e => e.Zip).HasMaxLength(20);
+			
+			// Add foreign key relationship to AddressType
+			entity.HasOne<AddressType>()
+				.WithMany()
+				.HasForeignKey(a => a.AddressTypeId)
+				.OnDelete(DeleteBehavior.Restrict);
+				
+			// Add foreign key relationship to State
+			entity.HasOne<State>()
+				.WithMany()
+				.HasForeignKey(a => a.StateId)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			// Seed Address data
+			var addressSeedData = new List<Address>();
+			var random = new Random(42); // Fixed seed for consistent data
+			
+			for (int i = 1; i <= 60; i++)
+			{
+				var streetNumber = random.Next(100, 9999);
+				var streetName = GetRandomStreetName(random);
+				var city = GetRandomCity(random);
+				var stateId = random.Next(1, 51); // 1-50 for states
+				var zip = random.Next(10000, 100000).ToString();
+				var addressTypeId = random.Next(1, 6); // 1-5 for address types
+				
+				addressSeedData.Add(new Address
+				{
+					AddressId = new Guid($"00000000-0000-0000-0000-{i:D012}"),
+					AddressLine1 = $"{streetNumber} {streetName}",
+					AddressLine2 = random.Next(0, 3) == 0 ? $"Apt {random.Next(1, 1000)}" : null,
+					City = city,
+					StateId = stateId,
+					Zip = zip,
+					AddressTypeId = addressTypeId
+				});
+			}
+			
+			entity.HasData(addressSeedData);
+		});
+
+		// Configure PhoneType
+		builder.Entity<PhoneType>(entity =>
+		{
+			entity.Property(e => e.Description).HasMaxLength(255);
+			entity.Property(e => e.Name).HasMaxLength(255);
+			entity.Property(e => e.ClientId).HasMaxLength(255);
+
+			entity.HasData(
+				new PhoneType { PhoneTypeId = 1, Description = "Home phone number", Name = "Home", ClientId = null, ClientOption = false },
+				new PhoneType { PhoneTypeId = 2, Description = "Work phone number", Name = "Work", ClientId = null, ClientOption = false },
+				new PhoneType { PhoneTypeId = 3, Description = "Mobile phone number", Name = "Mobile", ClientId = null, ClientOption = false },
+				new PhoneType { PhoneTypeId = 4, Description = "Fax number", Name = "Fax", ClientId = null, ClientOption = false },
+				new PhoneType { PhoneTypeId = 5, Description = "Emergency contact number", Name = "Emergency", ClientId = null, ClientOption = false }
+			);
+		});
+
+		// Configure Phone
+		builder.Entity<Phone>(entity =>
+		{
+			entity.Property(e => e.PhoneNumber).HasMaxLength(20);
+			entity.Property(e => e.Extension).HasMaxLength(10);
+			
+			// Add foreign key relationship to PhoneType
+			entity.HasOne<PhoneType>()
+				.WithMany()
+				.HasForeignKey(p => p.PhoneTypeId)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			// Seed Phone data
+			var phoneSeedData = new List<Phone>();
+			var random = new Random(42); // Fixed seed for consistent data
+			
+			for (int i = 1; i <= 60; i++)
+			{
+				var areaCode = random.Next(200, 999);
+				var prefix = random.Next(100, 999);
+				var lineNumber = random.Next(1000, 9999);
+				var phoneTypeId = random.Next(1, 6); // 1-5 for phone types
+				var extension = random.Next(0, 3) == 0 ? random.Next(1000, 9999).ToString() : null;
+				
+				phoneSeedData.Add(new Phone
+				{
+					PhoneId = new Guid($"00000000-0000-0000-0000-{i + 100:D012}"),
+					PhoneNumber = $"{areaCode}-{prefix}-{lineNumber}",
+					Extension = extension,
+					PhoneTypeId = phoneTypeId
+				});
+			}
+			
+			entity.HasData(phoneSeedData);
+		});
+
+		// Configure EmailType
+		builder.Entity<EmailType>(entity =>
+		{
+			entity.Property(e => e.Description).HasMaxLength(255);
+			entity.Property(e => e.Name).HasMaxLength(255);
+			entity.Property(e => e.ClientId).HasMaxLength(255);
+
+			entity.HasData(
+				new EmailType { EmailTypeId = 1, Description = "Personal email address", Name = "Personal", ClientId = null, ClientOption = false },
+				new EmailType { EmailTypeId = 2, Description = "Work email address", Name = "Work", ClientId = null, ClientOption = false },
+				new EmailType { EmailTypeId = 3, Description = "Business email address", Name = "Business", ClientId = null, ClientOption = false },
+				new EmailType { EmailTypeId = 4, Description = "Marketing email address", Name = "Marketing", ClientId = null, ClientOption = false },
+				new EmailType { EmailTypeId = 5, Description = "Support email address", Name = "Support", ClientId = null, ClientOption = false }
+			);
+		});
+
+		// Configure Email
+		builder.Entity<Email>(entity =>
+		{
+			entity.Property(e => e.EmailAddress).HasMaxLength(255);
+			
+			// Add foreign key relationship to EmailType
+			entity.HasOne<EmailType>()
+				.WithMany()
+				.HasForeignKey(e => e.EmailTypeId)
+				.OnDelete(DeleteBehavior.Restrict);
+
+			// Seed Email data
+			var emailSeedData = new List<Email>();
+			var random = new Random(42); // Fixed seed for consistent data
+			
+			for (int i = 1; i <= 60; i++)
+			{
+				var firstName = GetRandomFirstName(random);
+				var lastName = GetRandomLastName(random);
+				var domain = GetRandomDomain(random);
+				var emailTypeId = random.Next(1, 6); // 1-5 for email types
+				
+				emailSeedData.Add(new Email
+				{
+					EmailId = new Guid($"00000000-0000-0000-0000-{i + 200:D012}"),
+					EmailAddress = $"{firstName.ToLower()}.{lastName.ToLower()}@{domain}",
+					EmailTypeId = emailTypeId
+				});
+			}
+			
+			entity.HasData(emailSeedData);
+		});
+
+		// Configure State
+		builder.Entity<State>(entity =>
+		{
+			entity.Property(e => e.Abbreviation).HasMaxLength(2);
+			entity.Property(e => e.Name).HasMaxLength(255);
+
+			entity.HasData(
+				new State { StateId = 1, Abbreviation = "AL", Name = "Alabama" },
+				new State { StateId = 2, Abbreviation = "AK", Name = "Alaska" },
+				new State { StateId = 3, Abbreviation = "AZ", Name = "Arizona" },
+				new State { StateId = 4, Abbreviation = "AR", Name = "Arkansas" },
+				new State { StateId = 5, Abbreviation = "CA", Name = "California" },
+				new State { StateId = 6, Abbreviation = "CO", Name = "Colorado" },
+				new State { StateId = 7, Abbreviation = "CT", Name = "Connecticut" },
+				new State { StateId = 8, Abbreviation = "DE", Name = "Delaware" },
+				new State { StateId = 9, Abbreviation = "FL", Name = "Florida" },
+				new State { StateId = 10, Abbreviation = "GA", Name = "Georgia" },
+				new State { StateId = 11, Abbreviation = "HI", Name = "Hawaii" },
+				new State { StateId = 12, Abbreviation = "ID", Name = "Idaho" },
+				new State { StateId = 13, Abbreviation = "IL", Name = "Illinois" },
+				new State { StateId = 14, Abbreviation = "IN", Name = "Indiana" },
+				new State { StateId = 15, Abbreviation = "IA", Name = "Iowa" },
+				new State { StateId = 16, Abbreviation = "KS", Name = "Kansas" },
+				new State { StateId = 17, Abbreviation = "KY", Name = "Kentucky" },
+				new State { StateId = 18, Abbreviation = "LA", Name = "Louisiana" },
+				new State { StateId = 19, Abbreviation = "ME", Name = "Maine" },
+				new State { StateId = 20, Abbreviation = "MD", Name = "Maryland" },
+				new State { StateId = 21, Abbreviation = "MA", Name = "Massachusetts" },
+				new State { StateId = 22, Abbreviation = "MI", Name = "Michigan" },
+				new State { StateId = 23, Abbreviation = "MN", Name = "Minnesota" },
+				new State { StateId = 24, Abbreviation = "MS", Name = "Mississippi" },
+				new State { StateId = 25, Abbreviation = "MO", Name = "Missouri" },
+				new State { StateId = 26, Abbreviation = "MT", Name = "Montana" },
+				new State { StateId = 27, Abbreviation = "NE", Name = "Nebraska" },
+				new State { StateId = 28, Abbreviation = "NV", Name = "Nevada" },
+				new State { StateId = 29, Abbreviation = "NH", Name = "New Hampshire" },
+				new State { StateId = 30, Abbreviation = "NJ", Name = "New Jersey" },
+				new State { StateId = 31, Abbreviation = "NM", Name = "New Mexico" },
+				new State { StateId = 32, Abbreviation = "NY", Name = "New York" },
+				new State { StateId = 33, Abbreviation = "NC", Name = "North Carolina" },
+				new State { StateId = 34, Abbreviation = "ND", Name = "North Dakota" },
+				new State { StateId = 35, Abbreviation = "OH", Name = "Ohio" },
+				new State { StateId = 36, Abbreviation = "OK", Name = "Oklahoma" },
+				new State { StateId = 37, Abbreviation = "OR", Name = "Oregon" },
+				new State { StateId = 38, Abbreviation = "PA", Name = "Pennsylvania" },
+				new State { StateId = 39, Abbreviation = "RI", Name = "Rhode Island" },
+				new State { StateId = 40, Abbreviation = "SC", Name = "South Carolina" },
+				new State { StateId = 41, Abbreviation = "SD", Name = "South Dakota" },
+				new State { StateId = 42, Abbreviation = "TN", Name = "Tennessee" },
+				new State { StateId = 43, Abbreviation = "TX", Name = "Texas" },
+				new State { StateId = 44, Abbreviation = "UT", Name = "Utah" },
+				new State { StateId = 45, Abbreviation = "VT", Name = "Vermont" },
+				new State { StateId = 46, Abbreviation = "VA", Name = "Virginia" },
+				new State { StateId = 47, Abbreviation = "WA", Name = "Washington" },
+				new State { StateId = 48, Abbreviation = "WV", Name = "West Virginia" },
+				new State { StateId = 49, Abbreviation = "WI", Name = "Wisconsin" },
+				new State { StateId = 50, Abbreviation = "WY", Name = "Wyoming" }
+			);
+		});
+
+		// Configure ClientAddress lookup table
+		builder.Entity<ClientAddress>(entity =>
+		{
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+			
+			// Configure foreign key relationships
+			entity.HasOne(ca => ca.Client)
+				.WithMany()
+				.HasForeignKey(ca => ca.ClientId)
+				.OnDelete(DeleteBehavior.Cascade);
+				
+			entity.HasOne(ca => ca.Address)
+				.WithMany()
+				.HasForeignKey(ca => ca.AddressId)
+				.OnDelete(DeleteBehavior.Cascade);
+		});
+
+		// Configure ClientPhone lookup table
+		builder.Entity<ClientPhone>(entity =>
+		{
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+			
+			// Configure foreign key relationships
+			entity.HasOne(cp => cp.Client)
+				.WithMany()
+				.HasForeignKey(cp => cp.ClientId)
+				.OnDelete(DeleteBehavior.Cascade);
+				
+			entity.HasOne(cp => cp.Phone)
+				.WithMany()
+				.HasForeignKey(cp => cp.PhoneId)
+				.OnDelete(DeleteBehavior.Cascade);
+		});
+
+		// Configure ClientEmail lookup table
+		builder.Entity<ClientEmail>(entity =>
+		{
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+			
+			// Configure foreign key relationships
+			entity.HasOne(ce => ce.Client)
+				.WithMany()
+				.HasForeignKey(ce => ce.ClientId)
+				.OnDelete(DeleteBehavior.Cascade);
+				
+			entity.HasOne(ce => ce.Email)
+				.WithMany()
+				.HasForeignKey(ce => ce.EmailId)
+				.OnDelete(DeleteBehavior.Cascade);
+		});
+
+		// Configure PersonAddress lookup table
+		builder.Entity<PersonAddress>(entity =>
+		{
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+			
+			// Configure foreign key relationships
+			entity.HasOne(pa => pa.Person)
+				.WithMany()
+				.HasForeignKey(pa => pa.PersonId)
+				.OnDelete(DeleteBehavior.Cascade);
+				
+			entity.HasOne(pa => pa.Address)
+				.WithMany()
+				.HasForeignKey(pa => pa.AddressId)
+				.OnDelete(DeleteBehavior.Cascade);
+		});
+
+		// Configure PersonPhone lookup table
+		builder.Entity<PersonPhone>(entity =>
+		{
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+			
+			// Configure foreign key relationships
+			entity.HasOne(pp => pp.Person)
+				.WithMany()
+				.HasForeignKey(pp => pp.PersonId)
+				.OnDelete(DeleteBehavior.Cascade);
+				
+			entity.HasOne(pp => pp.Phone)
+				.WithMany()
+				.HasForeignKey(pp => pp.PhoneId)
+				.OnDelete(DeleteBehavior.Cascade);
+		});
+
+		// Configure PersonEmail lookup table
+		builder.Entity<PersonEmail>(entity =>
+		{
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+			
+			// Configure foreign key relationships
+			entity.HasOne(pe => pe.Person)
+				.WithMany()
+				.HasForeignKey(pe => pe.PersonId)
+				.OnDelete(DeleteBehavior.Cascade);
+				
+			entity.HasOne(pe => pe.Email)
+				.WithMany()
+				.HasForeignKey(pe => pe.EmailId)
+				.OnDelete(DeleteBehavior.Cascade);
+		});
+	}
+
+	// Helper methods for generating random seed data
+	private static string GetRandomStreetName(Random random)
+	{
+		var streetNames = new[]
+		{
+			"Main St", "Oak Ave", "Elm St", "Pine Rd", "Cedar Ln", "Maple Dr", "Washington Blvd", "Lincoln Ave",
+			"Park St", "Lake Dr", "River Rd", "Hill St", "Valley Ave", "Sunset Blvd", "Sunrise Dr", "Forest Ln",
+			"Garden St", "Meadow Ave", "Brook Rd", "Spring St", "Summer Ave", "Winter Dr", "Autumn Ln", "Cherry St",
+			"Apple Ave", "Peach Rd", "Plum St", "Berry Ave", "Grape Dr", "Orange Ln", "Lemon St", "Lime Ave",
+			"Blueberry Rd", "Strawberry St", "Raspberry Ave", "Blackberry Dr", "Cranberry Ln", "Boysenberry St",
+			"Elderberry Ave", "Gooseberry Rd", "Currant St", "Mulberry Ave", "Huckleberry Dr", "Serviceberry Ln"
+		};
+		return streetNames[random.Next(streetNames.Length)];
+	}
+
+	private static string GetRandomCity(Random random)
+	{
+		var cities = new[]
+		{
+			"New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego",
+			"Dallas", "San Jose", "Austin", "Jacksonville", "Fort Worth", "Columbus", "Charlotte", "San Francisco",
+			"Indianapolis", "Seattle", "Denver", "Washington", "Boston", "El Paso", "Nashville", "Detroit",
+			"Oklahoma City", "Portland", "Las Vegas", "Memphis", "Louisville", "Baltimore", "Milwaukee", "Albuquerque",
+			"Tucson", "Fresno", "Sacramento", "Mesa", "Kansas City", "Atlanta", "Long Beach", "Colorado Springs",
+			"Raleigh", "Miami", "Virginia Beach", "Omaha", "Oakland", "Minneapolis", "Tulsa", "Arlington",
+			"Tampa", "New Orleans", "Wichita", "Cleveland", "Bakersfield", "Aurora", "Anaheim", "Honolulu"
+		};
+		return cities[random.Next(cities.Length)];
+	}
+
+	private static string GetRandomFirstName(Random random)
+	{
+		var firstNames = new[]
+		{
+			"James", "Mary", "John", "Patricia", "Robert", "Jennifer", "Michael", "Linda", "William", "Elizabeth",
+			"David", "Barbara", "Richard", "Susan", "Joseph", "Jessica", "Thomas", "Sarah", "Christopher", "Karen",
+			"Charles", "Nancy", "Daniel", "Lisa", "Matthew", "Betty", "Anthony", "Helen", "Mark", "Sandra",
+			"Donald", "Donna", "Steven", "Carol", "Paul", "Ruth", "Andrew", "Sharon", "Joshua", "Michelle",
+			"Kenneth", "Laura", "Kevin", "Emily", "Brian", "Kimberly", "George", "Deborah", "Edward", "Dorothy",
+			"Ronald", "Lisa", "Timothy", "Nancy", "Jason", "Karen", "Jeffrey", "Betty", "Ryan", "Helen"
+		};
+		return firstNames[random.Next(firstNames.Length)];
+	}
+
+	private static string GetRandomLastName(Random random)
+	{
+		var lastNames = new[]
+		{
+			"Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez",
+			"Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore", "Jackson", "Martin",
+			"Lee", "Perez", "Thompson", "White", "Harris", "Sanchez", "Clark", "Ramirez", "Lewis", "Robinson",
+			"Walker", "Young", "Allen", "King", "Wright", "Scott", "Torres", "Nguyen", "Hill", "Flores",
+			"Green", "Adams", "Nelson", "Baker", "Hall", "Rivera", "Campbell", "Mitchell", "Carter", "Roberts"
+		};
+		return lastNames[random.Next(lastNames.Length)];
+	}
+
+	private static string GetRandomDomain(Random random)
+	{
+		var domains = new[]
+		{
+			"gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "aol.com", "icloud.com", "protonmail.com",
+			"company.com", "business.com", "corporate.com", "enterprise.com", "organization.com", "firm.com",
+			"consulting.com", "services.com", "solutions.com", "tech.com", "digital.com", "online.com", "web.com"
+		};
+		return domains[random.Next(domains.Length)];
 	}
 }

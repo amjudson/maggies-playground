@@ -24,6 +24,20 @@ builder.Services.AddScoped<IRaceService, RaceService>();
 builder.Services.AddScoped<IGenderService, GenderService>();
 builder.Services.AddScoped<IPersonTypeService, PersonTypeService>();
 builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IAddressTypeService, AddressTypeService>();
+builder.Services.AddScoped<IPhoneService, PhoneService>();
+builder.Services.AddScoped<IPhoneTypeService, PhoneTypeService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IEmailTypeService, EmailTypeService>();
+builder.Services.AddScoped<IStateService, StateService>();
+// Lookup table services
+builder.Services.AddScoped<IClientAddressService, ClientAddressService>();
+builder.Services.AddScoped<IClientPhoneService, ClientPhoneService>();
+builder.Services.AddScoped<IClientEmailService, ClientEmailService>();
+builder.Services.AddScoped<IPersonAddressService, PersonAddressService>();
+builder.Services.AddScoped<IPersonPhoneService, PersonPhoneService>();
+builder.Services.AddScoped<IPersonEmailService, PersonEmailService>();
 
 // Configure Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()

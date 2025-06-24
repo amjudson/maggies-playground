@@ -3,6 +3,7 @@ using System;
 using MaggiesPlaygroundApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MaggiesPlaygroundApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250624174106_AddNewSeedData")]
+    partial class AddNewSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,7 +77,7 @@ namespace MaggiesPlaygroundApi.Migrations
                     b.HasData(
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000001"),
+                            AddressId = new Guid("946214a6-436b-495b-a180-54358a4039d8"),
                             AddressLine1 = "6713 Washington Blvd",
                             AddressTypeId = 2,
                             City = "San Diego",
@@ -83,7 +86,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000002"),
+                            AddressId = new Guid("1afca743-c0e8-4ef6-8c04-b5c454997d0a"),
                             AddressLine1 = "5177 Lincoln Ave",
                             AddressLine2 = "Apt 381",
                             AddressTypeId = 3,
@@ -93,7 +96,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000003"),
+                            AddressId = new Guid("c7d7e56b-b5c8-46f8-b2f9-44ba801e42d1"),
                             AddressLine1 = "2676 Autumn Ln",
                             AddressLine2 = "Apt 91",
                             AddressTypeId = 2,
@@ -103,7 +106,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000004"),
+                            AddressId = new Guid("ae812dcb-e0d7-44d5-8352-260c6b029590"),
                             AddressLine1 = "7080 Blackberry Dr",
                             AddressTypeId = 1,
                             City = "Milwaukee",
@@ -112,7 +115,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000005"),
+                            AddressId = new Guid("c460f93f-2789-42aa-8c8b-d35bb1353e4d"),
                             AddressLine1 = "6955 Autumn Ln",
                             AddressTypeId = 3,
                             City = "Austin",
@@ -121,7 +124,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000006"),
+                            AddressId = new Guid("bf5553a0-458c-4145-9d04-6e0594576309"),
                             AddressLine1 = "139 Cherry St",
                             AddressLine2 = "Apt 51",
                             AddressTypeId = 1,
@@ -131,7 +134,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000007"),
+                            AddressId = new Guid("abe74b84-9e0d-4c63-9324-7ca8b4b62fe2"),
                             AddressLine1 = "7837 Berry Ave",
                             AddressTypeId = 2,
                             City = "San Antonio",
@@ -140,7 +143,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000008"),
+                            AddressId = new Guid("3073f9e9-a800-4386-8ecf-dbfb4b95f08c"),
                             AddressLine1 = "1521 Oak Ave",
                             AddressTypeId = 3,
                             City = "Fresno",
@@ -149,7 +152,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000009"),
+                            AddressId = new Guid("c5838911-b39b-46d8-8a83-e761c6d43040"),
                             AddressLine1 = "6321 Lake Dr",
                             AddressTypeId = 1,
                             City = "New York",
@@ -158,7 +161,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000010"),
+                            AddressId = new Guid("25fba7b4-28c9-425f-b727-68046d12d0cd"),
                             AddressLine1 = "802 Summer Ave",
                             AddressTypeId = 3,
                             City = "New York",
@@ -167,7 +170,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000011"),
+                            AddressId = new Guid("df201328-8cdf-49b1-b8dd-e849a1f6933e"),
                             AddressLine1 = "188 Cranberry Ln",
                             AddressLine2 = "Apt 913",
                             AddressTypeId = 4,
@@ -177,7 +180,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000012"),
+                            AddressId = new Guid("bc3f2598-20e7-4432-a47e-847a868290c4"),
                             AddressLine1 = "9295 Summer Ave",
                             AddressLine2 = "Apt 437",
                             AddressTypeId = 2,
@@ -187,7 +190,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000013"),
+                            AddressId = new Guid("649a97af-876c-48e9-9da8-4f76eac54552"),
                             AddressLine1 = "7942 Cherry St",
                             AddressTypeId = 3,
                             City = "Nashville",
@@ -196,7 +199,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000014"),
+                            AddressId = new Guid("21a85ca0-0bb6-4911-91b7-bf38d4477a01"),
                             AddressLine1 = "292 Elderberry Ave",
                             AddressLine2 = "Apt 452",
                             AddressTypeId = 1,
@@ -206,7 +209,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000015"),
+                            AddressId = new Guid("19db7ed7-8cdb-4ed2-8214-50ca0fa51ae4"),
                             AddressLine1 = "3398 Raspberry Ave",
                             AddressTypeId = 3,
                             City = "Dallas",
@@ -215,7 +218,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000016"),
+                            AddressId = new Guid("3a2ab513-cbc6-40f9-b009-a61bb42bafb7"),
                             AddressLine1 = "9870 Strawberry St",
                             AddressTypeId = 3,
                             City = "Atlanta",
@@ -224,7 +227,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000017"),
+                            AddressId = new Guid("9eaaeac3-a864-40ac-983c-b49864956314"),
                             AddressLine1 = "6542 Oak Ave",
                             AddressLine2 = "Apt 39",
                             AddressTypeId = 2,
@@ -234,7 +237,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000018"),
+                            AddressId = new Guid("06c210e4-ce8f-4d42-9db5-c433d523690b"),
                             AddressLine1 = "2239 Plum St",
                             AddressLine2 = "Apt 321",
                             AddressTypeId = 1,
@@ -244,7 +247,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000019"),
+                            AddressId = new Guid("23a05e1b-cab9-463d-a6b9-9bb074f3970c"),
                             AddressLine1 = "3305 Strawberry St",
                             AddressTypeId = 5,
                             City = "Tulsa",
@@ -253,7 +256,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000020"),
+                            AddressId = new Guid("a5433356-0cf2-40d6-91ea-efb9af150385"),
                             AddressLine1 = "2456 Currant St",
                             AddressTypeId = 4,
                             City = "Arlington",
@@ -262,7 +265,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000021"),
+                            AddressId = new Guid("494e74ee-d45b-4601-bbfa-2e7ae1a18075"),
                             AddressLine1 = "2003 Sunset Blvd",
                             AddressTypeId = 5,
                             City = "Austin",
@@ -271,7 +274,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000022"),
+                            AddressId = new Guid("92efc6bd-ac5a-49e3-a641-cacbb856aa5b"),
                             AddressLine1 = "7837 Maple Dr",
                             AddressTypeId = 3,
                             City = "New Orleans",
@@ -280,7 +283,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000023"),
+                            AddressId = new Guid("0f6e7ae5-fc7d-464a-8d06-29d8e0911194"),
                             AddressLine1 = "7152 Maple Dr",
                             AddressTypeId = 3,
                             City = "Fresno",
@@ -289,7 +292,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000024"),
+                            AddressId = new Guid("08140fa1-8946-4bd5-960e-a860637c157f"),
                             AddressLine1 = "9640 Summer Ave",
                             AddressLine2 = "Apt 3",
                             AddressTypeId = 1,
@@ -299,7 +302,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000025"),
+                            AddressId = new Guid("cfa5058e-94ef-4257-91a8-546f22e44815"),
                             AddressLine1 = "1900 Mulberry Ave",
                             AddressLine2 = "Apt 910",
                             AddressTypeId = 3,
@@ -309,7 +312,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000026"),
+                            AddressId = new Guid("50051656-4189-46bd-af6d-db65b2f034ba"),
                             AddressLine1 = "9641 Gooseberry Rd",
                             AddressTypeId = 4,
                             City = "San Jose",
@@ -318,7 +321,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000027"),
+                            AddressId = new Guid("b5f68ce4-c7b5-40ed-8b36-2325039cdba0"),
                             AddressLine1 = "8240 Blueberry Rd",
                             AddressLine2 = "Apt 888",
                             AddressTypeId = 5,
@@ -328,7 +331,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000028"),
+                            AddressId = new Guid("991bcf4f-2487-4e27-82f9-2d314d899726"),
                             AddressLine1 = "6677 Park St",
                             AddressLine2 = "Apt 421",
                             AddressTypeId = 4,
@@ -338,7 +341,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000029"),
+                            AddressId = new Guid("6ab4959b-870d-4bbc-971b-c281b78d1c5a"),
                             AddressLine1 = "8070 Elderberry Ave",
                             AddressTypeId = 3,
                             City = "Omaha",
@@ -347,7 +350,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000030"),
+                            AddressId = new Guid("58c4a785-a916-42eb-981f-85d2b8779244"),
                             AddressLine1 = "9694 Washington Blvd",
                             AddressTypeId = 3,
                             City = "Tucson",
@@ -356,7 +359,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000031"),
+                            AddressId = new Guid("748d783f-4038-4ce5-94c2-b4c80804d8a7"),
                             AddressLine1 = "1199 Blackberry Dr",
                             AddressTypeId = 2,
                             City = "Washington",
@@ -365,7 +368,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000032"),
+                            AddressId = new Guid("a0eee909-a13d-43d0-96df-d767696c7ac6"),
                             AddressLine1 = "7906 Peach Rd",
                             AddressLine2 = "Apt 314",
                             AddressTypeId = 1,
@@ -375,7 +378,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000033"),
+                            AddressId = new Guid("d84ddfd1-fb26-4d34-b8a9-1600dcf4deab"),
                             AddressLine1 = "1797 Valley Ave",
                             AddressTypeId = 2,
                             City = "San Francisco",
@@ -384,7 +387,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000034"),
+                            AddressId = new Guid("e41e16d6-4aaa-486f-84c1-d690e83f844f"),
                             AddressLine1 = "7656 Orange Ln",
                             AddressLine2 = "Apt 938",
                             AddressTypeId = 2,
@@ -394,7 +397,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000035"),
+                            AddressId = new Guid("1c748b70-cd9b-4a76-aacc-a99642897147"),
                             AddressLine1 = "5970 Plum St",
                             AddressTypeId = 3,
                             City = "El Paso",
@@ -403,7 +406,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000036"),
+                            AddressId = new Guid("3d3d94e6-f660-4eec-9ce3-b1e45064269d"),
                             AddressLine1 = "3192 Currant St",
                             AddressTypeId = 2,
                             City = "New Orleans",
@@ -412,7 +415,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000037"),
+                            AddressId = new Guid("bc2c6f3e-3c6b-4b16-8e85-4f9f3b6fcd36"),
                             AddressLine1 = "284 Gooseberry Rd",
                             AddressLine2 = "Apt 940",
                             AddressTypeId = 5,
@@ -422,7 +425,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000038"),
+                            AddressId = new Guid("d5f019f9-0a5d-4597-9f2b-05145c04572f"),
                             AddressLine1 = "7546 Oak Ave",
                             AddressTypeId = 4,
                             City = "Washington",
@@ -431,7 +434,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000039"),
+                            AddressId = new Guid("2cf71a29-8c76-489d-ac71-5cd7e5e19305"),
                             AddressLine1 = "3712 Forest Ln",
                             AddressLine2 = "Apt 665",
                             AddressTypeId = 4,
@@ -441,7 +444,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000040"),
+                            AddressId = new Guid("310e2a03-2548-4228-89ec-0a70f8104fdf"),
                             AddressLine1 = "1085 Maple Dr",
                             AddressLine2 = "Apt 579",
                             AddressTypeId = 2,
@@ -451,7 +454,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000041"),
+                            AddressId = new Guid("605f35b9-e4c1-470c-b1f4-4c5be4521776"),
                             AddressLine1 = "3574 Washington Blvd",
                             AddressLine2 = "Apt 656",
                             AddressTypeId = 5,
@@ -461,7 +464,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000042"),
+                            AddressId = new Guid("d3f9fd91-3e50-4929-9353-d2d9087ab2a1"),
                             AddressLine1 = "2068 Grape Dr",
                             AddressTypeId = 4,
                             City = "Kansas City",
@@ -470,7 +473,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000043"),
+                            AddressId = new Guid("f052bb63-8494-4a8e-8660-f796bb0431a2"),
                             AddressLine1 = "4342 Park St",
                             AddressTypeId = 4,
                             City = "Oakland",
@@ -479,7 +482,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000044"),
+                            AddressId = new Guid("62c162c4-e25a-48de-9a10-7546a285f4d9"),
                             AddressLine1 = "6580 Huckleberry Dr",
                             AddressTypeId = 3,
                             City = "Colorado Springs",
@@ -488,7 +491,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000045"),
+                            AddressId = new Guid("b9f0ae53-5cca-47f1-aa55-99848c0debf2"),
                             AddressLine1 = "6967 Sunset Blvd",
                             AddressTypeId = 5,
                             City = "Tucson",
@@ -497,7 +500,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000046"),
+                            AddressId = new Guid("570d4fd6-ee10-42a7-a2d0-cd5c42d7bfba"),
                             AddressLine1 = "8607 Oak Ave",
                             AddressTypeId = 3,
                             City = "Detroit",
@@ -506,7 +509,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000047"),
+                            AddressId = new Guid("def55aa4-01cd-46c9-8f36-5a079ff414fb"),
                             AddressLine1 = "117 Mulberry Ave",
                             AddressTypeId = 4,
                             City = "Portland",
@@ -515,7 +518,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000048"),
+                            AddressId = new Guid("cdb68337-2f22-4e2a-89a6-88936309b825"),
                             AddressLine1 = "1045 Park St",
                             AddressTypeId = 5,
                             City = "Oakland",
@@ -524,7 +527,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000049"),
+                            AddressId = new Guid("014b9290-7e26-4885-b9a8-05bfb6f91274"),
                             AddressLine1 = "2163 Mulberry Ave",
                             AddressTypeId = 5,
                             City = "New Orleans",
@@ -533,7 +536,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000050"),
+                            AddressId = new Guid("631a4188-1a58-4b07-abff-f479eb1959ff"),
                             AddressLine1 = "3313 Elm St",
                             AddressTypeId = 5,
                             City = "San Antonio",
@@ -542,7 +545,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000051"),
+                            AddressId = new Guid("17f13322-efe7-4f37-b35e-002f32f61f8a"),
                             AddressLine1 = "1624 Garden St",
                             AddressTypeId = 1,
                             City = "San Diego",
@@ -551,7 +554,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000052"),
+                            AddressId = new Guid("91c63489-0b91-4d2d-b29b-ca87774cfd12"),
                             AddressLine1 = "314 River Rd",
                             AddressTypeId = 2,
                             City = "Cleveland",
@@ -560,7 +563,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000053"),
+                            AddressId = new Guid("e2117989-40a0-4d12-bb58-c3e79b72469f"),
                             AddressLine1 = "1375 Raspberry Ave",
                             AddressTypeId = 1,
                             City = "Indianapolis",
@@ -569,7 +572,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000054"),
+                            AddressId = new Guid("72c9a612-42c9-4763-b06e-865d32aa4f47"),
                             AddressLine1 = "1031 Cherry St",
                             AddressTypeId = 5,
                             City = "Oakland",
@@ -578,7 +581,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000055"),
+                            AddressId = new Guid("2f730964-c7a7-4a78-852b-935673f0821c"),
                             AddressLine1 = "8908 Forest Ln",
                             AddressTypeId = 5,
                             City = "Nashville",
@@ -587,7 +590,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000056"),
+                            AddressId = new Guid("123bb897-4f81-44cf-b341-b5ed1a4ff0e6"),
                             AddressLine1 = "8130 Orange Ln",
                             AddressLine2 = "Apt 712",
                             AddressTypeId = 5,
@@ -597,7 +600,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000057"),
+                            AddressId = new Guid("41050e0c-c4ac-468d-8a91-19383c4de94d"),
                             AddressLine1 = "9665 Blackberry Dr",
                             AddressLine2 = "Apt 820",
                             AddressTypeId = 1,
@@ -607,7 +610,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000058"),
+                            AddressId = new Guid("9afeb645-6c5d-49f8-abeb-d729c78c4bf7"),
                             AddressLine1 = "3667 Peach Rd",
                             AddressTypeId = 5,
                             City = "Cleveland",
@@ -616,7 +619,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000059"),
+                            AddressId = new Guid("aa0a55bf-2fe2-403d-8a27-4799fe97f000"),
                             AddressLine1 = "8514 Meadow Ave",
                             AddressTypeId = 5,
                             City = "Philadelphia",
@@ -625,7 +628,7 @@ namespace MaggiesPlaygroundApi.Migrations
                         },
                         new
                         {
-                            AddressId = new Guid("00000000-0000-0000-0000-000000000060"),
+                            AddressId = new Guid("bc71bc67-fb5c-4a47-8ba0-f95f959b910d"),
                             AddressLine1 = "9686 Oak Ave",
                             AddressLine2 = "Apt 746",
                             AddressTypeId = 1,
@@ -1206,361 +1209,361 @@ namespace MaggiesPlaygroundApi.Migrations
                     b.HasData(
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000201"),
+                            EmailId = new Guid("6f590a19-8738-462c-8a05-36418d516a8e"),
                             EmailAddress = "kenneth.davis@hotmail.com",
                             EmailTypeId = 3
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000202"),
+                            EmailId = new Guid("5d9bac87-764e-4a6c-b6b5-6157056dbeef"),
                             EmailAddress = "david.wilson@services.com",
                             EmailTypeId = 3
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000203"),
+                            EmailId = new Guid("229623e2-4140-40c1-a803-81fa9188d0c0"),
                             EmailAddress = "david.hill@aol.com",
                             EmailTypeId = 2
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000204"),
+                            EmailId = new Guid("f386bf95-3c1b-4cf3-8614-3e103a061b5b"),
                             EmailAddress = "donald.taylor@company.com",
                             EmailTypeId = 2
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000205"),
+                            EmailId = new Guid("3be42c17-3a31-4e0e-8387-6505cc9b584d"),
                             EmailAddress = "donna.johnson@tech.com",
                             EmailTypeId = 3
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000206"),
+                            EmailId = new Guid("2549fa58-e354-4957-8e9f-a8b5b4fc0e15"),
                             EmailAddress = "lisa.davis@yahoo.com",
                             EmailTypeId = 4
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000207"),
+                            EmailId = new Guid("0bf2c6aa-b5a4-47d3-ae82-e07f16ed833a"),
                             EmailAddress = "edward.clark@gmail.com",
                             EmailTypeId = 4
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000208"),
+                            EmailId = new Guid("cad026ac-a986-474b-96d5-d0fe802a4083"),
                             EmailAddress = "william.rivera@consulting.com",
                             EmailTypeId = 3
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000209"),
+                            EmailId = new Guid("7789390b-6ed7-4f5a-bad5-67635bcc2f6b"),
                             EmailAddress = "barbara.williams@protonmail.com",
                             EmailTypeId = 3
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000210"),
+                            EmailId = new Guid("b728b254-536a-474d-b7ce-b7388a4c4617"),
                             EmailAddress = "dorothy.smith@enterprise.com",
                             EmailTypeId = 5
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000211"),
+                            EmailId = new Guid("97b5c21e-09cc-4c67-b801-e4bf1812dec3"),
                             EmailAddress = "brian.martin@hotmail.com",
                             EmailTypeId = 1
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000212"),
+                            EmailId = new Guid("1d3142e8-2796-4008-abed-3ba63acf2710"),
                             EmailAddress = "patricia.flores@firm.com",
                             EmailTypeId = 1
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000213"),
+                            EmailId = new Guid("b70848c1-dda8-4016-b485-c9c928e7d027"),
                             EmailAddress = "joseph.hill@icloud.com",
                             EmailTypeId = 4
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000214"),
+                            EmailId = new Guid("155a6dbe-fa8b-4d90-a819-d750847d60bf"),
                             EmailAddress = "william.williams@firm.com",
                             EmailTypeId = 3
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000215"),
+                            EmailId = new Guid("e2bbdab9-bb8c-4887-bb6d-c4a8d4a84935"),
                             EmailAddress = "patricia.perez@services.com",
                             EmailTypeId = 4
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000216"),
+                            EmailId = new Guid("754ad98e-7259-4373-8368-5ed4458f46eb"),
                             EmailAddress = "susan.smith@company.com",
                             EmailTypeId = 2
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000217"),
+                            EmailId = new Guid("999742d5-d497-4054-8926-94742c30fed6"),
                             EmailAddress = "robert.scott@yahoo.com",
                             EmailTypeId = 3
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000218"),
+                            EmailId = new Guid("00ff14cb-29b3-44e2-b7e5-2ce006a50e18"),
                             EmailAddress = "james.flores@business.com",
                             EmailTypeId = 3
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000219"),
+                            EmailId = new Guid("2b50a618-3ab2-48a7-a267-2be286384481"),
                             EmailAddress = "sandra.smith@tech.com",
                             EmailTypeId = 1
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000220"),
+                            EmailId = new Guid("4fdd4dcf-b0bd-4fd5-903d-6bd4581b2cf6"),
                             EmailAddress = "james.brown@consulting.com",
                             EmailTypeId = 1
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000221"),
+                            EmailId = new Guid("f894529f-f106-4458-94c3-f84edc6a0b5d"),
                             EmailAddress = "jason.campbell@corporate.com",
                             EmailTypeId = 2
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000222"),
+                            EmailId = new Guid("4550210b-ea87-4a9a-b880-d29065f14ace"),
                             EmailAddress = "andrew.williams@company.com",
                             EmailTypeId = 1
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000223"),
+                            EmailId = new Guid("bd55905f-04c9-4130-8791-f3fefe0f1505"),
                             EmailAddress = "anthony.flores@enterprise.com",
                             EmailTypeId = 3
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000224"),
+                            EmailId = new Guid("da9cb7ae-222c-40e4-b4f2-4c044b7096ad"),
                             EmailAddress = "sarah.rivera@organization.com",
                             EmailTypeId = 4
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000225"),
+                            EmailId = new Guid("a7517f17-3e56-4a96-bd77-c010e47d2f8a"),
                             EmailAddress = "mary.hall@web.com",
                             EmailTypeId = 2
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000226"),
+                            EmailId = new Guid("8f2d26f3-1f87-4e57-83ed-1304acee62ea"),
                             EmailAddress = "kevin.rodriguez@hotmail.com",
                             EmailTypeId = 3
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000227"),
+                            EmailId = new Guid("6c59b509-d84a-41f9-a118-e80e5eaeabb9"),
                             EmailAddress = "karen.hill@hotmail.com",
                             EmailTypeId = 1
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000228"),
+                            EmailId = new Guid("df969804-f624-41c5-b0ac-a923cd66c72d"),
                             EmailAddress = "richard.robinson@enterprise.com",
                             EmailTypeId = 5
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000229"),
+                            EmailId = new Guid("9c83efed-ad44-46ec-8e8b-12c60a052ba6"),
                             EmailAddress = "kimberly.king@services.com",
                             EmailTypeId = 2
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000230"),
+                            EmailId = new Guid("44b1ea9a-f594-4106-81ee-4f8c0c8c0bdc"),
                             EmailAddress = "carol.roberts@consulting.com",
                             EmailTypeId = 1
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000231"),
+                            EmailId = new Guid("4216cd25-631c-4bf8-8a9a-42300d2ee392"),
                             EmailAddress = "charles.campbell@gmail.com",
                             EmailTypeId = 2
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000232"),
+                            EmailId = new Guid("b4a3c1ae-38b9-45a8-b2a4-a18a9351271d"),
                             EmailAddress = "jessica.johnson@aol.com",
                             EmailTypeId = 3
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000233"),
+                            EmailId = new Guid("428af35a-cdb0-45cf-8ed0-32b4817da5b8"),
                             EmailAddress = "betty.jones@web.com",
                             EmailTypeId = 1
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000234"),
+                            EmailId = new Guid("2de60e79-7cf2-4e57-9a24-b13533b49334"),
                             EmailAddress = "michael.taylor@protonmail.com",
                             EmailTypeId = 4
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000235"),
+                            EmailId = new Guid("ef2e760c-a099-40a0-8958-a62c8f1813cc"),
                             EmailAddress = "dorothy.smith@gmail.com",
                             EmailTypeId = 5
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000236"),
+                            EmailId = new Guid("1fc0171c-aa2a-421b-a825-482b0ed8b141"),
                             EmailAddress = "nancy.lopez@online.com",
                             EmailTypeId = 5
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000237"),
+                            EmailId = new Guid("0b2d5da6-44e0-4d5c-bd38-d8d6db00ae89"),
                             EmailAddress = "thomas.ramirez@firm.com",
                             EmailTypeId = 4
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000238"),
+                            EmailId = new Guid("bad22237-2167-40f4-ae22-953454a67941"),
                             EmailAddress = "barbara.anderson@outlook.com",
                             EmailTypeId = 1
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000239"),
+                            EmailId = new Guid("319004a2-1ac3-4a3e-b688-ab4302650b93"),
                             EmailAddress = "susan.campbell@web.com",
                             EmailTypeId = 4
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000240"),
+                            EmailId = new Guid("8771c43b-8b7e-4fcc-b34e-8d5ec0f982b3"),
                             EmailAddress = "william.hall@outlook.com",
                             EmailTypeId = 2
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000241"),
+                            EmailId = new Guid("a60d3271-aa7e-47bd-b18c-2c22711607c6"),
                             EmailAddress = "carol.ramirez@services.com",
                             EmailTypeId = 1
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000242"),
+                            EmailId = new Guid("70c20ba8-a539-431b-9946-12722b77b4d8"),
                             EmailAddress = "ruth.martin@digital.com",
                             EmailTypeId = 3
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000243"),
+                            EmailId = new Guid("6b5283cb-0bd2-4e4a-9ba6-66c57b06986c"),
                             EmailAddress = "charles.carter@corporate.com",
                             EmailTypeId = 3
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000244"),
+                            EmailId = new Guid("aa3b03ba-e7fc-415b-8be2-c953ac657817"),
                             EmailAddress = "jeffrey.green@hotmail.com",
                             EmailTypeId = 1
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000245"),
+                            EmailId = new Guid("3a7ef524-2063-45a1-a34a-c9846b3fd6f5"),
                             EmailAddress = "james.martinez@online.com",
                             EmailTypeId = 4
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000246"),
+                            EmailId = new Guid("e0e15f8d-1d3c-4502-a11b-12fcc3d5d5a1"),
                             EmailAddress = "matthew.robinson@business.com",
                             EmailTypeId = 1
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000247"),
+                            EmailId = new Guid("e0e609c7-7711-4c78-a832-77d2221515c9"),
                             EmailAddress = "jason.carter@digital.com",
                             EmailTypeId = 1
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000248"),
+                            EmailId = new Guid("b8f63566-095d-4f23-8557-fafea1162975"),
                             EmailAddress = "charles.ramirez@firm.com",
                             EmailTypeId = 5
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000249"),
+                            EmailId = new Guid("a1e334df-79b8-4a94-bf82-d2ac25d80bb2"),
                             EmailAddress = "dorothy.nguyen@icloud.com",
                             EmailTypeId = 2
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000250"),
+                            EmailId = new Guid("8b25a05c-94e8-410b-a3ec-1a8ac0d58fbe"),
                             EmailAddress = "donna.green@aol.com",
                             EmailTypeId = 5
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000251"),
+                            EmailId = new Guid("c35022aa-a39a-48f9-b81f-e1d320ab30aa"),
                             EmailAddress = "michelle.martinez@icloud.com",
                             EmailTypeId = 2
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000252"),
+                            EmailId = new Guid("9bb308b5-c890-4fb1-876a-615559f82a6b"),
                             EmailAddress = "ronald.allen@yahoo.com",
                             EmailTypeId = 3
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000253"),
+                            EmailId = new Guid("9d04bf1e-9393-4685-8b5e-3467409b966b"),
                             EmailAddress = "edward.hall@solutions.com",
                             EmailTypeId = 5
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000254"),
+                            EmailId = new Guid("40d2fcef-fd25-4b24-80a1-46956c505056"),
                             EmailAddress = "jeffrey.white@digital.com",
                             EmailTypeId = 5
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000255"),
+                            EmailId = new Guid("0a3c7151-7539-4ed2-ba28-1da171029024"),
                             EmailAddress = "elizabeth.robinson@aol.com",
                             EmailTypeId = 4
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000256"),
+                            EmailId = new Guid("cc5f75c8-a187-4fb2-a9c7-3d9c5c8dca57"),
                             EmailAddress = "donald.scott@hotmail.com",
                             EmailTypeId = 5
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000257"),
+                            EmailId = new Guid("15afabd2-0c25-4fdb-a669-7357e625f0ad"),
                             EmailAddress = "charles.clark@services.com",
                             EmailTypeId = 2
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000258"),
+                            EmailId = new Guid("4c4641e2-2ac7-4eb0-9291-2d42104a444d"),
                             EmailAddress = "donna.flores@organization.com",
                             EmailTypeId = 1
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000259"),
+                            EmailId = new Guid("31fbeee3-e180-4d10-b0c6-d89773712e6d"),
                             EmailAddress = "jeffrey.williams@yahoo.com",
                             EmailTypeId = 2
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000260"),
+                            EmailId = new Guid("19909b9c-641b-4421-8c8b-eb2b2a15afe1"),
                             EmailAddress = "christopher.rodriguez@icloud.com",
                             EmailTypeId = 2
                         });
@@ -2673,390 +2676,390 @@ namespace MaggiesPlaygroundApi.Migrations
                     b.HasData(
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000101"),
+                            PhoneId = new Guid("a6cf15bf-0c53-4936-8878-239a6c9d84f3"),
                             Extension = "3363",
                             PhoneNumber = "733-226-2129",
                             PhoneTypeId = 3
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000102"),
+                            PhoneId = new Guid("1707eb4b-3108-448e-b275-66b46c467902"),
                             Extension = "3315",
                             PhoneNumber = "778-561-2562",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000103"),
+                            PhoneId = new Guid("227c47b8-64d8-40d6-89d3-9752656d098d"),
                             PhoneNumber = "603-387-4428",
                             PhoneTypeId = 2
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000104"),
+                            PhoneId = new Guid("6e7df500-1cc0-443a-8077-274c05f0524a"),
                             Extension = "1810",
                             PhoneNumber = "228-831-6194",
                             PhoneTypeId = 2
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000105"),
+                            PhoneId = new Guid("b74e6f9d-3b3a-4a22-98b2-8b271f05912b"),
                             PhoneNumber = "763-833-5859",
                             PhoneTypeId = 1
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000106"),
+                            PhoneId = new Guid("4527bd51-3aa0-4296-afb1-642609c34686"),
                             Extension = "1373",
                             PhoneNumber = "318-914-7232",
                             PhoneTypeId = 3
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000107"),
+                            PhoneId = new Guid("bf5f136d-421d-414f-acc9-6a42eea23da3"),
                             PhoneNumber = "446-624-8388",
                             PhoneTypeId = 1
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000108"),
+                            PhoneId = new Guid("a1506758-50a2-4c21-b50d-4cfd0cf8bcca"),
                             Extension = "1459",
                             PhoneNumber = "843-772-4460",
                             PhoneTypeId = 1
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000109"),
+                            PhoneId = new Guid("d3b483a5-9d86-4ad7-90d7-d012092e37a2"),
                             PhoneNumber = "824-663-2036",
                             PhoneTypeId = 2
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000110"),
+                            PhoneId = new Guid("5464e449-6d0b-4bbc-9752-468620741378"),
                             PhoneNumber = "431-682-2292",
                             PhoneTypeId = 1
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000111"),
+                            PhoneId = new Guid("1fd38c30-d6e5-4c7f-8862-8fc780558871"),
                             PhoneNumber = "612-145-4782",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000112"),
+                            PhoneId = new Guid("cabf9a16-3f1c-4121-9931-a947d9a78bcd"),
                             Extension = "7462",
                             PhoneNumber = "374-111-4286",
                             PhoneTypeId = 2
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000113"),
+                            PhoneId = new Guid("875624a3-fb98-4f70-b640-50a160e035b5"),
                             PhoneNumber = "256-517-1108",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000114"),
+                            PhoneId = new Guid("33796218-3393-4ba9-84be-f92a0496417d"),
                             Extension = "1027",
                             PhoneNumber = "610-549-1080",
                             PhoneTypeId = 5
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000115"),
+                            PhoneId = new Guid("d11218d8-c1ca-49c7-82bc-28efc9a7a145"),
                             PhoneNumber = "250-688-1310",
                             PhoneTypeId = 5
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000116"),
+                            PhoneId = new Guid("4cdcc03b-0f65-411b-95fc-7385208298d3"),
                             PhoneNumber = "568-437-6548",
                             PhoneTypeId = 1
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000117"),
+                            PhoneId = new Guid("2f363e8e-5db1-450c-b83c-0cf8310a934f"),
                             PhoneNumber = "313-492-8129",
                             PhoneTypeId = 3
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000118"),
+                            PhoneId = new Guid("bf40bc1a-58de-4d37-a8c8-a5d32584378a"),
                             Extension = "8934",
                             PhoneNumber = "437-915-6280",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000119"),
+                            PhoneId = new Guid("d01167c0-fff9-4b9e-9bfa-60be5fd2f516"),
                             Extension = "5068",
                             PhoneNumber = "965-399-7395",
                             PhoneTypeId = 1
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000120"),
+                            PhoneId = new Guid("7bc3f8e6-a6d3-447f-b2da-e7f1d5146726"),
                             Extension = "6324",
                             PhoneNumber = "466-797-2336",
                             PhoneTypeId = 1
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000121"),
+                            PhoneId = new Guid("56b11711-6279-4148-babc-d44d0d8159da"),
                             PhoneNumber = "609-987-7895",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000122"),
+                            PhoneId = new Guid("fad043bf-8257-440a-b649-09bcbc698b33"),
                             Extension = "4108",
                             PhoneNumber = "431-596-9907",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000123"),
+                            PhoneId = new Guid("e83eb4ce-10b8-4af6-864e-bf7cf426a36f"),
                             Extension = "2944",
                             PhoneNumber = "942-124-2977",
                             PhoneTypeId = 2
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000124"),
+                            PhoneId = new Guid("f45d06b3-f906-43ac-8c12-c537a34e4659"),
                             Extension = "1954",
                             PhoneNumber = "673-479-1843",
                             PhoneTypeId = 5
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000125"),
+                            PhoneId = new Guid("e9206a2a-e1b4-42ff-b031-4df17565d1b4"),
                             Extension = "1378",
                             PhoneNumber = "456-391-7759",
                             PhoneTypeId = 5
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000126"),
+                            PhoneId = new Guid("8f51ea48-dbf5-46ef-b08f-751d4a2f7595"),
                             PhoneNumber = "871-905-3142",
                             PhoneTypeId = 5
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000127"),
+                            PhoneId = new Guid("3bdb603c-978b-47f0-bebc-9b7679571542"),
                             Extension = "3675",
                             PhoneNumber = "423-590-6709",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000128"),
+                            PhoneId = new Guid("1af6a9fc-db59-48dd-af73-1d8e65be6a26"),
                             PhoneNumber = "346-126-3077",
                             PhoneTypeId = 5
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000129"),
+                            PhoneId = new Guid("0b2aabe0-521a-42bb-a32b-b02a8dddf1a2"),
                             Extension = "6039",
                             PhoneNumber = "824-221-8949",
                             PhoneTypeId = 1
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000130"),
+                            PhoneId = new Guid("9521d84d-4826-4769-8e63-48b4b096affa"),
                             PhoneNumber = "644-740-2097",
                             PhoneTypeId = 3
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000131"),
+                            PhoneId = new Guid("86faefa5-1b0b-475d-be9c-63abab7d292a"),
                             PhoneNumber = "903-499-4133",
                             PhoneTypeId = 5
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000132"),
+                            PhoneId = new Guid("2c5aeef7-9261-40e6-b45b-af8ec16d3ba6"),
                             Extension = "1025",
                             PhoneNumber = "633-952-8292",
                             PhoneTypeId = 1
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000133"),
+                            PhoneId = new Guid("fca3ce55-d2e7-480e-a39a-022d7606a3e5"),
                             PhoneNumber = "345-945-7480",
                             PhoneTypeId = 3
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000134"),
+                            PhoneId = new Guid("c7b57756-293f-43ba-94c6-825b92303445"),
                             PhoneNumber = "519-212-9195",
                             PhoneTypeId = 5
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000135"),
+                            PhoneId = new Guid("882ebcec-7e3c-4830-8bc0-5efb87f32f85"),
                             PhoneNumber = "337-400-5879",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000136"),
+                            PhoneId = new Guid("b8478d3a-d8f4-4dd3-84a9-046594e0876f"),
                             PhoneNumber = "857-771-3524",
                             PhoneTypeId = 2
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000137"),
+                            PhoneId = new Guid("ef96998c-0785-4080-b032-629d5d06d487"),
                             Extension = "3493",
                             PhoneNumber = "842-322-8991",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000138"),
+                            PhoneId = new Guid("01ce041c-32ac-4d3e-810d-7c35f1a7e2e9"),
                             PhoneNumber = "382-849-6759",
                             PhoneTypeId = 1
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000139"),
+                            PhoneId = new Guid("52c6e67b-0714-455a-a24a-c5fbeff31aad"),
                             PhoneNumber = "843-891-8008",
                             PhoneTypeId = 5
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000140"),
+                            PhoneId = new Guid("e7ebeb4f-9104-4a01-af87-2551acd4ab2e"),
                             PhoneNumber = "572-900-9721",
                             PhoneTypeId = 1
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000141"),
+                            PhoneId = new Guid("c96c411d-c295-4761-a1f6-f717e0a59d5c"),
                             Extension = "8253",
                             PhoneNumber = "368-670-5507",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000142"),
+                            PhoneId = new Guid("7d16309d-6e67-4a60-a31e-07df1cd79c8a"),
                             PhoneNumber = "477-568-7485",
                             PhoneTypeId = 2
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000143"),
+                            PhoneId = new Guid("7e2f0c44-466c-4cb8-89f7-113f0dbd04ea"),
                             Extension = "1501",
                             PhoneNumber = "830-622-2786",
                             PhoneTypeId = 5
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000144"),
+                            PhoneId = new Guid("b77847ce-1e1c-421b-aef7-048012d004a3"),
                             Extension = "8937",
                             PhoneNumber = "371-381-2543",
                             PhoneTypeId = 2
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000145"),
+                            PhoneId = new Guid("f4ba1dff-27f8-491c-bba1-ffbcb9e8ee0c"),
                             PhoneNumber = "575-430-5083",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000146"),
+                            PhoneId = new Guid("23356dff-aab8-4242-8db6-8d43505c2c37"),
                             Extension = "9441",
                             PhoneNumber = "998-419-8708",
                             PhoneTypeId = 2
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000147"),
+                            PhoneId = new Guid("2fffb528-2a64-4e39-bb4f-9d3aa83e8c62"),
                             Extension = "5239",
                             PhoneNumber = "673-650-4483",
                             PhoneTypeId = 5
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000148"),
+                            PhoneId = new Guid("eb4a840c-61a1-4db4-915b-d354da30df69"),
                             PhoneNumber = "903-380-9273",
                             PhoneTypeId = 5
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000149"),
+                            PhoneId = new Guid("3b09fc82-fe51-445c-a250-bba71e9d8e37"),
                             PhoneNumber = "213-368-6221",
                             PhoneTypeId = 1
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000150"),
+                            PhoneId = new Guid("5ddc70a5-4739-4962-9c4b-b735058da9c1"),
                             Extension = "9464",
                             PhoneNumber = "528-708-6899",
                             PhoneTypeId = 5
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000151"),
+                            PhoneId = new Guid("c8033f28-9b02-4ca0-bf2f-bf5f75161968"),
                             Extension = "7167",
                             PhoneNumber = "801-127-4066",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000152"),
+                            PhoneId = new Guid("495cc2cd-3458-4109-acf0-523fd2124df8"),
                             PhoneNumber = "616-428-4094",
                             PhoneTypeId = 2
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000153"),
+                            PhoneId = new Guid("6af2b343-4d35-4b2d-9641-6798e7873e3c"),
                             Extension = "2223",
                             PhoneNumber = "714-644-3896",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000154"),
+                            PhoneId = new Guid("c0627e2c-1d14-4d96-ad40-507f35c48f6c"),
                             Extension = "6213",
                             PhoneNumber = "873-361-9809",
                             PhoneTypeId = 2
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000155"),
+                            PhoneId = new Guid("6d269706-c451-4baf-a1f1-4de2f5fc0e3d"),
                             Extension = "9502",
                             PhoneNumber = "480-239-2648",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000156"),
+                            PhoneId = new Guid("eda42c55-9fba-4396-9e38-4e088edef48e"),
                             PhoneNumber = "344-689-2789",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000157"),
+                            PhoneId = new Guid("eb2be21b-2cf4-4b9c-af49-4561b8911ddc"),
                             PhoneNumber = "887-420-6537",
                             PhoneTypeId = 3
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000158"),
+                            PhoneId = new Guid("d13c391d-07a9-4073-8900-f3e97c8935cc"),
                             PhoneNumber = "356-810-5988",
                             PhoneTypeId = 3
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000159"),
+                            PhoneId = new Guid("8e4b21a0-4c21-4f34-a5fa-fd02ff0859c9"),
                             Extension = "3801",
                             PhoneNumber = "528-688-9771",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000160"),
+                            PhoneId = new Guid("8a11554d-9ac8-4d88-9a90-22d43bdc7763"),
                             PhoneNumber = "631-830-7243",
                             PhoneTypeId = 2
                         });

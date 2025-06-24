@@ -7,10 +7,15 @@ import {
     useAppSelector,
 } from '../../store/hooks'
 import {Login, PersonAdd, Logout} from '@mui/icons-material'
+import IconButton from '@mui/material/IconButton'
+import Brightness7Icon from '@mui/icons-material/Brightness7'
+import Brightness3Icon from '@mui/icons-material/Brightness3'
+import { toggleTheme } from '../../store/themeSlice'
 
 const Sidebar: React.FC = () => {
     const navigate = useNavigate()
     const { isAuthenticated, user } = useAppSelector(state => state.auth)
+    const theme = useAppSelector((state) => state.theme.currentTheme)
     // console.log('Sidebar state:', { isAuthenticated, user })
 
     const dispatch = useAppDispatch()
@@ -41,11 +46,25 @@ const Sidebar: React.FC = () => {
         navigate('/people')
     }
 
+    const handleToggleTheme = () => {
+        dispatch(toggleTheme())
+    }
+
     const displayName = user ? `${user.firstName} ${user.lastName}`.trim() || user.email : ''
 
     return (
+
         <div className='sidebar'>
-            <div className='sidebar__title' onClick={handleHomeClick} style={{ cursor: 'pointer' }}>Maggie&apos;s Playground</div>
+            <IconButton
+              onClick={handleToggleTheme}
+              aria-label={theme === 'theme-light' ? 'Switch to dark mode' : 'Switch to light mode'}
+              className={'icon-button'}
+            >
+                {theme === 'theme-light' ? <Brightness3Icon /> : <Brightness7Icon />}
+            </IconButton>
+            <div className='sidebar__header' style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div className='sidebar__title' onClick={handleHomeClick} style={{ cursor: 'pointer' }}>Maggie&apos;s Playground</div>
+            </div>
             {isAuthenticated && (
                 <div className='sidebar__content'>
                     <ul className='sidebar__list'>

@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './authSlice'
+import themeReducer from './themeSlice'
 import { authApi } from './authApi'
 import { clientsApi } from './clientsApi'
 import { clientTypesApi } from './clientTypesApi'
@@ -9,6 +10,7 @@ import { lookupApi } from './lookupApi'
 export const store = configureStore({
     reducer: {
         auth: authReducer,
+        theme: themeReducer,
         [authApi.reducerPath]: authApi.reducer,
         [clientsApi.reducerPath]: clientsApi.reducer,
         [clientTypesApi.reducerPath]: clientTypesApi.reducer,

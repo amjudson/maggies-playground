@@ -12,7 +12,7 @@ const AppRoutes: React.FC = () => {
             {/* Public routes */}
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
-            
+
             {/* Protected routes with sidebar */}
             <Route
                 path='/'
@@ -39,7 +39,7 @@ const AppRoutes: React.FC = () => {
                     </MainLayout>
                 }
             />
-            
+
             {/* Catch all route - redirect to home */}
             <Route path='*' element={<Navigate to='/' replace />} />
         </Routes>

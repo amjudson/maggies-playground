@@ -1,7 +1,7 @@
 .pagination {
     width: 100%;
-    background-color: #fff;
-    border-top: 1px solid #e0e0e0;
+    background-color: var(--text-light);
+    border-top: 1px solid var(--border);
     padding: 0.5rem 0 0.5rem 0;
 
     &__main-row {
@@ -16,7 +16,7 @@
         align-items: center;
         gap: 1rem;
         font-size: 1rem;
-        color: #111;
+        color: var(--text);
         font-weight: 400;
     }
 
@@ -27,9 +27,9 @@
     &__page-size-select {
         margin: 0 0.25rem;
         padding: 0.15rem 0.5rem;
-        border: 1px solid #bbb;
+        border: 1px solid var(--border);
         border-radius: 4px;
-        background: #fff;
+        background: var(--text-light);
         font-size: 1rem;
         font-weight: 400;
         min-width: 48px;
@@ -61,7 +61,7 @@
         border: none;
         border-radius: 6px;
         background: transparent;
-        color: #222;
+        color: var(--text);
         font-size: 1rem;
         cursor: pointer;
         transition: background 0.15s, color 0.15s;
@@ -72,7 +72,7 @@
         }
 
         &:hover:not(:disabled):not(.active) {
-            background: #f0f4fa;
+            background: var(--primary-light);
         }
 
         &:disabled {
@@ -81,8 +81,8 @@
         }
 
         &.active {
-            background: #1976d2;
-            color: #fff;
+            background: var(--primary);
+            color: var(--text-light);
             font-weight: 600;
         }
     }

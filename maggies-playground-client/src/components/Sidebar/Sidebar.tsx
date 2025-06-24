@@ -8,8 +8,8 @@ import {
 } from '../../store/hooks'
 import {Login, PersonAdd, Logout} from '@mui/icons-material'
 import IconButton from '@mui/material/IconButton'
-import Brightness7Icon from '@mui/icons-material/Brightness7'
-import Brightness3Icon from '@mui/icons-material/Brightness3'
+import SunnyIcon from '@mui/icons-material/Sunny'
+import NightlightRoundIcon from '@mui/icons-material/NightlightRound'
 import { toggleTheme } from '../../store/themeSlice'
 
 const Sidebar: React.FC = () => {
@@ -59,8 +59,19 @@ const Sidebar: React.FC = () => {
               onClick={handleToggleTheme}
               aria-label={theme === 'theme-light' ? 'Switch to dark mode' : 'Switch to light mode'}
               className={'icon-button'}
+              style={{
+                  width: '2rem',
+                  height: '2rem',
+                  background: 'none',
+                  color: '#8e44ad',
+                  border: '1px solid #8e44ad',
+                  borderRadius: '16px',
+                  padding: '1px',
+                  transition: 'background 0.2s, color 0.2s',
+                  flexShrink: '0',
+              }}
             >
-                {theme === 'theme-light' ? <Brightness3Icon /> : <Brightness7Icon />}
+                {theme === 'theme-light' ? <NightlightRoundIcon /> : <SunnyIcon />}
             </IconButton>
             <div className='sidebar__header' style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <div className='sidebar__title' onClick={handleHomeClick} style={{ cursor: 'pointer' }}>Maggie&apos;s Playground</div>

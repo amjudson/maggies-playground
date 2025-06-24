@@ -277,6 +277,33 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 				.WithMany()
 				.HasForeignKey(a => a.StateId)
 				.OnDelete(DeleteBehavior.Restrict);
+
+			// Seed Address data
+			var addressSeedData = new List<Address>();
+			var random = new Random(42); // Fixed seed for consistent data
+			
+			for (int i = 1; i <= 60; i++)
+			{
+				var streetNumber = random.Next(100, 9999);
+				var streetName = GetRandomStreetName(random);
+				var city = GetRandomCity(random);
+				var stateId = random.Next(1, 51); // 1-50 for states
+				var zip = random.Next(10000, 100000).ToString();
+				var addressTypeId = random.Next(1, 6); // 1-5 for address types
+				
+				addressSeedData.Add(new Address
+				{
+					AddressId = new Guid($"00000000-0000-0000-0000-{i:D012}"),
+					AddressLine1 = $"{streetNumber} {streetName}",
+					AddressLine2 = random.Next(0, 3) == 0 ? $"Apt {random.Next(1, 1000)}" : null,
+					City = city,
+					StateId = stateId,
+					Zip = zip,
+					AddressTypeId = addressTypeId
+				});
+			}
+			
+			entity.HasData(addressSeedData);
 		});
 
 		// Configure PhoneType
@@ -306,6 +333,29 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 				.WithMany()
 				.HasForeignKey(p => p.PhoneTypeId)
 				.OnDelete(DeleteBehavior.Restrict);
+
+			// Seed Phone data
+			var phoneSeedData = new List<Phone>();
+			var random = new Random(42); // Fixed seed for consistent data
+			
+			for (int i = 1; i <= 60; i++)
+			{
+				var areaCode = random.Next(200, 999);
+				var prefix = random.Next(100, 999);
+				var lineNumber = random.Next(1000, 9999);
+				var phoneTypeId = random.Next(1, 6); // 1-5 for phone types
+				var extension = random.Next(0, 3) == 0 ? random.Next(1000, 9999).ToString() : null;
+				
+				phoneSeedData.Add(new Phone
+				{
+					PhoneId = new Guid($"00000000-0000-0000-0000-{i + 100:D012}"),
+					PhoneNumber = $"{areaCode}-{prefix}-{lineNumber}",
+					Extension = extension,
+					PhoneTypeId = phoneTypeId
+				});
+			}
+			
+			entity.HasData(phoneSeedData);
 		});
 
 		// Configure EmailType
@@ -334,6 +384,27 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 				.WithMany()
 				.HasForeignKey(e => e.EmailTypeId)
 				.OnDelete(DeleteBehavior.Restrict);
+
+			// Seed Email data
+			var emailSeedData = new List<Email>();
+			var random = new Random(42); // Fixed seed for consistent data
+			
+			for (int i = 1; i <= 60; i++)
+			{
+				var firstName = GetRandomFirstName(random);
+				var lastName = GetRandomLastName(random);
+				var domain = GetRandomDomain(random);
+				var emailTypeId = random.Next(1, 6); // 1-5 for email types
+				
+				emailSeedData.Add(new Email
+				{
+					EmailId = new Guid($"00000000-0000-0000-0000-{i + 200:D012}"),
+					EmailAddress = $"{firstName.ToLower()}.{lastName.ToLower()}@{domain}",
+					EmailTypeId = emailTypeId
+				});
+			}
+			
+			entity.HasData(emailSeedData);
 		});
 
 		// Configure State
@@ -503,5 +574,73 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 				.HasForeignKey(pe => pe.EmailId)
 				.OnDelete(DeleteBehavior.Cascade);
 		});
+	}
+
+	// Helper methods for generating random seed data
+	private static string GetRandomStreetName(Random random)
+	{
+		var streetNames = new[]
+		{
+			"Main St", "Oak Ave", "Elm St", "Pine Rd", "Cedar Ln", "Maple Dr", "Washington Blvd", "Lincoln Ave",
+			"Park St", "Lake Dr", "River Rd", "Hill St", "Valley Ave", "Sunset Blvd", "Sunrise Dr", "Forest Ln",
+			"Garden St", "Meadow Ave", "Brook Rd", "Spring St", "Summer Ave", "Winter Dr", "Autumn Ln", "Cherry St",
+			"Apple Ave", "Peach Rd", "Plum St", "Berry Ave", "Grape Dr", "Orange Ln", "Lemon St", "Lime Ave",
+			"Blueberry Rd", "Strawberry St", "Raspberry Ave", "Blackberry Dr", "Cranberry Ln", "Boysenberry St",
+			"Elderberry Ave", "Gooseberry Rd", "Currant St", "Mulberry Ave", "Huckleberry Dr", "Serviceberry Ln"
+		};
+		return streetNames[random.Next(streetNames.Length)];
+	}
+
+	private static string GetRandomCity(Random random)
+	{
+		var cities = new[]
+		{
+			"New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego",
+			"Dallas", "San Jose", "Austin", "Jacksonville", "Fort Worth", "Columbus", "Charlotte", "San Francisco",
+			"Indianapolis", "Seattle", "Denver", "Washington", "Boston", "El Paso", "Nashville", "Detroit",
+			"Oklahoma City", "Portland", "Las Vegas", "Memphis", "Louisville", "Baltimore", "Milwaukee", "Albuquerque",
+			"Tucson", "Fresno", "Sacramento", "Mesa", "Kansas City", "Atlanta", "Long Beach", "Colorado Springs",
+			"Raleigh", "Miami", "Virginia Beach", "Omaha", "Oakland", "Minneapolis", "Tulsa", "Arlington",
+			"Tampa", "New Orleans", "Wichita", "Cleveland", "Bakersfield", "Aurora", "Anaheim", "Honolulu"
+		};
+		return cities[random.Next(cities.Length)];
+	}
+
+	private static string GetRandomFirstName(Random random)
+	{
+		var firstNames = new[]
+		{
+			"James", "Mary", "John", "Patricia", "Robert", "Jennifer", "Michael", "Linda", "William", "Elizabeth",
+			"David", "Barbara", "Richard", "Susan", "Joseph", "Jessica", "Thomas", "Sarah", "Christopher", "Karen",
+			"Charles", "Nancy", "Daniel", "Lisa", "Matthew", "Betty", "Anthony", "Helen", "Mark", "Sandra",
+			"Donald", "Donna", "Steven", "Carol", "Paul", "Ruth", "Andrew", "Sharon", "Joshua", "Michelle",
+			"Kenneth", "Laura", "Kevin", "Emily", "Brian", "Kimberly", "George", "Deborah", "Edward", "Dorothy",
+			"Ronald", "Lisa", "Timothy", "Nancy", "Jason", "Karen", "Jeffrey", "Betty", "Ryan", "Helen"
+		};
+		return firstNames[random.Next(firstNames.Length)];
+	}
+
+	private static string GetRandomLastName(Random random)
+	{
+		var lastNames = new[]
+		{
+			"Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez",
+			"Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore", "Jackson", "Martin",
+			"Lee", "Perez", "Thompson", "White", "Harris", "Sanchez", "Clark", "Ramirez", "Lewis", "Robinson",
+			"Walker", "Young", "Allen", "King", "Wright", "Scott", "Torres", "Nguyen", "Hill", "Flores",
+			"Green", "Adams", "Nelson", "Baker", "Hall", "Rivera", "Campbell", "Mitchell", "Carter", "Roberts"
+		};
+		return lastNames[random.Next(lastNames.Length)];
+	}
+
+	private static string GetRandomDomain(Random random)
+	{
+		var domains = new[]
+		{
+			"gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "aol.com", "icloud.com", "protonmail.com",
+			"company.com", "business.com", "corporate.com", "enterprise.com", "organization.com", "firm.com",
+			"consulting.com", "services.com", "solutions.com", "tech.com", "digital.com", "online.com", "web.com"
+		};
+		return domains[random.Next(domains.Length)];
 	}
 }

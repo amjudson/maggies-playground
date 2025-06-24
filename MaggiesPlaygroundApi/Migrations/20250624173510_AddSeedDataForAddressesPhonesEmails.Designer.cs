@@ -3,6 +3,7 @@ using System;
 using MaggiesPlaygroundApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MaggiesPlaygroundApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250624173510_AddSeedDataForAddressesPhonesEmails")]
+    partial class AddSeedDataForAddressesPhonesEmails
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,563 +78,572 @@ namespace MaggiesPlaygroundApi.Migrations
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            AddressLine1 = "6713 Washington Blvd",
+                            AddressLine1 = "110 Main Street",
+                            AddressLine2 = "Apt 1",
                             AddressTypeId = 2,
-                            City = "San Diego",
-                            StateId = 27,
-                            Zip = "25159"
+                            City = "City 1",
+                            StateId = 2,
+                            Zip = "10001"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            AddressLine1 = "5177 Lincoln Ave",
-                            AddressLine2 = "Apt 381",
+                            AddressLine1 = "120 Main Street",
+                            AddressLine2 = "Apt 2",
                             AddressTypeId = 3,
-                            City = "Virginia Beach",
-                            StateId = 12,
-                            Zip = "33158"
+                            City = "City 2",
+                            StateId = 3,
+                            Zip = "10002"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000003"),
-                            AddressLine1 = "2676 Autumn Ln",
-                            AddressLine2 = "Apt 91",
-                            AddressTypeId = 2,
-                            City = "Los Angeles",
-                            StateId = 41,
-                            Zip = "61947"
+                            AddressLine1 = "130 Main Street",
+                            AddressLine2 = "Apt 3",
+                            AddressTypeId = 4,
+                            City = "City 3",
+                            StateId = 4,
+                            Zip = "10003"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000004"),
-                            AddressLine1 = "7080 Blackberry Dr",
-                            AddressTypeId = 1,
-                            City = "Milwaukee",
-                            StateId = 3,
-                            Zip = "74003"
+                            AddressLine1 = "140 Main Street",
+                            AddressLine2 = "Apt 4",
+                            AddressTypeId = 5,
+                            City = "City 4",
+                            StateId = 5,
+                            Zip = "10004"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000005"),
-                            AddressLine1 = "6955 Autumn Ln",
-                            AddressTypeId = 3,
-                            City = "Austin",
-                            StateId = 3,
-                            Zip = "37737"
+                            AddressLine1 = "150 Main Street",
+                            AddressLine2 = "Apt 5",
+                            AddressTypeId = 1,
+                            City = "City 5",
+                            StateId = 6,
+                            Zip = "10005"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000006"),
-                            AddressLine1 = "139 Cherry St",
-                            AddressLine2 = "Apt 51",
-                            AddressTypeId = 1,
-                            City = "Minneapolis",
-                            StateId = 38,
-                            Zip = "44611"
+                            AddressLine1 = "160 Main Street",
+                            AddressLine2 = "Apt 6",
+                            AddressTypeId = 2,
+                            City = "City 6",
+                            StateId = 7,
+                            Zip = "10006"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000007"),
-                            AddressLine1 = "7837 Berry Ave",
-                            AddressTypeId = 2,
-                            City = "San Antonio",
-                            StateId = 13,
-                            Zip = "79518"
+                            AddressLine1 = "170 Main Street",
+                            AddressLine2 = "Apt 7",
+                            AddressTypeId = 3,
+                            City = "City 7",
+                            StateId = 8,
+                            Zip = "10007"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000008"),
-                            AddressLine1 = "1521 Oak Ave",
-                            AddressTypeId = 3,
-                            City = "Fresno",
-                            StateId = 26,
-                            Zip = "14571"
+                            AddressLine1 = "180 Main Street",
+                            AddressLine2 = "Apt 8",
+                            AddressTypeId = 4,
+                            City = "City 8",
+                            StateId = 9,
+                            Zip = "10008"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000009"),
-                            AddressLine1 = "6321 Lake Dr",
-                            AddressTypeId = 1,
-                            City = "New York",
-                            StateId = 19,
-                            Zip = "34069"
+                            AddressLine1 = "190 Main Street",
+                            AddressLine2 = "Apt 9",
+                            AddressTypeId = 5,
+                            City = "City 9",
+                            StateId = 10,
+                            Zip = "10009"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000010"),
-                            AddressLine1 = "802 Summer Ave",
-                            AddressTypeId = 3,
-                            City = "New York",
-                            StateId = 40,
-                            Zip = "49526"
+                            AddressLine1 = "200 Main Street",
+                            AddressLine2 = "Apt 10",
+                            AddressTypeId = 1,
+                            City = "City 10",
+                            StateId = 11,
+                            Zip = "10010"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000011"),
-                            AddressLine1 = "188 Cranberry Ln",
-                            AddressLine2 = "Apt 913",
-                            AddressTypeId = 4,
-                            City = "New York",
-                            StateId = 1,
-                            Zip = "15739"
+                            AddressLine1 = "210 Main Street",
+                            AddressLine2 = "Apt 11",
+                            AddressTypeId = 2,
+                            City = "City 11",
+                            StateId = 12,
+                            Zip = "10011"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000012"),
-                            AddressLine1 = "9295 Summer Ave",
-                            AddressLine2 = "Apt 437",
-                            AddressTypeId = 2,
-                            City = "El Paso",
-                            StateId = 31,
-                            Zip = "13999"
+                            AddressLine1 = "220 Main Street",
+                            AddressLine2 = "Apt 12",
+                            AddressTypeId = 3,
+                            City = "City 12",
+                            StateId = 13,
+                            Zip = "10012"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000013"),
-                            AddressLine1 = "7942 Cherry St",
-                            AddressTypeId = 3,
-                            City = "Nashville",
-                            StateId = 15,
-                            Zip = "91653"
+                            AddressLine1 = "230 Main Street",
+                            AddressLine2 = "Apt 13",
+                            AddressTypeId = 4,
+                            City = "City 13",
+                            StateId = 14,
+                            Zip = "10013"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000014"),
-                            AddressLine1 = "292 Elderberry Ave",
-                            AddressLine2 = "Apt 452",
-                            AddressTypeId = 1,
-                            City = "Aurora",
-                            StateId = 17,
-                            Zip = "73962"
+                            AddressLine1 = "240 Main Street",
+                            AddressLine2 = "Apt 14",
+                            AddressTypeId = 5,
+                            City = "City 14",
+                            StateId = 15,
+                            Zip = "10014"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000015"),
-                            AddressLine1 = "3398 Raspberry Ave",
-                            AddressTypeId = 3,
-                            City = "Dallas",
-                            StateId = 7,
-                            Zip = "29409"
+                            AddressLine1 = "250 Main Street",
+                            AddressLine2 = "Apt 15",
+                            AddressTypeId = 1,
+                            City = "City 15",
+                            StateId = 16,
+                            Zip = "10015"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000016"),
-                            AddressLine1 = "9870 Strawberry St",
-                            AddressTypeId = 3,
-                            City = "Atlanta",
-                            StateId = 36,
-                            Zip = "36052"
+                            AddressLine1 = "260 Main Street",
+                            AddressLine2 = "Apt 16",
+                            AddressTypeId = 2,
+                            City = "City 16",
+                            StateId = 17,
+                            Zip = "10016"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000017"),
-                            AddressLine1 = "6542 Oak Ave",
-                            AddressLine2 = "Apt 39",
-                            AddressTypeId = 2,
-                            City = "Washington",
-                            StateId = 47,
-                            Zip = "12442"
+                            AddressLine1 = "270 Main Street",
+                            AddressLine2 = "Apt 17",
+                            AddressTypeId = 3,
+                            City = "City 17",
+                            StateId = 18,
+                            Zip = "10017"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000018"),
-                            AddressLine1 = "2239 Plum St",
-                            AddressLine2 = "Apt 321",
-                            AddressTypeId = 1,
-                            City = "Detroit",
-                            StateId = 5,
-                            Zip = "99413"
+                            AddressLine1 = "280 Main Street",
+                            AddressLine2 = "Apt 18",
+                            AddressTypeId = 4,
+                            City = "City 18",
+                            StateId = 19,
+                            Zip = "10018"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000019"),
-                            AddressLine1 = "3305 Strawberry St",
+                            AddressLine1 = "290 Main Street",
+                            AddressLine2 = "Apt 19",
                             AddressTypeId = 5,
-                            City = "Tulsa",
-                            StateId = 1,
-                            Zip = "13787"
+                            City = "City 19",
+                            StateId = 20,
+                            Zip = "10019"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000020"),
-                            AddressLine1 = "2456 Currant St",
-                            AddressTypeId = 4,
-                            City = "Arlington",
-                            StateId = 14,
-                            Zip = "59080"
+                            AddressLine1 = "300 Main Street",
+                            AddressLine2 = "Apt 20",
+                            AddressTypeId = 1,
+                            City = "City 20",
+                            StateId = 21,
+                            Zip = "10020"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000021"),
-                            AddressLine1 = "2003 Sunset Blvd",
-                            AddressTypeId = 5,
-                            City = "Austin",
-                            StateId = 2,
-                            Zip = "30776"
+                            AddressLine1 = "310 Main Street",
+                            AddressLine2 = "Apt 21",
+                            AddressTypeId = 2,
+                            City = "City 21",
+                            StateId = 22,
+                            Zip = "10021"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000022"),
-                            AddressLine1 = "7837 Maple Dr",
+                            AddressLine1 = "320 Main Street",
+                            AddressLine2 = "Apt 22",
                             AddressTypeId = 3,
-                            City = "New Orleans",
-                            StateId = 10,
-                            Zip = "36529"
+                            City = "City 22",
+                            StateId = 23,
+                            Zip = "10022"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000023"),
-                            AddressLine1 = "7152 Maple Dr",
-                            AddressTypeId = 3,
-                            City = "Fresno",
-                            StateId = 20,
-                            Zip = "89283"
+                            AddressLine1 = "330 Main Street",
+                            AddressLine2 = "Apt 23",
+                            AddressTypeId = 4,
+                            City = "City 23",
+                            StateId = 24,
+                            Zip = "10023"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000024"),
-                            AddressLine1 = "9640 Summer Ave",
-                            AddressLine2 = "Apt 3",
-                            AddressTypeId = 1,
-                            City = "Milwaukee",
-                            StateId = 48,
-                            Zip = "82930"
+                            AddressLine1 = "340 Main Street",
+                            AddressLine2 = "Apt 24",
+                            AddressTypeId = 5,
+                            City = "City 24",
+                            StateId = 25,
+                            Zip = "10024"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000025"),
-                            AddressLine1 = "1900 Mulberry Ave",
-                            AddressLine2 = "Apt 910",
-                            AddressTypeId = 3,
-                            City = "Raleigh",
-                            StateId = 21,
-                            Zip = "63171"
+                            AddressLine1 = "350 Main Street",
+                            AddressLine2 = "Apt 25",
+                            AddressTypeId = 1,
+                            City = "City 25",
+                            StateId = 26,
+                            Zip = "10025"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000026"),
-                            AddressLine1 = "9641 Gooseberry Rd",
-                            AddressTypeId = 4,
-                            City = "San Jose",
-                            StateId = 17,
-                            Zip = "58798"
+                            AddressLine1 = "360 Main Street",
+                            AddressLine2 = "Apt 26",
+                            AddressTypeId = 2,
+                            City = "City 26",
+                            StateId = 27,
+                            Zip = "10026"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000027"),
-                            AddressLine1 = "8240 Blueberry Rd",
-                            AddressLine2 = "Apt 888",
-                            AddressTypeId = 5,
-                            City = "San Francisco",
-                            StateId = 17,
-                            Zip = "57303"
+                            AddressLine1 = "370 Main Street",
+                            AddressLine2 = "Apt 27",
+                            AddressTypeId = 3,
+                            City = "City 27",
+                            StateId = 28,
+                            Zip = "10027"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000028"),
-                            AddressLine1 = "6677 Park St",
-                            AddressLine2 = "Apt 421",
+                            AddressLine1 = "380 Main Street",
+                            AddressLine2 = "Apt 28",
                             AddressTypeId = 4,
-                            City = "San Francisco",
-                            StateId = 12,
-                            Zip = "85025"
+                            City = "City 28",
+                            StateId = 29,
+                            Zip = "10028"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000029"),
-                            AddressLine1 = "8070 Elderberry Ave",
-                            AddressTypeId = 3,
-                            City = "Omaha",
-                            StateId = 48,
-                            Zip = "94878"
+                            AddressLine1 = "390 Main Street",
+                            AddressLine2 = "Apt 29",
+                            AddressTypeId = 5,
+                            City = "City 29",
+                            StateId = 30,
+                            Zip = "10029"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000030"),
-                            AddressLine1 = "9694 Washington Blvd",
-                            AddressTypeId = 3,
-                            City = "Tucson",
-                            StateId = 11,
-                            Zip = "67084"
+                            AddressLine1 = "400 Main Street",
+                            AddressLine2 = "Apt 30",
+                            AddressTypeId = 1,
+                            City = "City 30",
+                            StateId = 31,
+                            Zip = "10030"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000031"),
-                            AddressLine1 = "1199 Blackberry Dr",
+                            AddressLine1 = "410 Main Street",
                             AddressTypeId = 2,
-                            City = "Washington",
-                            StateId = 27,
-                            Zip = "74861"
+                            City = "City 31",
+                            StateId = 32,
+                            Zip = "10031"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000032"),
-                            AddressLine1 = "7906 Peach Rd",
-                            AddressLine2 = "Apt 314",
-                            AddressTypeId = 1,
-                            City = "Jacksonville",
-                            StateId = 47,
-                            Zip = "14706"
+                            AddressLine1 = "420 Main Street",
+                            AddressTypeId = 3,
+                            City = "City 32",
+                            StateId = 33,
+                            Zip = "10032"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000033"),
-                            AddressLine1 = "1797 Valley Ave",
-                            AddressTypeId = 2,
-                            City = "San Francisco",
-                            StateId = 45,
-                            Zip = "52303"
+                            AddressLine1 = "430 Main Street",
+                            AddressTypeId = 4,
+                            City = "City 33",
+                            StateId = 34,
+                            Zip = "10033"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000034"),
-                            AddressLine1 = "7656 Orange Ln",
-                            AddressLine2 = "Apt 938",
-                            AddressTypeId = 2,
-                            City = "Honolulu",
-                            StateId = 18,
-                            Zip = "87089"
+                            AddressLine1 = "440 Main Street",
+                            AddressTypeId = 5,
+                            City = "City 34",
+                            StateId = 35,
+                            Zip = "10034"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000035"),
-                            AddressLine1 = "5970 Plum St",
-                            AddressTypeId = 3,
-                            City = "El Paso",
-                            StateId = 48,
-                            Zip = "17067"
+                            AddressLine1 = "450 Main Street",
+                            AddressTypeId = 1,
+                            City = "City 35",
+                            StateId = 36,
+                            Zip = "10035"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000036"),
-                            AddressLine1 = "3192 Currant St",
+                            AddressLine1 = "460 Main Street",
                             AddressTypeId = 2,
-                            City = "New Orleans",
-                            StateId = 45,
-                            Zip = "11485"
+                            City = "City 36",
+                            StateId = 37,
+                            Zip = "10036"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000037"),
-                            AddressLine1 = "284 Gooseberry Rd",
-                            AddressLine2 = "Apt 940",
-                            AddressTypeId = 5,
-                            City = "Detroit",
-                            StateId = 34,
-                            Zip = "68997"
+                            AddressLine1 = "470 Main Street",
+                            AddressTypeId = 3,
+                            City = "City 37",
+                            StateId = 38,
+                            Zip = "10037"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000038"),
-                            AddressLine1 = "7546 Oak Ave",
+                            AddressLine1 = "480 Main Street",
                             AddressTypeId = 4,
-                            City = "Washington",
-                            StateId = 33,
-                            Zip = "13833"
+                            City = "City 38",
+                            StateId = 39,
+                            Zip = "10038"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000039"),
-                            AddressLine1 = "3712 Forest Ln",
-                            AddressLine2 = "Apt 665",
-                            AddressTypeId = 4,
-                            City = "Fort Worth",
-                            StateId = 31,
-                            Zip = "67930"
+                            AddressLine1 = "490 Main Street",
+                            AddressTypeId = 5,
+                            City = "City 39",
+                            StateId = 40,
+                            Zip = "10039"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000040"),
-                            AddressLine1 = "1085 Maple Dr",
-                            AddressLine2 = "Apt 579",
-                            AddressTypeId = 2,
-                            City = "Arlington",
-                            StateId = 15,
-                            Zip = "98103"
+                            AddressLine1 = "500 Main Street",
+                            AddressTypeId = 1,
+                            City = "City 40",
+                            StateId = 41,
+                            Zip = "10040"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000041"),
-                            AddressLine1 = "3574 Washington Blvd",
-                            AddressLine2 = "Apt 656",
-                            AddressTypeId = 5,
-                            City = "Austin",
-                            StateId = 33,
-                            Zip = "19768"
+                            AddressLine1 = "510 Main Street",
+                            AddressTypeId = 2,
+                            City = "City 41",
+                            StateId = 42,
+                            Zip = "10041"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000042"),
-                            AddressLine1 = "2068 Grape Dr",
-                            AddressTypeId = 4,
-                            City = "Kansas City",
-                            StateId = 44,
-                            Zip = "42060"
+                            AddressLine1 = "520 Main Street",
+                            AddressTypeId = 3,
+                            City = "City 42",
+                            StateId = 43,
+                            Zip = "10042"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000043"),
-                            AddressLine1 = "4342 Park St",
+                            AddressLine1 = "530 Main Street",
                             AddressTypeId = 4,
-                            City = "Oakland",
-                            StateId = 28,
-                            Zip = "58378"
+                            City = "City 43",
+                            StateId = 44,
+                            Zip = "10043"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000044"),
-                            AddressLine1 = "6580 Huckleberry Dr",
-                            AddressTypeId = 3,
-                            City = "Colorado Springs",
-                            StateId = 12,
-                            Zip = "38022"
+                            AddressLine1 = "540 Main Street",
+                            AddressTypeId = 5,
+                            City = "City 44",
+                            StateId = 45,
+                            Zip = "10044"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000045"),
-                            AddressLine1 = "6967 Sunset Blvd",
-                            AddressTypeId = 5,
-                            City = "Tucson",
-                            StateId = 38,
-                            Zip = "50636"
+                            AddressLine1 = "550 Main Street",
+                            AddressTypeId = 1,
+                            City = "City 45",
+                            StateId = 46,
+                            Zip = "10045"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000046"),
-                            AddressLine1 = "8607 Oak Ave",
-                            AddressTypeId = 3,
-                            City = "Detroit",
-                            StateId = 22,
-                            Zip = "24728"
+                            AddressLine1 = "560 Main Street",
+                            AddressTypeId = 2,
+                            City = "City 46",
+                            StateId = 47,
+                            Zip = "10046"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000047"),
-                            AddressLine1 = "117 Mulberry Ave",
-                            AddressTypeId = 4,
-                            City = "Portland",
-                            StateId = 16,
-                            Zip = "53581"
+                            AddressLine1 = "570 Main Street",
+                            AddressTypeId = 3,
+                            City = "City 47",
+                            StateId = 48,
+                            Zip = "10047"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000048"),
-                            AddressLine1 = "1045 Park St",
-                            AddressTypeId = 5,
-                            City = "Oakland",
-                            StateId = 24,
-                            Zip = "91645"
+                            AddressLine1 = "580 Main Street",
+                            AddressTypeId = 4,
+                            City = "City 48",
+                            StateId = 49,
+                            Zip = "10048"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000049"),
-                            AddressLine1 = "2163 Mulberry Ave",
+                            AddressLine1 = "590 Main Street",
                             AddressTypeId = 5,
-                            City = "New Orleans",
-                            StateId = 32,
-                            Zip = "67584"
+                            City = "City 49",
+                            StateId = 50,
+                            Zip = "10049"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000050"),
-                            AddressLine1 = "3313 Elm St",
-                            AddressTypeId = 5,
-                            City = "San Antonio",
-                            StateId = 46,
-                            Zip = "66296"
+                            AddressLine1 = "600 Main Street",
+                            AddressTypeId = 1,
+                            City = "City 50",
+                            StateId = 1,
+                            Zip = "10050"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000051"),
-                            AddressLine1 = "1624 Garden St",
-                            AddressTypeId = 1,
-                            City = "San Diego",
-                            StateId = 19,
-                            Zip = "19850"
+                            AddressLine1 = "610 Main Street",
+                            AddressTypeId = 2,
+                            City = "City 51",
+                            StateId = 2,
+                            Zip = "10051"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000052"),
-                            AddressLine1 = "314 River Rd",
-                            AddressTypeId = 2,
-                            City = "Cleveland",
-                            StateId = 42,
-                            Zip = "84320"
+                            AddressLine1 = "620 Main Street",
+                            AddressTypeId = 3,
+                            City = "City 52",
+                            StateId = 3,
+                            Zip = "10052"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000053"),
-                            AddressLine1 = "1375 Raspberry Ave",
-                            AddressTypeId = 1,
-                            City = "Indianapolis",
-                            StateId = 28,
-                            Zip = "14516"
+                            AddressLine1 = "630 Main Street",
+                            AddressTypeId = 4,
+                            City = "City 53",
+                            StateId = 4,
+                            Zip = "10053"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000054"),
-                            AddressLine1 = "1031 Cherry St",
+                            AddressLine1 = "640 Main Street",
                             AddressTypeId = 5,
-                            City = "Oakland",
-                            StateId = 27,
-                            Zip = "74790"
+                            City = "City 54",
+                            StateId = 5,
+                            Zip = "10054"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000055"),
-                            AddressLine1 = "8908 Forest Ln",
-                            AddressTypeId = 5,
-                            City = "Nashville",
-                            StateId = 43,
-                            Zip = "81563"
+                            AddressLine1 = "650 Main Street",
+                            AddressTypeId = 1,
+                            City = "City 55",
+                            StateId = 6,
+                            Zip = "10055"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000056"),
-                            AddressLine1 = "8130 Orange Ln",
-                            AddressLine2 = "Apt 712",
-                            AddressTypeId = 5,
-                            City = "Phoenix",
-                            StateId = 40,
-                            Zip = "94110"
+                            AddressLine1 = "660 Main Street",
+                            AddressTypeId = 2,
+                            City = "City 56",
+                            StateId = 7,
+                            Zip = "10056"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000057"),
-                            AddressLine1 = "9665 Blackberry Dr",
-                            AddressLine2 = "Apt 820",
-                            AddressTypeId = 1,
-                            City = "Minneapolis",
-                            StateId = 23,
-                            Zip = "91611"
+                            AddressLine1 = "670 Main Street",
+                            AddressTypeId = 3,
+                            City = "City 57",
+                            StateId = 8,
+                            Zip = "10057"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000058"),
-                            AddressLine1 = "3667 Peach Rd",
-                            AddressTypeId = 5,
-                            City = "Cleveland",
-                            StateId = 46,
-                            Zip = "15388"
+                            AddressLine1 = "680 Main Street",
+                            AddressTypeId = 4,
+                            City = "City 58",
+                            StateId = 9,
+                            Zip = "10058"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000059"),
-                            AddressLine1 = "8514 Meadow Ave",
+                            AddressLine1 = "690 Main Street",
                             AddressTypeId = 5,
-                            City = "Philadelphia",
-                            StateId = 49,
-                            Zip = "21870"
+                            City = "City 59",
+                            StateId = 10,
+                            Zip = "10059"
                         },
                         new
                         {
                             AddressId = new Guid("00000000-0000-0000-0000-000000000060"),
-                            AddressLine1 = "9686 Oak Ave",
-                            AddressLine2 = "Apt 746",
+                            AddressLine1 = "700 Main Street",
                             AddressTypeId = 1,
-                            City = "Albuquerque",
-                            StateId = 33,
-                            Zip = "38588"
+                            City = "City 60",
+                            StateId = 11,
+                            Zip = "10060"
                         });
                 });
 
@@ -1207,362 +1219,362 @@ namespace MaggiesPlaygroundApi.Migrations
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000201"),
-                            EmailAddress = "kenneth.davis@hotmail.com",
-                            EmailTypeId = 3
+                            EmailAddress = "user1@gmail.com",
+                            EmailTypeId = 2
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000202"),
-                            EmailAddress = "david.wilson@services.com",
+                            EmailAddress = "user2@gmail.com",
                             EmailTypeId = 3
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000203"),
-                            EmailAddress = "david.hill@aol.com",
-                            EmailTypeId = 2
+                            EmailAddress = "user3@gmail.com",
+                            EmailTypeId = 4
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000204"),
-                            EmailAddress = "donald.taylor@company.com",
-                            EmailTypeId = 2
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000205"),
-                            EmailAddress = "donna.johnson@tech.com",
-                            EmailTypeId = 3
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000206"),
-                            EmailAddress = "lisa.davis@yahoo.com",
-                            EmailTypeId = 4
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000207"),
-                            EmailAddress = "edward.clark@gmail.com",
-                            EmailTypeId = 4
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000208"),
-                            EmailAddress = "william.rivera@consulting.com",
-                            EmailTypeId = 3
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000209"),
-                            EmailAddress = "barbara.williams@protonmail.com",
-                            EmailTypeId = 3
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000210"),
-                            EmailAddress = "dorothy.smith@enterprise.com",
+                            EmailAddress = "user4@gmail.com",
                             EmailTypeId = 5
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000211"),
-                            EmailAddress = "brian.martin@hotmail.com",
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000205"),
+                            EmailAddress = "user5@gmail.com",
                             EmailTypeId = 1
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000206"),
+                            EmailAddress = "user6@gmail.com",
+                            EmailTypeId = 2
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000207"),
+                            EmailAddress = "user7@gmail.com",
+                            EmailTypeId = 3
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000208"),
+                            EmailAddress = "user8@gmail.com",
+                            EmailTypeId = 4
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000209"),
+                            EmailAddress = "user9@gmail.com",
+                            EmailTypeId = 5
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000210"),
+                            EmailAddress = "user10@gmail.com",
+                            EmailTypeId = 1
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000211"),
+                            EmailAddress = "user11@gmail.com",
+                            EmailTypeId = 2
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000212"),
-                            EmailAddress = "patricia.flores@firm.com",
-                            EmailTypeId = 1
+                            EmailAddress = "user12@gmail.com",
+                            EmailTypeId = 3
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000213"),
-                            EmailAddress = "joseph.hill@icloud.com",
+                            EmailAddress = "user13@gmail.com",
                             EmailTypeId = 4
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000214"),
-                            EmailAddress = "william.williams@firm.com",
-                            EmailTypeId = 3
+                            EmailAddress = "user14@gmail.com",
+                            EmailTypeId = 5
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000215"),
-                            EmailAddress = "patricia.perez@services.com",
-                            EmailTypeId = 4
+                            EmailAddress = "user15@gmail.com",
+                            EmailTypeId = 1
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000216"),
-                            EmailAddress = "susan.smith@company.com",
+                            EmailAddress = "user16@gmail.com",
                             EmailTypeId = 2
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000217"),
-                            EmailAddress = "robert.scott@yahoo.com",
+                            EmailAddress = "user17@gmail.com",
                             EmailTypeId = 3
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000218"),
-                            EmailAddress = "james.flores@business.com",
-                            EmailTypeId = 3
+                            EmailAddress = "user18@gmail.com",
+                            EmailTypeId = 4
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000219"),
-                            EmailAddress = "sandra.smith@tech.com",
-                            EmailTypeId = 1
+                            EmailAddress = "user19@gmail.com",
+                            EmailTypeId = 5
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000220"),
-                            EmailAddress = "james.brown@consulting.com",
+                            EmailAddress = "user20@gmail.com",
                             EmailTypeId = 1
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000221"),
-                            EmailAddress = "jason.campbell@corporate.com",
+                            EmailAddress = "user21@yahoo.com",
                             EmailTypeId = 2
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000222"),
-                            EmailAddress = "andrew.williams@company.com",
-                            EmailTypeId = 1
+                            EmailAddress = "user22@yahoo.com",
+                            EmailTypeId = 3
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000223"),
-                            EmailAddress = "anthony.flores@enterprise.com",
-                            EmailTypeId = 3
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000224"),
-                            EmailAddress = "sarah.rivera@organization.com",
+                            EmailAddress = "user23@yahoo.com",
                             EmailTypeId = 4
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000225"),
-                            EmailAddress = "mary.hall@web.com",
-                            EmailTypeId = 2
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000226"),
-                            EmailAddress = "kevin.rodriguez@hotmail.com",
-                            EmailTypeId = 3
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000227"),
-                            EmailAddress = "karen.hill@hotmail.com",
-                            EmailTypeId = 1
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000228"),
-                            EmailAddress = "richard.robinson@enterprise.com",
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000224"),
+                            EmailAddress = "user24@yahoo.com",
                             EmailTypeId = 5
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000229"),
-                            EmailAddress = "kimberly.king@services.com",
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000225"),
+                            EmailAddress = "user25@yahoo.com",
+                            EmailTypeId = 1
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000226"),
+                            EmailAddress = "user26@yahoo.com",
                             EmailTypeId = 2
                         },
                         new
                         {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000227"),
+                            EmailAddress = "user27@yahoo.com",
+                            EmailTypeId = 3
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000228"),
+                            EmailAddress = "user28@yahoo.com",
+                            EmailTypeId = 4
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000229"),
+                            EmailAddress = "user29@yahoo.com",
+                            EmailTypeId = 5
+                        },
+                        new
+                        {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000230"),
-                            EmailAddress = "carol.roberts@consulting.com",
+                            EmailAddress = "user30@yahoo.com",
                             EmailTypeId = 1
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000231"),
-                            EmailAddress = "charles.campbell@gmail.com",
+                            EmailAddress = "user31@yahoo.com",
                             EmailTypeId = 2
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000232"),
-                            EmailAddress = "jessica.johnson@aol.com",
+                            EmailAddress = "user32@yahoo.com",
                             EmailTypeId = 3
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000233"),
-                            EmailAddress = "betty.jones@web.com",
-                            EmailTypeId = 1
+                            EmailAddress = "user33@yahoo.com",
+                            EmailTypeId = 4
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000234"),
-                            EmailAddress = "michael.taylor@protonmail.com",
-                            EmailTypeId = 4
+                            EmailAddress = "user34@yahoo.com",
+                            EmailTypeId = 5
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000235"),
-                            EmailAddress = "dorothy.smith@gmail.com",
-                            EmailTypeId = 5
+                            EmailAddress = "user35@yahoo.com",
+                            EmailTypeId = 1
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000236"),
-                            EmailAddress = "nancy.lopez@online.com",
-                            EmailTypeId = 5
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000237"),
-                            EmailAddress = "thomas.ramirez@firm.com",
-                            EmailTypeId = 4
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000238"),
-                            EmailAddress = "barbara.anderson@outlook.com",
-                            EmailTypeId = 1
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000239"),
-                            EmailAddress = "susan.campbell@web.com",
-                            EmailTypeId = 4
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000240"),
-                            EmailAddress = "william.hall@outlook.com",
+                            EmailAddress = "user36@yahoo.com",
                             EmailTypeId = 2
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000241"),
-                            EmailAddress = "carol.ramirez@services.com",
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000237"),
+                            EmailAddress = "user37@yahoo.com",
+                            EmailTypeId = 3
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000238"),
+                            EmailAddress = "user38@yahoo.com",
+                            EmailTypeId = 4
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000239"),
+                            EmailAddress = "user39@yahoo.com",
+                            EmailTypeId = 5
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000240"),
+                            EmailAddress = "user40@yahoo.com",
                             EmailTypeId = 1
                         },
                         new
                         {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000241"),
+                            EmailAddress = "user41@hotmail.com",
+                            EmailTypeId = 2
+                        },
+                        new
+                        {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000242"),
-                            EmailAddress = "ruth.martin@digital.com",
+                            EmailAddress = "user42@hotmail.com",
                             EmailTypeId = 3
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000243"),
-                            EmailAddress = "charles.carter@corporate.com",
-                            EmailTypeId = 3
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000244"),
-                            EmailAddress = "jeffrey.green@hotmail.com",
-                            EmailTypeId = 1
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000245"),
-                            EmailAddress = "james.martinez@online.com",
+                            EmailAddress = "user43@hotmail.com",
                             EmailTypeId = 4
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000246"),
-                            EmailAddress = "matthew.robinson@business.com",
-                            EmailTypeId = 1
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000247"),
-                            EmailAddress = "jason.carter@digital.com",
-                            EmailTypeId = 1
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000248"),
-                            EmailAddress = "charles.ramirez@firm.com",
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000244"),
+                            EmailAddress = "user44@hotmail.com",
                             EmailTypeId = 5
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000249"),
-                            EmailAddress = "dorothy.nguyen@icloud.com",
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000245"),
+                            EmailAddress = "user45@hotmail.com",
+                            EmailTypeId = 1
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000246"),
+                            EmailAddress = "user46@hotmail.com",
                             EmailTypeId = 2
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000250"),
-                            EmailAddress = "donna.green@aol.com",
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000247"),
+                            EmailAddress = "user47@hotmail.com",
+                            EmailTypeId = 3
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000248"),
+                            EmailAddress = "user48@hotmail.com",
+                            EmailTypeId = 4
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000249"),
+                            EmailAddress = "user49@hotmail.com",
                             EmailTypeId = 5
                         },
                         new
                         {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000250"),
+                            EmailAddress = "user50@hotmail.com",
+                            EmailTypeId = 1
+                        },
+                        new
+                        {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000251"),
-                            EmailAddress = "michelle.martinez@icloud.com",
+                            EmailAddress = "user51@hotmail.com",
                             EmailTypeId = 2
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000252"),
-                            EmailAddress = "ronald.allen@yahoo.com",
+                            EmailAddress = "user52@hotmail.com",
                             EmailTypeId = 3
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000253"),
-                            EmailAddress = "edward.hall@solutions.com",
-                            EmailTypeId = 5
+                            EmailAddress = "user53@hotmail.com",
+                            EmailTypeId = 4
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000254"),
-                            EmailAddress = "jeffrey.white@digital.com",
+                            EmailAddress = "user54@hotmail.com",
                             EmailTypeId = 5
                         },
                         new
                         {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000255"),
-                            EmailAddress = "elizabeth.robinson@aol.com",
-                            EmailTypeId = 4
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000256"),
-                            EmailAddress = "donald.scott@hotmail.com",
-                            EmailTypeId = 5
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000257"),
-                            EmailAddress = "charles.clark@services.com",
-                            EmailTypeId = 2
-                        },
-                        new
-                        {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000258"),
-                            EmailAddress = "donna.flores@organization.com",
+                            EmailAddress = "user55@hotmail.com",
                             EmailTypeId = 1
                         },
                         new
                         {
-                            EmailId = new Guid("00000000-0000-0000-0000-000000000259"),
-                            EmailAddress = "jeffrey.williams@yahoo.com",
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000256"),
+                            EmailAddress = "user56@hotmail.com",
                             EmailTypeId = 2
                         },
                         new
                         {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000257"),
+                            EmailAddress = "user57@hotmail.com",
+                            EmailTypeId = 3
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000258"),
+                            EmailAddress = "user58@hotmail.com",
+                            EmailTypeId = 4
+                        },
+                        new
+                        {
+                            EmailId = new Guid("00000000-0000-0000-0000-000000000259"),
+                            EmailAddress = "user59@hotmail.com",
+                            EmailTypeId = 5
+                        },
+                        new
+                        {
                             EmailId = new Guid("00000000-0000-0000-0000-000000000260"),
-                            EmailAddress = "christopher.rodriguez@icloud.com",
-                            EmailTypeId = 2
+                            EmailAddress = "user60@hotmail.com",
+                            EmailTypeId = 1
                         });
                 });
 
@@ -2674,391 +2686,382 @@ namespace MaggiesPlaygroundApi.Migrations
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000101"),
-                            Extension = "3363",
-                            PhoneNumber = "733-226-2129",
-                            PhoneTypeId = 3
+                            Extension = "1",
+                            PhoneNumber = "201-501-1010",
+                            PhoneTypeId = 2
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000102"),
-                            Extension = "3315",
-                            PhoneNumber = "778-561-2562",
-                            PhoneTypeId = 4
+                            Extension = "2",
+                            PhoneNumber = "202-502-1020",
+                            PhoneTypeId = 3
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000103"),
-                            PhoneNumber = "603-387-4428",
-                            PhoneTypeId = 2
+                            Extension = "3",
+                            PhoneNumber = "203-503-1030",
+                            PhoneTypeId = 4
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000104"),
-                            Extension = "1810",
-                            PhoneNumber = "228-831-6194",
-                            PhoneTypeId = 2
+                            Extension = "4",
+                            PhoneNumber = "204-504-1040",
+                            PhoneTypeId = 5
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000105"),
-                            PhoneNumber = "763-833-5859",
+                            Extension = "5",
+                            PhoneNumber = "205-505-1050",
                             PhoneTypeId = 1
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000106"),
-                            Extension = "1373",
-                            PhoneNumber = "318-914-7232",
-                            PhoneTypeId = 3
-                        },
-                        new
-                        {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000107"),
-                            PhoneNumber = "446-624-8388",
-                            PhoneTypeId = 1
-                        },
-                        new
-                        {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000108"),
-                            Extension = "1459",
-                            PhoneNumber = "843-772-4460",
-                            PhoneTypeId = 1
-                        },
-                        new
-                        {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000109"),
-                            PhoneNumber = "824-663-2036",
+                            Extension = "6",
+                            PhoneNumber = "206-506-1060",
                             PhoneTypeId = 2
                         },
                         new
                         {
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000107"),
+                            Extension = "7",
+                            PhoneNumber = "207-507-1070",
+                            PhoneTypeId = 3
+                        },
+                        new
+                        {
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000108"),
+                            Extension = "8",
+                            PhoneNumber = "208-508-1080",
+                            PhoneTypeId = 4
+                        },
+                        new
+                        {
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000109"),
+                            Extension = "9",
+                            PhoneNumber = "209-509-1090",
+                            PhoneTypeId = 5
+                        },
+                        new
+                        {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000110"),
-                            PhoneNumber = "431-682-2292",
+                            Extension = "10",
+                            PhoneNumber = "210-510-1100",
                             PhoneTypeId = 1
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000111"),
-                            PhoneNumber = "612-145-4782",
-                            PhoneTypeId = 4
-                        },
-                        new
-                        {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000112"),
-                            Extension = "7462",
-                            PhoneNumber = "374-111-4286",
+                            Extension = "11",
+                            PhoneNumber = "211-511-1110",
                             PhoneTypeId = 2
                         },
                         new
                         {
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000112"),
+                            Extension = "12",
+                            PhoneNumber = "212-512-1120",
+                            PhoneTypeId = 3
+                        },
+                        new
+                        {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000113"),
-                            PhoneNumber = "256-517-1108",
+                            Extension = "13",
+                            PhoneNumber = "213-513-1130",
                             PhoneTypeId = 4
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000114"),
-                            Extension = "1027",
-                            PhoneNumber = "610-549-1080",
+                            Extension = "14",
+                            PhoneNumber = "214-514-1140",
                             PhoneTypeId = 5
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000115"),
-                            PhoneNumber = "250-688-1310",
-                            PhoneTypeId = 5
-                        },
-                        new
-                        {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000116"),
-                            PhoneNumber = "568-437-6548",
+                            Extension = "15",
+                            PhoneNumber = "215-515-1150",
                             PhoneTypeId = 1
                         },
                         new
                         {
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000116"),
+                            Extension = "16",
+                            PhoneNumber = "216-516-1160",
+                            PhoneTypeId = 2
+                        },
+                        new
+                        {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000117"),
-                            PhoneNumber = "313-492-8129",
+                            Extension = "17",
+                            PhoneNumber = "217-517-1170",
                             PhoneTypeId = 3
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000118"),
-                            Extension = "8934",
-                            PhoneNumber = "437-915-6280",
+                            Extension = "18",
+                            PhoneNumber = "218-518-1180",
                             PhoneTypeId = 4
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000119"),
-                            Extension = "5068",
-                            PhoneNumber = "965-399-7395",
-                            PhoneTypeId = 1
+                            Extension = "19",
+                            PhoneNumber = "219-519-1190",
+                            PhoneTypeId = 5
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000120"),
-                            Extension = "6324",
-                            PhoneNumber = "466-797-2336",
+                            Extension = "20",
+                            PhoneNumber = "220-520-1200",
                             PhoneTypeId = 1
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000121"),
-                            PhoneNumber = "609-987-7895",
-                            PhoneTypeId = 4
-                        },
-                        new
-                        {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000122"),
-                            Extension = "4108",
-                            PhoneNumber = "431-596-9907",
-                            PhoneTypeId = 4
-                        },
-                        new
-                        {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000123"),
-                            Extension = "2944",
-                            PhoneNumber = "942-124-2977",
+                            PhoneNumber = "221-521-1210",
                             PhoneTypeId = 2
                         },
                         new
                         {
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000122"),
+                            PhoneNumber = "222-522-1220",
+                            PhoneTypeId = 3
+                        },
+                        new
+                        {
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000123"),
+                            PhoneNumber = "223-523-1230",
+                            PhoneTypeId = 4
+                        },
+                        new
+                        {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000124"),
-                            Extension = "1954",
-                            PhoneNumber = "673-479-1843",
+                            PhoneNumber = "224-524-1240",
                             PhoneTypeId = 5
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000125"),
-                            Extension = "1378",
-                            PhoneNumber = "456-391-7759",
-                            PhoneTypeId = 5
+                            PhoneNumber = "225-525-1250",
+                            PhoneTypeId = 1
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000126"),
-                            PhoneNumber = "871-905-3142",
-                            PhoneTypeId = 5
+                            PhoneNumber = "226-526-1260",
+                            PhoneTypeId = 2
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000127"),
-                            Extension = "3675",
-                            PhoneNumber = "423-590-6709",
-                            PhoneTypeId = 4
+                            PhoneNumber = "227-527-1270",
+                            PhoneTypeId = 3
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000128"),
-                            PhoneNumber = "346-126-3077",
-                            PhoneTypeId = 5
+                            PhoneNumber = "228-528-1280",
+                            PhoneTypeId = 4
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000129"),
-                            Extension = "6039",
-                            PhoneNumber = "824-221-8949",
-                            PhoneTypeId = 1
-                        },
-                        new
-                        {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000130"),
-                            PhoneNumber = "644-740-2097",
-                            PhoneTypeId = 3
-                        },
-                        new
-                        {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000131"),
-                            PhoneNumber = "903-499-4133",
+                            PhoneNumber = "229-529-1290",
                             PhoneTypeId = 5
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000132"),
-                            Extension = "1025",
-                            PhoneNumber = "633-952-8292",
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000130"),
+                            PhoneNumber = "230-530-1300",
                             PhoneTypeId = 1
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000133"),
-                            PhoneNumber = "345-945-7480",
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000131"),
+                            PhoneNumber = "231-531-1310",
+                            PhoneTypeId = 2
+                        },
+                        new
+                        {
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000132"),
+                            PhoneNumber = "232-532-1320",
                             PhoneTypeId = 3
                         },
                         new
                         {
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000133"),
+                            PhoneNumber = "233-533-1330",
+                            PhoneTypeId = 4
+                        },
+                        new
+                        {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000134"),
-                            PhoneNumber = "519-212-9195",
+                            PhoneNumber = "234-534-1340",
                             PhoneTypeId = 5
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000135"),
-                            PhoneNumber = "337-400-5879",
-                            PhoneTypeId = 4
+                            PhoneNumber = "235-535-1350",
+                            PhoneTypeId = 1
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000136"),
-                            PhoneNumber = "857-771-3524",
+                            PhoneNumber = "236-536-1360",
                             PhoneTypeId = 2
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000137"),
-                            Extension = "3493",
-                            PhoneNumber = "842-322-8991",
-                            PhoneTypeId = 4
+                            PhoneNumber = "237-537-1370",
+                            PhoneTypeId = 3
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000138"),
-                            PhoneNumber = "382-849-6759",
-                            PhoneTypeId = 1
+                            PhoneNumber = "238-538-1380",
+                            PhoneTypeId = 4
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000139"),
-                            PhoneNumber = "843-891-8008",
+                            PhoneNumber = "239-539-1390",
                             PhoneTypeId = 5
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000140"),
-                            PhoneNumber = "572-900-9721",
+                            PhoneNumber = "240-540-1400",
                             PhoneTypeId = 1
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000141"),
-                            Extension = "8253",
-                            PhoneNumber = "368-670-5507",
-                            PhoneTypeId = 4
+                            PhoneNumber = "241-541-1410",
+                            PhoneTypeId = 2
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000142"),
-                            PhoneNumber = "477-568-7485",
-                            PhoneTypeId = 2
+                            PhoneNumber = "242-542-1420",
+                            PhoneTypeId = 3
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000143"),
-                            Extension = "1501",
-                            PhoneNumber = "830-622-2786",
-                            PhoneTypeId = 5
-                        },
-                        new
-                        {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000144"),
-                            Extension = "8937",
-                            PhoneNumber = "371-381-2543",
-                            PhoneTypeId = 2
-                        },
-                        new
-                        {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000145"),
-                            PhoneNumber = "575-430-5083",
+                            PhoneNumber = "243-543-1430",
                             PhoneTypeId = 4
                         },
                         new
                         {
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000144"),
+                            PhoneNumber = "244-544-1440",
+                            PhoneTypeId = 5
+                        },
+                        new
+                        {
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000145"),
+                            PhoneNumber = "245-545-1450",
+                            PhoneTypeId = 1
+                        },
+                        new
+                        {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000146"),
-                            Extension = "9441",
-                            PhoneNumber = "998-419-8708",
+                            PhoneNumber = "246-546-1460",
                             PhoneTypeId = 2
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000147"),
-                            Extension = "5239",
-                            PhoneNumber = "673-650-4483",
-                            PhoneTypeId = 5
+                            PhoneNumber = "247-547-1470",
+                            PhoneTypeId = 3
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000148"),
-                            PhoneNumber = "903-380-9273",
-                            PhoneTypeId = 5
-                        },
-                        new
-                        {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000149"),
-                            PhoneNumber = "213-368-6221",
-                            PhoneTypeId = 1
-                        },
-                        new
-                        {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000150"),
-                            Extension = "9464",
-                            PhoneNumber = "528-708-6899",
-                            PhoneTypeId = 5
-                        },
-                        new
-                        {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000151"),
-                            Extension = "7167",
-                            PhoneNumber = "801-127-4066",
+                            PhoneNumber = "248-548-1480",
                             PhoneTypeId = 4
                         },
                         new
                         {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000152"),
-                            PhoneNumber = "616-428-4094",
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000149"),
+                            PhoneNumber = "249-549-1490",
+                            PhoneTypeId = 5
+                        },
+                        new
+                        {
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000150"),
+                            PhoneNumber = "250-550-1500",
+                            PhoneTypeId = 1
+                        },
+                        new
+                        {
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000151"),
+                            PhoneNumber = "251-551-1510",
                             PhoneTypeId = 2
                         },
                         new
                         {
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000152"),
+                            PhoneNumber = "252-552-1520",
+                            PhoneTypeId = 3
+                        },
+                        new
+                        {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000153"),
-                            Extension = "2223",
-                            PhoneNumber = "714-644-3896",
+                            PhoneNumber = "253-553-1530",
                             PhoneTypeId = 4
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000154"),
-                            Extension = "6213",
-                            PhoneNumber = "873-361-9809",
-                            PhoneTypeId = 2
+                            PhoneNumber = "254-554-1540",
+                            PhoneTypeId = 5
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000155"),
-                            Extension = "9502",
-                            PhoneNumber = "480-239-2648",
-                            PhoneTypeId = 4
+                            PhoneNumber = "255-555-1550",
+                            PhoneTypeId = 1
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000156"),
-                            PhoneNumber = "344-689-2789",
-                            PhoneTypeId = 4
+                            PhoneNumber = "256-556-1560",
+                            PhoneTypeId = 2
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000157"),
-                            PhoneNumber = "887-420-6537",
+                            PhoneNumber = "257-557-1570",
                             PhoneTypeId = 3
                         },
                         new
                         {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000158"),
-                            PhoneNumber = "356-810-5988",
-                            PhoneTypeId = 3
-                        },
-                        new
-                        {
-                            PhoneId = new Guid("00000000-0000-0000-0000-000000000159"),
-                            Extension = "3801",
-                            PhoneNumber = "528-688-9771",
+                            PhoneNumber = "258-558-1580",
                             PhoneTypeId = 4
                         },
                         new
                         {
+                            PhoneId = new Guid("00000000-0000-0000-0000-000000000159"),
+                            PhoneNumber = "259-559-1590",
+                            PhoneTypeId = 5
+                        },
+                        new
+                        {
                             PhoneId = new Guid("00000000-0000-0000-0000-000000000160"),
-                            PhoneNumber = "631-830-7243",
-                            PhoneTypeId = 2
+                            PhoneNumber = "260-560-1600",
+                            PhoneTypeId = 1
                         });
                 });
 

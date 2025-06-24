@@ -3,6 +3,7 @@ using System;
 using MaggiesPlaygroundApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MaggiesPlaygroundApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250624170856_AddEmailsAndEmailTypes")]
+    partial class AddEmailsAndEmailTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,8 +59,6 @@ namespace MaggiesPlaygroundApi.Migrations
                     b.HasKey("AddressId");
 
                     b.HasIndex("AddressTypeId");
-
-                    b.HasIndex("StateId");
 
                     b.ToTable("Addresses");
                 });
@@ -1672,331 +1673,6 @@ namespace MaggiesPlaygroundApi.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MaggiesPlaygroundApi.Models.State", b =>
-                {
-                    b.Property<int>("StateId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("StateId"));
-
-                    b.Property<string>("Abbreviation")
-                        .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("varchar");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar");
-
-                    b.HasKey("StateId");
-
-                    b.ToTable("States");
-
-                    b.HasData(
-                        new
-                        {
-                            StateId = 1,
-                            Abbreviation = "AL",
-                            Name = "Alabama"
-                        },
-                        new
-                        {
-                            StateId = 2,
-                            Abbreviation = "AK",
-                            Name = "Alaska"
-                        },
-                        new
-                        {
-                            StateId = 3,
-                            Abbreviation = "AZ",
-                            Name = "Arizona"
-                        },
-                        new
-                        {
-                            StateId = 4,
-                            Abbreviation = "AR",
-                            Name = "Arkansas"
-                        },
-                        new
-                        {
-                            StateId = 5,
-                            Abbreviation = "CA",
-                            Name = "California"
-                        },
-                        new
-                        {
-                            StateId = 6,
-                            Abbreviation = "CO",
-                            Name = "Colorado"
-                        },
-                        new
-                        {
-                            StateId = 7,
-                            Abbreviation = "CT",
-                            Name = "Connecticut"
-                        },
-                        new
-                        {
-                            StateId = 8,
-                            Abbreviation = "DE",
-                            Name = "Delaware"
-                        },
-                        new
-                        {
-                            StateId = 9,
-                            Abbreviation = "FL",
-                            Name = "Florida"
-                        },
-                        new
-                        {
-                            StateId = 10,
-                            Abbreviation = "GA",
-                            Name = "Georgia"
-                        },
-                        new
-                        {
-                            StateId = 11,
-                            Abbreviation = "HI",
-                            Name = "Hawaii"
-                        },
-                        new
-                        {
-                            StateId = 12,
-                            Abbreviation = "ID",
-                            Name = "Idaho"
-                        },
-                        new
-                        {
-                            StateId = 13,
-                            Abbreviation = "IL",
-                            Name = "Illinois"
-                        },
-                        new
-                        {
-                            StateId = 14,
-                            Abbreviation = "IN",
-                            Name = "Indiana"
-                        },
-                        new
-                        {
-                            StateId = 15,
-                            Abbreviation = "IA",
-                            Name = "Iowa"
-                        },
-                        new
-                        {
-                            StateId = 16,
-                            Abbreviation = "KS",
-                            Name = "Kansas"
-                        },
-                        new
-                        {
-                            StateId = 17,
-                            Abbreviation = "KY",
-                            Name = "Kentucky"
-                        },
-                        new
-                        {
-                            StateId = 18,
-                            Abbreviation = "LA",
-                            Name = "Louisiana"
-                        },
-                        new
-                        {
-                            StateId = 19,
-                            Abbreviation = "ME",
-                            Name = "Maine"
-                        },
-                        new
-                        {
-                            StateId = 20,
-                            Abbreviation = "MD",
-                            Name = "Maryland"
-                        },
-                        new
-                        {
-                            StateId = 21,
-                            Abbreviation = "MA",
-                            Name = "Massachusetts"
-                        },
-                        new
-                        {
-                            StateId = 22,
-                            Abbreviation = "MI",
-                            Name = "Michigan"
-                        },
-                        new
-                        {
-                            StateId = 23,
-                            Abbreviation = "MN",
-                            Name = "Minnesota"
-                        },
-                        new
-                        {
-                            StateId = 24,
-                            Abbreviation = "MS",
-                            Name = "Mississippi"
-                        },
-                        new
-                        {
-                            StateId = 25,
-                            Abbreviation = "MO",
-                            Name = "Missouri"
-                        },
-                        new
-                        {
-                            StateId = 26,
-                            Abbreviation = "MT",
-                            Name = "Montana"
-                        },
-                        new
-                        {
-                            StateId = 27,
-                            Abbreviation = "NE",
-                            Name = "Nebraska"
-                        },
-                        new
-                        {
-                            StateId = 28,
-                            Abbreviation = "NV",
-                            Name = "Nevada"
-                        },
-                        new
-                        {
-                            StateId = 29,
-                            Abbreviation = "NH",
-                            Name = "New Hampshire"
-                        },
-                        new
-                        {
-                            StateId = 30,
-                            Abbreviation = "NJ",
-                            Name = "New Jersey"
-                        },
-                        new
-                        {
-                            StateId = 31,
-                            Abbreviation = "NM",
-                            Name = "New Mexico"
-                        },
-                        new
-                        {
-                            StateId = 32,
-                            Abbreviation = "NY",
-                            Name = "New York"
-                        },
-                        new
-                        {
-                            StateId = 33,
-                            Abbreviation = "NC",
-                            Name = "North Carolina"
-                        },
-                        new
-                        {
-                            StateId = 34,
-                            Abbreviation = "ND",
-                            Name = "North Dakota"
-                        },
-                        new
-                        {
-                            StateId = 35,
-                            Abbreviation = "OH",
-                            Name = "Ohio"
-                        },
-                        new
-                        {
-                            StateId = 36,
-                            Abbreviation = "OK",
-                            Name = "Oklahoma"
-                        },
-                        new
-                        {
-                            StateId = 37,
-                            Abbreviation = "OR",
-                            Name = "Oregon"
-                        },
-                        new
-                        {
-                            StateId = 38,
-                            Abbreviation = "PA",
-                            Name = "Pennsylvania"
-                        },
-                        new
-                        {
-                            StateId = 39,
-                            Abbreviation = "RI",
-                            Name = "Rhode Island"
-                        },
-                        new
-                        {
-                            StateId = 40,
-                            Abbreviation = "SC",
-                            Name = "South Carolina"
-                        },
-                        new
-                        {
-                            StateId = 41,
-                            Abbreviation = "SD",
-                            Name = "South Dakota"
-                        },
-                        new
-                        {
-                            StateId = 42,
-                            Abbreviation = "TN",
-                            Name = "Tennessee"
-                        },
-                        new
-                        {
-                            StateId = 43,
-                            Abbreviation = "TX",
-                            Name = "Texas"
-                        },
-                        new
-                        {
-                            StateId = 44,
-                            Abbreviation = "UT",
-                            Name = "Utah"
-                        },
-                        new
-                        {
-                            StateId = 45,
-                            Abbreviation = "VT",
-                            Name = "Vermont"
-                        },
-                        new
-                        {
-                            StateId = 46,
-                            Abbreviation = "VA",
-                            Name = "Virginia"
-                        },
-                        new
-                        {
-                            StateId = 47,
-                            Abbreviation = "WA",
-                            Name = "Washington"
-                        },
-                        new
-                        {
-                            StateId = 48,
-                            Abbreviation = "WV",
-                            Name = "West Virginia"
-                        },
-                        new
-                        {
-                            StateId = 49,
-                            Abbreviation = "WI",
-                            Name = "Wisconsin"
-                        },
-                        new
-                        {
-                            StateId = 50,
-                            Abbreviation = "WY",
-                            Name = "Wyoming"
-                        });
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -2134,12 +1810,6 @@ namespace MaggiesPlaygroundApi.Migrations
                     b.HasOne("MaggiesPlaygroundApi.Models.AddressType", null)
                         .WithMany()
                         .HasForeignKey("AddressTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("MaggiesPlaygroundApi.Models.State", null)
-                        .WithMany()
-                        .HasForeignKey("StateId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

@@ -8,8 +8,8 @@ public interface IClientEmailService
     Task<ClientEmailDto?> GetByIdAsync(Guid id);
     Task<IEnumerable<ClientEmailDto>> GetByClientIdAsync(Guid clientId);
     Task<IEnumerable<ClientEmailDto>> GetByEmailIdAsync(Guid emailId);
-    Task<ClientEmailDto> CreateAsync(ClientEmailDto clientEmailDto, string enteredBy);
-    Task<ClientEmailDto> UpdateAsync(Guid id, ClientEmailDto clientEmailDto, string enteredBy);
+    Task<ClientEmailDto> CreateAsync(ClientEmailDto clientEmailDto);
+    Task<ClientEmailDto> UpdateAsync(Guid id, ClientEmailDto clientEmailDto);
     Task<bool> DeleteAsync(Guid id);
     Task<bool> ExistsAsync(Guid id);
 } 

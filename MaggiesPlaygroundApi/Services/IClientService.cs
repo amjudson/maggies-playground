@@ -4,9 +4,9 @@ namespace MaggiesPlaygroundApi.Services;
 
 public interface IClientService
 {
-    Task<(IEnumerable<ClientDto> Clients, int TotalCount)> GetClientsAsync(ClientQueryParameters queryParams);
-    Task<ClientDto?> GetClientByIdAsync(Guid id);
-    Task<ClientDto> CreateClientAsync(CreateClientDto clientDto, string currentUser);
-    Task<ClientDto?> UpdateClientAsync(Guid id, UpdateClientDto clientDto, string currentUser);
-    Task<bool> DeleteClientAsync(Guid id, string currentUser);
+    Task<IEnumerable<ClientDto>> GetAllAsync(int page = 1, int pageSize = 10, string? searchTerm = null);
+    Task<ClientDto?> GetByIdAsync(Guid id);
+    Task<ClientDto> CreateAsync(ClientDto clientDto);
+    Task<ClientDto> UpdateAsync(Guid id, ClientDto clientDto);
+    Task<bool> DeleteAsync(Guid id);
 } 

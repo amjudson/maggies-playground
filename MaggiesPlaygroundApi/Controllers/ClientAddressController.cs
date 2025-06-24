@@ -8,63 +8,81 @@ namespace MaggiesPlaygroundApi.Controllers;
 [Route("api/[controller]")]
 public class ClientAddressController : ControllerBase
 {
-    private readonly IClientAddressService _service;
+    private readonly IClientAddressService service;
 
     public ClientAddressController(IClientAddressService service)
     {
-        _service = service;
+        this.service = service;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
+    [HttpGet("[action]")]
+    public async Task<ActionResult<IEnumerable<ClientAddressDto>>> GetAll()
     {
-        var result = await _service.GetAllAsync();
-        return Ok(result);
+        var clientAddresses = await service.GetAllAsync();
+        return Ok(clientAddresses);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(Guid id)
+    [HttpGet("[action]/{id:guid}")]
+    public async Task<ActionResult<ClientAddressDto>> GetById(Guid id)
     {
-        var result = await _service.GetByIdAsync(id);
-        if (result == null) return NotFound();
-        return Ok(result);
+        var clientAddress = await service.GetByIdAsync(id);
+        
+        if (clientAddress == null)
+            return NotFound();
+
+        return Ok(clientAddress);
     }
 
-    [HttpGet("ByClient/{clientId}")]
-    public async Task<IActionResult> GetByClientId(Guid clientId)
+    [HttpGet("[action]/client/{clientId:guid}")]
+    public async Task<ActionResult<IEnumerable<ClientAddressDto>>> GetByClientId(Guid clientId)
     {
-        var result = await _service.GetByClientIdAsync(clientId);
-        return Ok(result);
+        var clientAddresses = await service.GetByClientIdAsync(clientId);
+        return Ok(clientAddresses);
     }
 
-    [HttpGet("ByAddress/{addressId}")]
-    public async Task<IActionResult> GetByAddressId(Guid addressId)
+    [HttpGet("[action]/address/{addressId:guid}")]
+    public async Task<ActionResult<IEnumerable<ClientAddressDto>>> GetByAddressId(Guid addressId)
     {
-        var result = await _service.GetByAddressIdAsync(addressId);
-        return Ok(result);
+        var clientAddresses = await service.GetByAddressIdAsync(addressId);
+        return Ok(clientAddresses);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] ClientAddressDto dto)
+    [HttpPost("[action]")]
+    public async Task<ActionResult<ClientAddressDto>> Create(ClientAddressDto clientAddressDto)
     {
-        var enteredBy = User?.Identity?.Name ?? "System";
-        var created = await _service.CreateAsync(dto, enteredBy);
-        return CreatedAtAction(nameof(GetById), new { id = created.ClientAddressId }, created);
+        try
+        {
+            var createdClientAddress = await service.CreateAsync(clientAddressDto);
+            return CreatedAtAction(nameof(GetById), new { id = createdClientAddress.ClientAddressId }, createdClientAddress);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] ClientAddressDto dto)
+    [HttpPut("[action]/{id:guid}")]
+    public async Task<ActionResult<ClientAddressDto>> Update(Guid id, ClientAddressDto clientAddressDto)
     {
-        var enteredBy = User?.Identity?.Name ?? "System";
-        var updated = await _service.UpdateAsync(id, dto, enteredBy);
-        return Ok(updated);
+        try
+        {
+            var updatedClientAddress = await service.UpdateAsync(id, clientAddressDto);
+            return Ok(updatedClientAddress);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id)
+    [HttpDelete("[action]/{id:guid}")]
+    public async Task<ActionResult> Delete(Guid id)
     {
-        var deleted = await _service.DeleteAsync(id);
-        if (!deleted) return NotFound();
+        var deleted = await service.DeleteAsync(id);
+        
+        if (!deleted)
+            return NotFound();
+
         return NoContent();
     }
 } 

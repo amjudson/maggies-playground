@@ -6,21 +6,19 @@ namespace MaggiesPlaygroundApi.Services;
 
 public class PersonAddressService : IPersonAddressService
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext context;
 
     public PersonAddressService(ApplicationDbContext context)
     {
-        _context = context;
+        this.context = context;
     }
 
     public async Task<IEnumerable<PersonAddressDto>> GetAllAsync()
     {
-        return await _context.PersonAddresses
+        return await context.PersonAddresses
             .Include(pa => pa.Person)
             .Include(pa => pa.Address)
-            .ThenInclude(a => a!.AddressType)
-            .Include(pa => pa.Address)
-            .ThenInclude(a => a!.State)
+            .ThenInclude(a => a.State)
             .Where(pa => pa.Active)
             .Select(pa => new PersonAddressDto
             {
@@ -54,7 +52,13 @@ public class PersonAddressService : IPersonAddressService
                     City = pa.Address.City,
                     StateId = pa.Address.StateId,
                     Zip = pa.Address.Zip,
-                    AddressTypeId = pa.Address.AddressTypeId
+                    AddressTypeId = pa.Address.AddressTypeId,
+                    State = pa.Address.State != null ? new StateDto
+                    {
+                        StateId = pa.Address.State.StateId,
+                        Name = pa.Address.State.Name,
+                        Abbreviation = pa.Address.State.Abbreviation
+                    } : null
                 } : null
             })
             .ToListAsync();
@@ -62,12 +66,10 @@ public class PersonAddressService : IPersonAddressService
 
     public async Task<PersonAddressDto?> GetByIdAsync(Guid id)
     {
-        var personAddress = await _context.PersonAddresses
+        var personAddress = await context.PersonAddresses
             .Include(pa => pa.Person)
             .Include(pa => pa.Address)
-            .ThenInclude(a => a!.AddressType)
-            .Include(pa => pa.Address)
-            .ThenInclude(a => a!.State)
+            .ThenInclude(a => a.State)
             .FirstOrDefaultAsync(pa => pa.PersonAddressId == id && pa.Active);
 
         if (personAddress == null)
@@ -105,19 +107,23 @@ public class PersonAddressService : IPersonAddressService
                 City = personAddress.Address.City,
                 StateId = personAddress.Address.StateId,
                 Zip = personAddress.Address.Zip,
-                AddressTypeId = personAddress.Address.AddressTypeId
+                AddressTypeId = personAddress.Address.AddressTypeId,
+                State = personAddress.Address.State != null ? new StateDto
+                {
+                    StateId = personAddress.Address.State.StateId,
+                    Name = personAddress.Address.State.Name,
+                    Abbreviation = personAddress.Address.State.Abbreviation
+                } : null
             } : null
         };
     }
 
     public async Task<IEnumerable<PersonAddressDto>> GetByPersonIdAsync(Guid personId)
     {
-        return await _context.PersonAddresses
+        return await context.PersonAddresses
             .Include(pa => pa.Person)
             .Include(pa => pa.Address)
-            .ThenInclude(a => a!.AddressType)
-            .Include(pa => pa.Address)
-            .ThenInclude(a => a!.State)
+            .ThenInclude(a => a.State)
             .Where(pa => pa.PersonId == personId && pa.Active)
             .Select(pa => new PersonAddressDto
             {
@@ -151,7 +157,13 @@ public class PersonAddressService : IPersonAddressService
                     City = pa.Address.City,
                     StateId = pa.Address.StateId,
                     Zip = pa.Address.Zip,
-                    AddressTypeId = pa.Address.AddressTypeId
+                    AddressTypeId = pa.Address.AddressTypeId,
+                    State = pa.Address.State != null ? new StateDto
+                    {
+                        StateId = pa.Address.State.StateId,
+                        Name = pa.Address.State.Name,
+                        Abbreviation = pa.Address.State.Abbreviation
+                    } : null
                 } : null
             })
             .ToListAsync();
@@ -159,12 +171,10 @@ public class PersonAddressService : IPersonAddressService
 
     public async Task<IEnumerable<PersonAddressDto>> GetByAddressIdAsync(Guid addressId)
     {
-        return await _context.PersonAddresses
+        return await context.PersonAddresses
             .Include(pa => pa.Person)
             .Include(pa => pa.Address)
-            .ThenInclude(a => a!.AddressType)
-            .Include(pa => pa.Address)
-            .ThenInclude(a => a!.State)
+            .ThenInclude(a => a.State)
             .Where(pa => pa.AddressId == addressId && pa.Active)
             .Select(pa => new PersonAddressDto
             {
@@ -198,13 +208,19 @@ public class PersonAddressService : IPersonAddressService
                     City = pa.Address.City,
                     StateId = pa.Address.StateId,
                     Zip = pa.Address.Zip,
-                    AddressTypeId = pa.Address.AddressTypeId
+                    AddressTypeId = pa.Address.AddressTypeId,
+                    State = pa.Address.State != null ? new StateDto
+                    {
+                        StateId = pa.Address.State.StateId,
+                        Name = pa.Address.State.Name,
+                        Abbreviation = pa.Address.State.Abbreviation
+                    } : null
                 } : null
             })
             .ToListAsync();
     }
 
-    public async Task<PersonAddressDto> CreateAsync(PersonAddressDto personAddressDto, string enteredBy)
+    public async Task<PersonAddressDto> CreateAsync(PersonAddressDto personAddressDto)
     {
         var personAddress = new PersonAddress
         {
@@ -213,45 +229,44 @@ public class PersonAddressService : IPersonAddressService
             AddressId = personAddressDto.AddressId,
             Active = true,
             CreatedDate = DateTime.UtcNow,
-            EnteredBy = enteredBy
+            EnteredBy = personAddressDto.EnteredBy
         };
 
-        _context.PersonAddresses.Add(personAddress);
-        await _context.SaveChangesAsync();
+        context.PersonAddresses.Add(personAddress);
+        await context.SaveChangesAsync();
 
         return await GetByIdAsync(personAddress.PersonAddressId) ?? personAddressDto;
     }
 
-    public async Task<PersonAddressDto> UpdateAsync(Guid id, PersonAddressDto personAddressDto, string enteredBy)
+    public async Task<PersonAddressDto> UpdateAsync(Guid id, PersonAddressDto personAddressDto)
     {
-        var personAddress = await _context.PersonAddresses.FindAsync(id);
+        var personAddress = await context.PersonAddresses.FindAsync(id);
         if (personAddress == null)
             throw new ArgumentException("PersonAddress not found");
 
         personAddress.PersonId = personAddressDto.PersonId;
         personAddress.AddressId = personAddressDto.AddressId;
-        personAddress.Active = personAddressDto.Active;
-        personAddress.EnteredBy = enteredBy;
+        personAddress.EnteredBy = personAddressDto.EnteredBy;
 
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
         return await GetByIdAsync(id) ?? personAddressDto;
     }
 
     public async Task<bool> DeleteAsync(Guid id)
     {
-        var personAddress = await _context.PersonAddresses.FindAsync(id);
+        var personAddress = await context.PersonAddresses.FindAsync(id);
         if (personAddress == null)
             return false;
 
         personAddress.Active = false;
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
         return true;
     }
 
     public async Task<bool> ExistsAsync(Guid id)
     {
-        return await _context.PersonAddresses.AnyAsync(pa => pa.PersonAddressId == id && pa.Active);
+        return await context.PersonAddresses.AnyAsync(pa => pa.PersonAddressId == id && pa.Active);
     }
 } 

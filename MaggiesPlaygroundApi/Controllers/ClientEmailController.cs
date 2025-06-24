@@ -8,63 +8,81 @@ namespace MaggiesPlaygroundApi.Controllers;
 [Route("api/[controller]")]
 public class ClientEmailController : ControllerBase
 {
-    private readonly IClientEmailService _service;
+    private readonly IClientEmailService service;
 
     public ClientEmailController(IClientEmailService service)
     {
-        _service = service;
+        this.service = service;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
+    [HttpGet("[action]")]
+    public async Task<ActionResult<IEnumerable<ClientEmailDto>>> GetAll()
     {
-        var result = await _service.GetAllAsync();
-        return Ok(result);
+        var clientEmails = await service.GetAllAsync();
+        return Ok(clientEmails);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(Guid id)
+    [HttpGet("[action]/{id:guid}")]
+    public async Task<ActionResult<ClientEmailDto>> GetById(Guid id)
     {
-        var result = await _service.GetByIdAsync(id);
-        if (result == null) return NotFound();
-        return Ok(result);
+        var clientEmail = await service.GetByIdAsync(id);
+        
+        if (clientEmail == null)
+            return NotFound();
+
+        return Ok(clientEmail);
     }
 
-    [HttpGet("ByClient/{clientId}")]
-    public async Task<IActionResult> GetByClientId(Guid clientId)
+    [HttpGet("[action]/client/{clientId:guid}")]
+    public async Task<ActionResult<IEnumerable<ClientEmailDto>>> GetByClientId(Guid clientId)
     {
-        var result = await _service.GetByClientIdAsync(clientId);
-        return Ok(result);
+        var clientEmails = await service.GetByClientIdAsync(clientId);
+        return Ok(clientEmails);
     }
 
-    [HttpGet("ByEmail/{emailId}")]
-    public async Task<IActionResult> GetByEmailId(Guid emailId)
+    [HttpGet("[action]/email/{emailId:guid}")]
+    public async Task<ActionResult<IEnumerable<ClientEmailDto>>> GetByEmailId(Guid emailId)
     {
-        var result = await _service.GetByEmailIdAsync(emailId);
-        return Ok(result);
+        var clientEmails = await service.GetByEmailIdAsync(emailId);
+        return Ok(clientEmails);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] ClientEmailDto dto)
+    [HttpPost("[action]")]
+    public async Task<ActionResult<ClientEmailDto>> Create(ClientEmailDto clientEmailDto)
     {
-        var enteredBy = User?.Identity?.Name ?? "System";
-        var created = await _service.CreateAsync(dto, enteredBy);
-        return CreatedAtAction(nameof(GetById), new { id = created.ClientEmailId }, created);
+        try
+        {
+            var createdClientEmail = await service.CreateAsync(clientEmailDto);
+            return CreatedAtAction(nameof(GetById), new { id = createdClientEmail.ClientEmailId }, createdClientEmail);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] ClientEmailDto dto)
+    [HttpPut("[action]/{id:guid}")]
+    public async Task<ActionResult<ClientEmailDto>> Update(Guid id, ClientEmailDto clientEmailDto)
     {
-        var enteredBy = User?.Identity?.Name ?? "System";
-        var updated = await _service.UpdateAsync(id, dto, enteredBy);
-        return Ok(updated);
+        try
+        {
+            var updatedClientEmail = await service.UpdateAsync(id, clientEmailDto);
+            return Ok(updatedClientEmail);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id)
+    [HttpDelete("[action]/{id:guid}")]
+    public async Task<ActionResult> Delete(Guid id)
     {
-        var deleted = await _service.DeleteAsync(id);
-        if (!deleted) return NotFound();
+        var deleted = await service.DeleteAsync(id);
+        
+        if (!deleted)
+            return NotFound();
+
         return NoContent();
     }
 } 

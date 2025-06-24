@@ -6,19 +6,18 @@ namespace MaggiesPlaygroundApi.Services;
 
 public class ClientPhoneService : IClientPhoneService
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext context;
 
     public ClientPhoneService(ApplicationDbContext context)
     {
-        _context = context;
+        this.context = context;
     }
 
     public async Task<IEnumerable<ClientPhoneDto>> GetAllAsync()
     {
-        return await _context.ClientPhones
+        return await context.ClientPhones
             .Include(cp => cp.Client)
             .Include(cp => cp.Phone)
-            .ThenInclude(p => p!.PhoneType)
             .Where(cp => cp.Active)
             .Select(cp => new ClientPhoneDto
             {
@@ -32,10 +31,10 @@ public class ClientPhoneService : IClientPhoneService
                 {
                     ClientId = cp.Client.ClientId,
                     ClientName = cp.Client.ClientName,
+                    ClientTypeId = cp.Client.ClientTypeId,
                     Active = cp.Client.Active,
                     CreatedDate = cp.Client.CreatedDate,
-                    EnteredBy = cp.Client.EnteredBy,
-                    ClientTypeId = cp.Client.ClientTypeId
+                    EnteredBy = cp.Client.EnteredBy
                 } : null,
                 Phone = cp.Phone != null ? new PhoneDto
                 {
@@ -50,10 +49,9 @@ public class ClientPhoneService : IClientPhoneService
 
     public async Task<ClientPhoneDto?> GetByIdAsync(Guid id)
     {
-        var clientPhone = await _context.ClientPhones
+        var clientPhone = await context.ClientPhones
             .Include(cp => cp.Client)
             .Include(cp => cp.Phone)
-            .ThenInclude(p => p!.PhoneType)
             .FirstOrDefaultAsync(cp => cp.ClientPhoneId == id && cp.Active);
 
         if (clientPhone == null)
@@ -71,10 +69,10 @@ public class ClientPhoneService : IClientPhoneService
             {
                 ClientId = clientPhone.Client.ClientId,
                 ClientName = clientPhone.Client.ClientName,
+                ClientTypeId = clientPhone.Client.ClientTypeId,
                 Active = clientPhone.Client.Active,
                 CreatedDate = clientPhone.Client.CreatedDate,
-                EnteredBy = clientPhone.Client.EnteredBy,
-                ClientTypeId = clientPhone.Client.ClientTypeId
+                EnteredBy = clientPhone.Client.EnteredBy
             } : null,
             Phone = clientPhone.Phone != null ? new PhoneDto
             {
@@ -88,10 +86,9 @@ public class ClientPhoneService : IClientPhoneService
 
     public async Task<IEnumerable<ClientPhoneDto>> GetByClientIdAsync(Guid clientId)
     {
-        return await _context.ClientPhones
+        return await context.ClientPhones
             .Include(cp => cp.Client)
             .Include(cp => cp.Phone)
-            .ThenInclude(p => p!.PhoneType)
             .Where(cp => cp.ClientId == clientId && cp.Active)
             .Select(cp => new ClientPhoneDto
             {
@@ -105,10 +102,10 @@ public class ClientPhoneService : IClientPhoneService
                 {
                     ClientId = cp.Client.ClientId,
                     ClientName = cp.Client.ClientName,
+                    ClientTypeId = cp.Client.ClientTypeId,
                     Active = cp.Client.Active,
                     CreatedDate = cp.Client.CreatedDate,
-                    EnteredBy = cp.Client.EnteredBy,
-                    ClientTypeId = cp.Client.ClientTypeId
+                    EnteredBy = cp.Client.EnteredBy
                 } : null,
                 Phone = cp.Phone != null ? new PhoneDto
                 {
@@ -123,10 +120,9 @@ public class ClientPhoneService : IClientPhoneService
 
     public async Task<IEnumerable<ClientPhoneDto>> GetByPhoneIdAsync(Guid phoneId)
     {
-        return await _context.ClientPhones
+        return await context.ClientPhones
             .Include(cp => cp.Client)
             .Include(cp => cp.Phone)
-            .ThenInclude(p => p!.PhoneType)
             .Where(cp => cp.PhoneId == phoneId && cp.Active)
             .Select(cp => new ClientPhoneDto
             {
@@ -140,10 +136,10 @@ public class ClientPhoneService : IClientPhoneService
                 {
                     ClientId = cp.Client.ClientId,
                     ClientName = cp.Client.ClientName,
+                    ClientTypeId = cp.Client.ClientTypeId,
                     Active = cp.Client.Active,
                     CreatedDate = cp.Client.CreatedDate,
-                    EnteredBy = cp.Client.EnteredBy,
-                    ClientTypeId = cp.Client.ClientTypeId
+                    EnteredBy = cp.Client.EnteredBy
                 } : null,
                 Phone = cp.Phone != null ? new PhoneDto
                 {
@@ -156,7 +152,7 @@ public class ClientPhoneService : IClientPhoneService
             .ToListAsync();
     }
 
-    public async Task<ClientPhoneDto> CreateAsync(ClientPhoneDto clientPhoneDto, string enteredBy)
+    public async Task<ClientPhoneDto> CreateAsync(ClientPhoneDto clientPhoneDto)
     {
         var clientPhone = new ClientPhone
         {
@@ -165,45 +161,44 @@ public class ClientPhoneService : IClientPhoneService
             PhoneId = clientPhoneDto.PhoneId,
             Active = true,
             CreatedDate = DateTime.UtcNow,
-            EnteredBy = enteredBy
+            EnteredBy = clientPhoneDto.EnteredBy
         };
 
-        _context.ClientPhones.Add(clientPhone);
-        await _context.SaveChangesAsync();
+        context.ClientPhones.Add(clientPhone);
+        await context.SaveChangesAsync();
 
         return await GetByIdAsync(clientPhone.ClientPhoneId) ?? clientPhoneDto;
     }
 
-    public async Task<ClientPhoneDto> UpdateAsync(Guid id, ClientPhoneDto clientPhoneDto, string enteredBy)
+    public async Task<ClientPhoneDto> UpdateAsync(Guid id, ClientPhoneDto clientPhoneDto)
     {
-        var clientPhone = await _context.ClientPhones.FindAsync(id);
+        var clientPhone = await context.ClientPhones.FindAsync(id);
         if (clientPhone == null)
             throw new ArgumentException("ClientPhone not found");
 
         clientPhone.ClientId = clientPhoneDto.ClientId;
         clientPhone.PhoneId = clientPhoneDto.PhoneId;
-        clientPhone.Active = clientPhoneDto.Active;
-        clientPhone.EnteredBy = enteredBy;
+        clientPhone.EnteredBy = clientPhoneDto.EnteredBy;
 
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
         return await GetByIdAsync(id) ?? clientPhoneDto;
     }
 
     public async Task<bool> DeleteAsync(Guid id)
     {
-        var clientPhone = await _context.ClientPhones.FindAsync(id);
+        var clientPhone = await context.ClientPhones.FindAsync(id);
         if (clientPhone == null)
             return false;
 
         clientPhone.Active = false;
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
         return true;
     }
 
     public async Task<bool> ExistsAsync(Guid id)
     {
-        return await _context.ClientPhones.AnyAsync(cp => cp.ClientPhoneId == id && cp.Active);
+        return await context.ClientPhones.AnyAsync(cp => cp.ClientPhoneId == id && cp.Active);
     }
 } 

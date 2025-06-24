@@ -6,16 +6,16 @@ namespace MaggiesPlaygroundApi.Services;
 
 public class PersonPhoneService : IPersonPhoneService
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext context;
 
     public PersonPhoneService(ApplicationDbContext context)
     {
-        _context = context;
+        this.context = context;
     }
 
     public async Task<IEnumerable<PersonPhoneDto>> GetAllAsync()
     {
-        return await _context.PersonPhones
+        return await context.PersonPhones
             .Include(pp => pp.Person)
             .Include(pp => pp.Phone)
             .ThenInclude(p => p!.PhoneType)
@@ -57,7 +57,7 @@ public class PersonPhoneService : IPersonPhoneService
 
     public async Task<PersonPhoneDto?> GetByIdAsync(Guid id)
     {
-        var personPhone = await _context.PersonPhones
+        var personPhone = await context.PersonPhones
             .Include(pp => pp.Person)
             .Include(pp => pp.Phone)
             .ThenInclude(p => p!.PhoneType)
@@ -102,7 +102,7 @@ public class PersonPhoneService : IPersonPhoneService
 
     public async Task<IEnumerable<PersonPhoneDto>> GetByPersonIdAsync(Guid personId)
     {
-        return await _context.PersonPhones
+        return await context.PersonPhones
             .Include(pp => pp.Person)
             .Include(pp => pp.Phone)
             .ThenInclude(p => p!.PhoneType)
@@ -144,7 +144,7 @@ public class PersonPhoneService : IPersonPhoneService
 
     public async Task<IEnumerable<PersonPhoneDto>> GetByPhoneIdAsync(Guid phoneId)
     {
-        return await _context.PersonPhones
+        return await context.PersonPhones
             .Include(pp => pp.Person)
             .Include(pp => pp.Phone)
             .ThenInclude(p => p!.PhoneType)
@@ -184,7 +184,7 @@ public class PersonPhoneService : IPersonPhoneService
             .ToListAsync();
     }
 
-    public async Task<PersonPhoneDto> CreateAsync(PersonPhoneDto personPhoneDto, string enteredBy)
+    public async Task<PersonPhoneDto> CreateAsync(PersonPhoneDto personPhoneDto)
     {
         var personPhone = new PersonPhone
         {
@@ -193,45 +193,44 @@ public class PersonPhoneService : IPersonPhoneService
             PhoneId = personPhoneDto.PhoneId,
             Active = true,
             CreatedDate = DateTime.UtcNow,
-            EnteredBy = enteredBy
+            EnteredBy = personPhoneDto.EnteredBy
         };
 
-        _context.PersonPhones.Add(personPhone);
-        await _context.SaveChangesAsync();
+        context.PersonPhones.Add(personPhone);
+        await context.SaveChangesAsync();
 
         return await GetByIdAsync(personPhone.PersonPhoneId) ?? personPhoneDto;
     }
 
-    public async Task<PersonPhoneDto> UpdateAsync(Guid id, PersonPhoneDto personPhoneDto, string enteredBy)
+    public async Task<PersonPhoneDto> UpdateAsync(Guid id, PersonPhoneDto personPhoneDto)
     {
-        var personPhone = await _context.PersonPhones.FindAsync(id);
+        var personPhone = await context.PersonPhones.FindAsync(id);
         if (personPhone == null)
             throw new ArgumentException("PersonPhone not found");
 
         personPhone.PersonId = personPhoneDto.PersonId;
         personPhone.PhoneId = personPhoneDto.PhoneId;
-        personPhone.Active = personPhoneDto.Active;
-        personPhone.EnteredBy = enteredBy;
+        personPhone.EnteredBy = personPhoneDto.EnteredBy;
 
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
         return await GetByIdAsync(id) ?? personPhoneDto;
     }
 
     public async Task<bool> DeleteAsync(Guid id)
     {
-        var personPhone = await _context.PersonPhones.FindAsync(id);
+        var personPhone = await context.PersonPhones.FindAsync(id);
         if (personPhone == null)
             return false;
 
         personPhone.Active = false;
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
         return true;
     }
 
     public async Task<bool> ExistsAsync(Guid id)
     {
-        return await _context.PersonPhones.AnyAsync(pp => pp.PersonPhoneId == id && pp.Active);
+        return await context.PersonPhones.AnyAsync(pp => pp.PersonPhoneId == id && pp.Active);
     }
 } 

@@ -6,21 +6,19 @@ namespace MaggiesPlaygroundApi.Services;
 
 public class ClientAddressService : IClientAddressService
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext context;
 
     public ClientAddressService(ApplicationDbContext context)
     {
-        _context = context;
+        this.context = context;
     }
 
     public async Task<IEnumerable<ClientAddressDto>> GetAllAsync()
     {
-        return await _context.ClientAddresses
+        return await context.ClientAddresses
             .Include(ca => ca.Client)
             .Include(ca => ca.Address)
-            .ThenInclude(a => a!.AddressType)
-            .Include(ca => ca.Address)
-            .ThenInclude(a => a!.State)
+            .ThenInclude(a => a.State)
             .Where(ca => ca.Active)
             .Select(ca => new ClientAddressDto
             {
@@ -34,10 +32,10 @@ public class ClientAddressService : IClientAddressService
                 {
                     ClientId = ca.Client.ClientId,
                     ClientName = ca.Client.ClientName,
+                    ClientTypeId = ca.Client.ClientTypeId,
                     Active = ca.Client.Active,
                     CreatedDate = ca.Client.CreatedDate,
-                    EnteredBy = ca.Client.EnteredBy,
-                    ClientTypeId = ca.Client.ClientTypeId
+                    EnteredBy = ca.Client.EnteredBy
                 } : null,
                 Address = ca.Address != null ? new AddressDto
                 {
@@ -47,7 +45,13 @@ public class ClientAddressService : IClientAddressService
                     City = ca.Address.City,
                     StateId = ca.Address.StateId,
                     Zip = ca.Address.Zip,
-                    AddressTypeId = ca.Address.AddressTypeId
+                    AddressTypeId = ca.Address.AddressTypeId,
+                    State = ca.Address.State != null ? new StateDto
+                    {
+                        StateId = ca.Address.State.StateId,
+                        Name = ca.Address.State.Name,
+                        Abbreviation = ca.Address.State.Abbreviation
+                    } : null
                 } : null
             })
             .ToListAsync();
@@ -55,12 +59,10 @@ public class ClientAddressService : IClientAddressService
 
     public async Task<ClientAddressDto?> GetByIdAsync(Guid id)
     {
-        var clientAddress = await _context.ClientAddresses
+        var clientAddress = await context.ClientAddresses
             .Include(ca => ca.Client)
             .Include(ca => ca.Address)
-            .ThenInclude(a => a!.AddressType)
-            .Include(ca => ca.Address)
-            .ThenInclude(a => a!.State)
+            .ThenInclude(a => a.State)
             .FirstOrDefaultAsync(ca => ca.ClientAddressId == id && ca.Active);
 
         if (clientAddress == null)
@@ -78,10 +80,10 @@ public class ClientAddressService : IClientAddressService
             {
                 ClientId = clientAddress.Client.ClientId,
                 ClientName = clientAddress.Client.ClientName,
+                ClientTypeId = clientAddress.Client.ClientTypeId,
                 Active = clientAddress.Client.Active,
                 CreatedDate = clientAddress.Client.CreatedDate,
-                EnteredBy = clientAddress.Client.EnteredBy,
-                ClientTypeId = clientAddress.Client.ClientTypeId
+                EnteredBy = clientAddress.Client.EnteredBy
             } : null,
             Address = clientAddress.Address != null ? new AddressDto
             {
@@ -91,19 +93,23 @@ public class ClientAddressService : IClientAddressService
                 City = clientAddress.Address.City,
                 StateId = clientAddress.Address.StateId,
                 Zip = clientAddress.Address.Zip,
-                AddressTypeId = clientAddress.Address.AddressTypeId
+                AddressTypeId = clientAddress.Address.AddressTypeId,
+                State = clientAddress.Address.State != null ? new StateDto
+                {
+                    StateId = clientAddress.Address.State.StateId,
+                    Name = clientAddress.Address.State.Name,
+                    Abbreviation = clientAddress.Address.State.Abbreviation
+                } : null
             } : null
         };
     }
 
     public async Task<IEnumerable<ClientAddressDto>> GetByClientIdAsync(Guid clientId)
     {
-        return await _context.ClientAddresses
+        return await context.ClientAddresses
             .Include(ca => ca.Client)
             .Include(ca => ca.Address)
-            .ThenInclude(a => a!.AddressType)
-            .Include(ca => ca.Address)
-            .ThenInclude(a => a!.State)
+            .ThenInclude(a => a.State)
             .Where(ca => ca.ClientId == clientId && ca.Active)
             .Select(ca => new ClientAddressDto
             {
@@ -117,10 +123,10 @@ public class ClientAddressService : IClientAddressService
                 {
                     ClientId = ca.Client.ClientId,
                     ClientName = ca.Client.ClientName,
+                    ClientTypeId = ca.Client.ClientTypeId,
                     Active = ca.Client.Active,
                     CreatedDate = ca.Client.CreatedDate,
-                    EnteredBy = ca.Client.EnteredBy,
-                    ClientTypeId = ca.Client.ClientTypeId
+                    EnteredBy = ca.Client.EnteredBy
                 } : null,
                 Address = ca.Address != null ? new AddressDto
                 {
@@ -130,7 +136,13 @@ public class ClientAddressService : IClientAddressService
                     City = ca.Address.City,
                     StateId = ca.Address.StateId,
                     Zip = ca.Address.Zip,
-                    AddressTypeId = ca.Address.AddressTypeId
+                    AddressTypeId = ca.Address.AddressTypeId,
+                    State = ca.Address.State != null ? new StateDto
+                    {
+                        StateId = ca.Address.State.StateId,
+                        Name = ca.Address.State.Name,
+                        Abbreviation = ca.Address.State.Abbreviation
+                    } : null
                 } : null
             })
             .ToListAsync();
@@ -138,12 +150,10 @@ public class ClientAddressService : IClientAddressService
 
     public async Task<IEnumerable<ClientAddressDto>> GetByAddressIdAsync(Guid addressId)
     {
-        return await _context.ClientAddresses
+        return await context.ClientAddresses
             .Include(ca => ca.Client)
             .Include(ca => ca.Address)
-            .ThenInclude(a => a!.AddressType)
-            .Include(ca => ca.Address)
-            .ThenInclude(a => a!.State)
+            .ThenInclude(a => a.State)
             .Where(ca => ca.AddressId == addressId && ca.Active)
             .Select(ca => new ClientAddressDto
             {
@@ -157,10 +167,10 @@ public class ClientAddressService : IClientAddressService
                 {
                     ClientId = ca.Client.ClientId,
                     ClientName = ca.Client.ClientName,
+                    ClientTypeId = ca.Client.ClientTypeId,
                     Active = ca.Client.Active,
                     CreatedDate = ca.Client.CreatedDate,
-                    EnteredBy = ca.Client.EnteredBy,
-                    ClientTypeId = ca.Client.ClientTypeId
+                    EnteredBy = ca.Client.EnteredBy
                 } : null,
                 Address = ca.Address != null ? new AddressDto
                 {
@@ -170,13 +180,19 @@ public class ClientAddressService : IClientAddressService
                     City = ca.Address.City,
                     StateId = ca.Address.StateId,
                     Zip = ca.Address.Zip,
-                    AddressTypeId = ca.Address.AddressTypeId
+                    AddressTypeId = ca.Address.AddressTypeId,
+                    State = ca.Address.State != null ? new StateDto
+                    {
+                        StateId = ca.Address.State.StateId,
+                        Name = ca.Address.State.Name,
+                        Abbreviation = ca.Address.State.Abbreviation
+                    } : null
                 } : null
             })
             .ToListAsync();
     }
 
-    public async Task<ClientAddressDto> CreateAsync(ClientAddressDto clientAddressDto, string enteredBy)
+    public async Task<ClientAddressDto> CreateAsync(ClientAddressDto clientAddressDto)
     {
         var clientAddress = new ClientAddress
         {
@@ -185,45 +201,44 @@ public class ClientAddressService : IClientAddressService
             AddressId = clientAddressDto.AddressId,
             Active = true,
             CreatedDate = DateTime.UtcNow,
-            EnteredBy = enteredBy
+            EnteredBy = clientAddressDto.EnteredBy
         };
 
-        _context.ClientAddresses.Add(clientAddress);
-        await _context.SaveChangesAsync();
+        context.ClientAddresses.Add(clientAddress);
+        await context.SaveChangesAsync();
 
         return await GetByIdAsync(clientAddress.ClientAddressId) ?? clientAddressDto;
     }
 
-    public async Task<ClientAddressDto> UpdateAsync(Guid id, ClientAddressDto clientAddressDto, string enteredBy)
+    public async Task<ClientAddressDto> UpdateAsync(Guid id, ClientAddressDto clientAddressDto)
     {
-        var clientAddress = await _context.ClientAddresses.FindAsync(id);
+        var clientAddress = await context.ClientAddresses.FindAsync(id);
         if (clientAddress == null)
             throw new ArgumentException("ClientAddress not found");
 
         clientAddress.ClientId = clientAddressDto.ClientId;
         clientAddress.AddressId = clientAddressDto.AddressId;
-        clientAddress.Active = clientAddressDto.Active;
-        clientAddress.EnteredBy = enteredBy;
+        clientAddress.EnteredBy = clientAddressDto.EnteredBy;
 
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
         return await GetByIdAsync(id) ?? clientAddressDto;
     }
 
     public async Task<bool> DeleteAsync(Guid id)
     {
-        var clientAddress = await _context.ClientAddresses.FindAsync(id);
+        var clientAddress = await context.ClientAddresses.FindAsync(id);
         if (clientAddress == null)
             return false;
 
         clientAddress.Active = false;
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
         return true;
     }
 
     public async Task<bool> ExistsAsync(Guid id)
     {
-        return await _context.ClientAddresses.AnyAsync(ca => ca.ClientAddressId == id && ca.Active);
+        return await context.ClientAddresses.AnyAsync(ca => ca.ClientAddressId == id && ca.Active);
     }
 } 

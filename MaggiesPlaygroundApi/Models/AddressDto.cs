@@ -9,6 +9,7 @@ public class AddressDto
     public int StateId { get; set; }
     public string Zip { get; set; } = string.Empty;
     public int AddressTypeId { get; set; }
+    public StateDto? State { get; set; }
 }
 
 public class CreateAddressDto

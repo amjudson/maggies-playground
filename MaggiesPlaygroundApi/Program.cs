@@ -38,6 +38,7 @@ builder.Services.AddScoped<IClientEmailService, ClientEmailService>();
 builder.Services.AddScoped<IPersonAddressService, PersonAddressService>();
 builder.Services.AddScoped<IPersonPhoneService, PersonPhoneService>();
 builder.Services.AddScoped<IPersonEmailService, PersonEmailService>();
+builder.Services.AddScoped<IPersonClientService, PersonClientService>();
 
 // Configure Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()

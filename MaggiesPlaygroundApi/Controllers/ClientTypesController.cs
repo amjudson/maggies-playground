@@ -21,22 +21,11 @@ public class ClientTypesController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<IEnumerable<ClientTypeDto>>> GetClientTypes([FromQuery] ClientTypeQueryParameters queryParams)
+    public async Task<ActionResult<IEnumerable<ClientTypeDto>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string? searchTerm = null)
     {
         try
         {
-            var (clientTypes, totalCount) = await clientTypeService.GetClientTypesAsync(queryParams);
-
-            Response.Headers.Append("X-Total-Count", totalCount.ToString());
-            Response.Headers.Append("X-Pagination", 
-                System.Text.Json.JsonSerializer.Serialize(new
-                {
-                    currentPage = queryParams.PageNumber,
-                    pageSize = queryParams.PageSize,
-                    totalPages = (int)Math.Ceiling(totalCount / (double)queryParams.PageSize),
-                    totalCount
-                }));
-
+            var clientTypes = await clientTypeService.GetAllAsync(page, pageSize, searchTerm);
             return Ok(clientTypes);
         }
         catch (Exception ex)
@@ -46,12 +35,12 @@ public class ClientTypesController : ControllerBase
         }
     }
 
-    [HttpGet("[action]/{id}")]
-    public async Task<ActionResult<ClientTypeDto>> GetClientType(int id)
+    [HttpGet("[action]/{id:int}")]
+    public async Task<ActionResult<ClientTypeDto>> GetById(int id)
     {
         try
         {
-            var clientType = await clientTypeService.GetClientTypeByIdAsync(id);
+            var clientType = await clientTypeService.GetByIdAsync(id);
 
             if (clientType == null)
             {
@@ -68,16 +57,14 @@ public class ClientTypesController : ControllerBase
     }
 
     [HttpPost("[action]")]
-    public async Task<ActionResult<ClientTypeDto>> CreateClientType(CreateClientTypeDto clientTypeDto)
+    public async Task<ActionResult<ClientTypeDto>> Create(ClientTypeDto clientTypeDto)
     {
         try
         {
-            var currentUser = User.FindFirstValue(ClaimTypes.Name) ?? "system";
-            
-            var createdClientType = await clientTypeService.CreateClientTypeAsync(clientTypeDto, currentUser);
+            var createdClientType = await clientTypeService.CreateAsync(clientTypeDto);
 
             return CreatedAtAction(
-                nameof(GetClientType),
+                nameof(GetById),
                 new { id = createdClientType.ClientTypeId },
                 createdClientType);
         }
@@ -88,20 +75,12 @@ public class ClientTypesController : ControllerBase
         }
     }
 
-    [HttpPut("[action]/{id}")]
-    public async Task<ActionResult<ClientTypeDto>> UpdateClientType(int id, UpdateClientTypeDto clientTypeDto)
+    [HttpPut("[action]/{id:int}")]
+    public async Task<ActionResult<ClientTypeDto>> Update(int id, ClientTypeDto clientTypeDto)
     {
         try
         {
-            var currentUser = User.FindFirstValue(ClaimTypes.Name) ?? "system";
-            
-            var updatedClientType = await clientTypeService.UpdateClientTypeAsync(id, clientTypeDto, currentUser);
-
-            if (updatedClientType == null)
-            {
-                return NotFound();
-            }
-
+            var updatedClientType = await clientTypeService.UpdateAsync(id, clientTypeDto);
             return Ok(updatedClientType);
         }
         catch (Exception ex)
@@ -111,14 +90,12 @@ public class ClientTypesController : ControllerBase
         }
     }
 
-    [HttpDelete("[action]/{id}")]
-    public async Task<IActionResult> DeleteClientType(int id)
+    [HttpDelete("[action]/{id:int}")]
+    public async Task<ActionResult> Delete(int id)
     {
         try
         {
-            var currentUser = User.FindFirstValue(ClaimTypes.Name) ?? "system";
-            
-            var result = await clientTypeService.DeleteClientTypeAsync(id, currentUser);
+            var result = await clientTypeService.DeleteAsync(id);
 
             if (!result)
             {

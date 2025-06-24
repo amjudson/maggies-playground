@@ -6,16 +6,16 @@ namespace MaggiesPlaygroundApi.Services;
 
 public class ClientEmailService : IClientEmailService
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext context;
 
     public ClientEmailService(ApplicationDbContext context)
     {
-        _context = context;
+        this.context = context;
     }
 
     public async Task<IEnumerable<ClientEmailDto>> GetAllAsync()
     {
-        return await _context.ClientEmails
+        return await context.ClientEmails
             .Include(ce => ce.Client)
             .Include(ce => ce.Email)
             .ThenInclude(e => e!.EmailType)
@@ -32,10 +32,10 @@ public class ClientEmailService : IClientEmailService
                 {
                     ClientId = ce.Client.ClientId,
                     ClientName = ce.Client.ClientName,
+                    ClientTypeId = ce.Client.ClientTypeId,
                     Active = ce.Client.Active,
                     CreatedDate = ce.Client.CreatedDate,
-                    EnteredBy = ce.Client.EnteredBy,
-                    ClientTypeId = ce.Client.ClientTypeId
+                    EnteredBy = ce.Client.EnteredBy
                 } : null,
                 Email = ce.Email != null ? new EmailDto
                 {
@@ -49,7 +49,7 @@ public class ClientEmailService : IClientEmailService
 
     public async Task<ClientEmailDto?> GetByIdAsync(Guid id)
     {
-        var clientEmail = await _context.ClientEmails
+        var clientEmail = await context.ClientEmails
             .Include(ce => ce.Client)
             .Include(ce => ce.Email)
             .ThenInclude(e => e!.EmailType)
@@ -70,10 +70,10 @@ public class ClientEmailService : IClientEmailService
             {
                 ClientId = clientEmail.Client.ClientId,
                 ClientName = clientEmail.Client.ClientName,
+                ClientTypeId = clientEmail.Client.ClientTypeId,
                 Active = clientEmail.Client.Active,
                 CreatedDate = clientEmail.Client.CreatedDate,
-                EnteredBy = clientEmail.Client.EnteredBy,
-                ClientTypeId = clientEmail.Client.ClientTypeId
+                EnteredBy = clientEmail.Client.EnteredBy
             } : null,
             Email = clientEmail.Email != null ? new EmailDto
             {
@@ -86,7 +86,7 @@ public class ClientEmailService : IClientEmailService
 
     public async Task<IEnumerable<ClientEmailDto>> GetByClientIdAsync(Guid clientId)
     {
-        return await _context.ClientEmails
+        return await context.ClientEmails
             .Include(ce => ce.Client)
             .Include(ce => ce.Email)
             .ThenInclude(e => e!.EmailType)
@@ -103,10 +103,10 @@ public class ClientEmailService : IClientEmailService
                 {
                     ClientId = ce.Client.ClientId,
                     ClientName = ce.Client.ClientName,
+                    ClientTypeId = ce.Client.ClientTypeId,
                     Active = ce.Client.Active,
                     CreatedDate = ce.Client.CreatedDate,
-                    EnteredBy = ce.Client.EnteredBy,
-                    ClientTypeId = ce.Client.ClientTypeId
+                    EnteredBy = ce.Client.EnteredBy
                 } : null,
                 Email = ce.Email != null ? new EmailDto
                 {
@@ -120,7 +120,7 @@ public class ClientEmailService : IClientEmailService
 
     public async Task<IEnumerable<ClientEmailDto>> GetByEmailIdAsync(Guid emailId)
     {
-        return await _context.ClientEmails
+        return await context.ClientEmails
             .Include(ce => ce.Client)
             .Include(ce => ce.Email)
             .ThenInclude(e => e!.EmailType)
@@ -137,10 +137,10 @@ public class ClientEmailService : IClientEmailService
                 {
                     ClientId = ce.Client.ClientId,
                     ClientName = ce.Client.ClientName,
+                    ClientTypeId = ce.Client.ClientTypeId,
                     Active = ce.Client.Active,
                     CreatedDate = ce.Client.CreatedDate,
-                    EnteredBy = ce.Client.EnteredBy,
-                    ClientTypeId = ce.Client.ClientTypeId
+                    EnteredBy = ce.Client.EnteredBy
                 } : null,
                 Email = ce.Email != null ? new EmailDto
                 {
@@ -152,7 +152,7 @@ public class ClientEmailService : IClientEmailService
             .ToListAsync();
     }
 
-    public async Task<ClientEmailDto> CreateAsync(ClientEmailDto clientEmailDto, string enteredBy)
+    public async Task<ClientEmailDto> CreateAsync(ClientEmailDto clientEmailDto)
     {
         var clientEmail = new ClientEmail
         {
@@ -161,45 +161,44 @@ public class ClientEmailService : IClientEmailService
             EmailId = clientEmailDto.EmailId,
             Active = true,
             CreatedDate = DateTime.UtcNow,
-            EnteredBy = enteredBy
+            EnteredBy = clientEmailDto.EnteredBy
         };
 
-        _context.ClientEmails.Add(clientEmail);
-        await _context.SaveChangesAsync();
+        context.ClientEmails.Add(clientEmail);
+        await context.SaveChangesAsync();
 
         return await GetByIdAsync(clientEmail.ClientEmailId) ?? clientEmailDto;
     }
 
-    public async Task<ClientEmailDto> UpdateAsync(Guid id, ClientEmailDto clientEmailDto, string enteredBy)
+    public async Task<ClientEmailDto> UpdateAsync(Guid id, ClientEmailDto clientEmailDto)
     {
-        var clientEmail = await _context.ClientEmails.FindAsync(id);
+        var clientEmail = await context.ClientEmails.FindAsync(id);
         if (clientEmail == null)
             throw new ArgumentException("ClientEmail not found");
 
         clientEmail.ClientId = clientEmailDto.ClientId;
         clientEmail.EmailId = clientEmailDto.EmailId;
-        clientEmail.Active = clientEmailDto.Active;
-        clientEmail.EnteredBy = enteredBy;
+        clientEmail.EnteredBy = clientEmailDto.EnteredBy;
 
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
         return await GetByIdAsync(id) ?? clientEmailDto;
     }
 
     public async Task<bool> DeleteAsync(Guid id)
     {
-        var clientEmail = await _context.ClientEmails.FindAsync(id);
+        var clientEmail = await context.ClientEmails.FindAsync(id);
         if (clientEmail == null)
             return false;
 
         clientEmail.Active = false;
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
         return true;
     }
 
     public async Task<bool> ExistsAsync(Guid id)
     {
-        return await _context.ClientEmails.AnyAsync(ce => ce.ClientEmailId == id && ce.Active);
+        return await context.ClientEmails.AnyAsync(ce => ce.ClientEmailId == id && ce.Active);
     }
 } 

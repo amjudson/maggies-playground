@@ -6,75 +6,43 @@ namespace MaggiesPlaygroundApi.Services;
 
 public class ClientTypeService : IClientTypeService
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext context;
 
     public ClientTypeService(ApplicationDbContext context)
     {
-        _context = context;
+        this.context = context;
     }
 
-    public async Task<(IEnumerable<ClientTypeDto> ClientTypes, int TotalCount)> GetClientTypesAsync(ClientTypeQueryParameters queryParams)
+    public async Task<IEnumerable<ClientTypeDto>> GetAllAsync(int page = 1, int pageSize = 10, string? searchTerm = null)
     {
-        var query = _context.ClientTypes.AsQueryable();
+        var query = context.ClientTypes.AsQueryable();
 
-        // Apply filters
-        if (!string.IsNullOrWhiteSpace(queryParams.SearchTerm))
+        if (!string.IsNullOrWhiteSpace(searchTerm))
         {
-            query = query.Where(ct => ct.Name.Contains(queryParams.SearchTerm));
+            query = query.Where(ct => ct.Name.Contains(searchTerm));
         }
 
-        if (queryParams.Active.HasValue)
-        {
-            query = query.Where(ct => ct.Active == queryParams.Active.Value);
-        }
-
-        // Apply sorting
-        if (!string.IsNullOrWhiteSpace(queryParams.SortBy))
-        {
-            query = queryParams.SortBy.ToLower() switch
-            {
-                "name" => queryParams.SortDescending 
-                    ? query.OrderByDescending(ct => ct.Name)
-                    : query.OrderBy(ct => ct.Name),
-                "createddate" => queryParams.SortDescending
-                    ? query.OrderByDescending(ct => ct.CreatedDate)
-                    : query.OrderBy(ct => ct.CreatedDate),
-                _ => query.OrderBy(ct => ct.Name)
-            };
-        }
-        else
-        {
-            query = query.OrderBy(ct => ct.Name);
-        }
-
-        // Get total count before pagination
         var totalCount = await query.CountAsync();
-
-        // Apply pagination
         var clientTypes = await query
-            .Skip((queryParams.PageNumber - 1) * queryParams.PageSize)
-            .Take(queryParams.PageSize)
-            .Select(ct => new ClientTypeDto
-            {
-                ClientTypeId = ct.ClientTypeId,
-                Name = ct.Name,
-                Active = ct.Active,
-                CreatedDate = ct.CreatedDate,
-                EnteredBy = ct.EnteredBy
-            })
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
 
-        return (clientTypes, totalCount);
+        return clientTypes.Select(ct => new ClientTypeDto
+        {
+            ClientTypeId = ct.ClientTypeId,
+            Name = ct.Name,
+            Active = ct.Active,
+            CreatedDate = ct.CreatedDate,
+            EnteredBy = ct.EnteredBy
+        });
     }
 
-    public async Task<ClientTypeDto?> GetClientTypeByIdAsync(int id)
+    public async Task<ClientTypeDto?> GetByIdAsync(int id)
     {
-        var clientType = await _context.ClientTypes.FindAsync(id);
-        
+        var clientType = await context.ClientTypes.FindAsync(id);
         if (clientType == null)
-        {
             return null;
-        }
 
         return new ClientTypeDto
         {
@@ -86,73 +54,52 @@ public class ClientTypeService : IClientTypeService
         };
     }
 
-    public async Task<ClientTypeDto> CreateClientTypeAsync(CreateClientTypeDto clientTypeDto, string currentUser)
+    public async Task<ClientTypeDto> CreateAsync(ClientTypeDto clientTypeDto)
     {
         var clientType = new ClientType
         {
+            ClientTypeId = 0, // Will be auto-generated
             Name = clientTypeDto.Name,
-            Active = clientTypeDto.Active,
+            Active = true,
             CreatedDate = DateTime.UtcNow,
-            EnteredBy = currentUser
+            EnteredBy = clientTypeDto.EnteredBy
         };
 
-        _context.ClientTypes.Add(clientType);
-        await _context.SaveChangesAsync();
+        context.ClientTypes.Add(clientType);
+        await context.SaveChangesAsync();
 
-        return new ClientTypeDto
-        {
-            ClientTypeId = clientType.ClientTypeId,
-            Name = clientType.Name,
-            Active = clientType.Active,
-            CreatedDate = clientType.CreatedDate,
-            EnteredBy = clientType.EnteredBy
-        };
+        return await GetByIdAsync(clientType.ClientTypeId) ?? clientTypeDto;
     }
 
-    public async Task<ClientTypeDto?> UpdateClientTypeAsync(int id, UpdateClientTypeDto clientTypeDto, string currentUser)
+    public async Task<ClientTypeDto> UpdateAsync(int id, ClientTypeDto clientTypeDto)
     {
-        var existingClientType = await _context.ClientTypes.FindAsync(id);
-        
+        var existingClientType = await context.ClientTypes.FindAsync(id);
         if (existingClientType == null)
-        {
-            return null;
-        }
+            throw new ArgumentException("ClientType not found");
 
         existingClientType.Name = clientTypeDto.Name;
         existingClientType.Active = clientTypeDto.Active;
-        existingClientType.EnteredBy = currentUser;
+        existingClientType.EnteredBy = clientTypeDto.EnteredBy;
 
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
-        return new ClientTypeDto
-        {
-            ClientTypeId = existingClientType.ClientTypeId,
-            Name = existingClientType.Name,
-            Active = existingClientType.Active,
-            CreatedDate = existingClientType.CreatedDate,
-            EnteredBy = existingClientType.EnteredBy
-        };
+        return await GetByIdAsync(id) ?? clientTypeDto;
     }
 
-    public async Task<bool> DeleteClientTypeAsync(int id, string currentUser)
+    public async Task<bool> DeleteAsync(int id)
     {
-        var clientType = await _context.ClientTypes.FindAsync(id);
-        
+        var clientType = await context.ClientTypes.FindAsync(id);
         if (clientType == null)
-        {
             return false;
-        }
 
-        // Check if the client type is in use
-        var inUse = await _context.Clients.AnyAsync(c => c.ClientTypeId == id);
+        // Check if any clients are using this type
+        var inUse = await context.Clients.AnyAsync(c => c.ClientTypeId == id);
         if (inUse)
-        {
-            return false;
-        }
+            throw new InvalidOperationException("Cannot delete client type that is in use by clients");
 
-        _context.ClientTypes.Remove(clientType);
-        await _context.SaveChangesAsync();
-        
+        context.ClientTypes.Remove(clientType);
+        await context.SaveChangesAsync();
+
         return true;
     }
 } 

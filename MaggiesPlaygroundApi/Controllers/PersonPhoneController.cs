@@ -8,63 +8,81 @@ namespace MaggiesPlaygroundApi.Controllers;
 [Route("api/[controller]")]
 public class PersonPhoneController : ControllerBase
 {
-    private readonly IPersonPhoneService _service;
+    private readonly IPersonPhoneService service;
 
     public PersonPhoneController(IPersonPhoneService service)
     {
-        _service = service;
+        this.service = service;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
+    [HttpGet("[action]")]
+    public async Task<ActionResult<IEnumerable<PersonPhoneDto>>> GetAll()
     {
-        var result = await _service.GetAllAsync();
-        return Ok(result);
+        var personPhones = await service.GetAllAsync();
+        return Ok(personPhones);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(Guid id)
+    [HttpGet("[action]/{id:guid}")]
+    public async Task<ActionResult<PersonPhoneDto>> GetById(Guid id)
     {
-        var result = await _service.GetByIdAsync(id);
-        if (result == null) return NotFound();
-        return Ok(result);
+        var personPhone = await service.GetByIdAsync(id);
+        
+        if (personPhone == null)
+            return NotFound();
+
+        return Ok(personPhone);
     }
 
-    [HttpGet("ByPerson/{personId}")]
-    public async Task<IActionResult> GetByPersonId(Guid personId)
+    [HttpGet("[action]/person/{personId:guid}")]
+    public async Task<ActionResult<IEnumerable<PersonPhoneDto>>> GetByPersonId(Guid personId)
     {
-        var result = await _service.GetByPersonIdAsync(personId);
-        return Ok(result);
+        var personPhones = await service.GetByPersonIdAsync(personId);
+        return Ok(personPhones);
     }
 
-    [HttpGet("ByPhone/{phoneId}")]
-    public async Task<IActionResult> GetByPhoneId(Guid phoneId)
+    [HttpGet("[action]/phone/{phoneId:guid}")]
+    public async Task<ActionResult<IEnumerable<PersonPhoneDto>>> GetByPhoneId(Guid phoneId)
     {
-        var result = await _service.GetByPhoneIdAsync(phoneId);
-        return Ok(result);
+        var personPhones = await service.GetByPhoneIdAsync(phoneId);
+        return Ok(personPhones);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] PersonPhoneDto dto)
+    [HttpPost("[action]")]
+    public async Task<ActionResult<PersonPhoneDto>> Create(PersonPhoneDto personPhoneDto)
     {
-        var enteredBy = User?.Identity?.Name ?? "System";
-        var created = await _service.CreateAsync(dto, enteredBy);
-        return CreatedAtAction(nameof(GetById), new { id = created.PersonPhoneId }, created);
+        try
+        {
+            var createdPersonPhone = await service.CreateAsync(personPhoneDto);
+            return CreatedAtAction(nameof(GetById), new { id = createdPersonPhone.PersonPhoneId }, createdPersonPhone);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] PersonPhoneDto dto)
+    [HttpPut("[action]/{id:guid}")]
+    public async Task<ActionResult<PersonPhoneDto>> Update(Guid id, PersonPhoneDto personPhoneDto)
     {
-        var enteredBy = User?.Identity?.Name ?? "System";
-        var updated = await _service.UpdateAsync(id, dto, enteredBy);
-        return Ok(updated);
+        try
+        {
+            var updatedPersonPhone = await service.UpdateAsync(id, personPhoneDto);
+            return Ok(updatedPersonPhone);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id)
+    [HttpDelete("[action]/{id:guid}")]
+    public async Task<ActionResult> Delete(Guid id)
     {
-        var deleted = await _service.DeleteAsync(id);
-        if (!deleted) return NotFound();
+        var deleted = await service.DeleteAsync(id);
+        
+        if (!deleted)
+            return NotFound();
+
         return NoContent();
     }
 } 

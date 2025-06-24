@@ -20,21 +20,12 @@ public class ClientsController : ControllerBase
     }
 
     [HttpGet("[action]")]
-    public async Task<ActionResult<PaginatedResponseDto<ClientDto>>> GetClients([FromQuery] ClientQueryParameters queryParams)
+    public async Task<ActionResult<IEnumerable<ClientDto>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10, [FromQuery] string? searchTerm = null)
     {
         try
         {
-            var (clients, totalCount) = await clientService.GetClientsAsync(queryParams);
-            
-            var response = new PaginatedResponseDto<ClientDto>
-            {
-                TotalCount = totalCount,
-                PageSize = queryParams.PageSize,
-                CurrentPage = queryParams.PageNumber,
-                Items = clients
-            };
-            
-            return Ok(response);
+            var clients = await clientService.GetAllAsync(page, pageSize, searchTerm);
+            return Ok(clients);
         }
         catch (Exception ex)
         {
@@ -43,12 +34,12 @@ public class ClientsController : ControllerBase
         }
     }
 
-    [HttpGet("[action]/{id}")]
-    public async Task<ActionResult<ClientDto>> GetClient(Guid id)
+    [HttpGet("[action]/{id:guid}")]
+    public async Task<ActionResult<ClientDto>> GetById(Guid id)
     {
         try
         {
-            var client = await clientService.GetClientByIdAsync(id);
+            var client = await clientService.GetByIdAsync(id);
             
             if (client == null)
             {
@@ -64,15 +55,13 @@ public class ClientsController : ControllerBase
         }
     }
 
-    [Authorize]
     [HttpPost("[action]")]
-    public async Task<ActionResult<ClientDto>> CreateClient(CreateClientDto clientDto)
+    public async Task<ActionResult<ClientDto>> Create(ClientDto clientDto)
     {
         try
         {
-            var currentUser = User.Identity?.Name ?? "System";
-            var createdClient = await clientService.CreateClientAsync(clientDto, currentUser);
-            return CreatedAtAction(nameof(GetClient), new { id = createdClient.ClientId }, createdClient);
+            var createdClient = await clientService.CreateAsync(clientDto);
+            return CreatedAtAction(nameof(GetById), new { id = createdClient.ClientId }, createdClient);
         }
         catch (Exception ex)
         {
@@ -81,20 +70,12 @@ public class ClientsController : ControllerBase
         }
     }
 
-    [Authorize]
-    [HttpPut("[action]/{id}")]
-    public async Task<IActionResult> UpdateClient(Guid id, UpdateClientDto clientDto)
+    [HttpPut("[action]/{id:guid}")]
+    public async Task<ActionResult<ClientDto>> Update(Guid id, ClientDto clientDto)
     {
         try
         {
-            var currentUser = User.Identity?.Name ?? "System";
-            var updatedClient = await clientService.UpdateClientAsync(id, clientDto, currentUser);
-            
-            if (updatedClient == null)
-            {
-                return NotFound();
-            }
-
+            var updatedClient = await clientService.UpdateAsync(id, clientDto);
             return Ok(updatedClient);
         }
         catch (Exception ex)
@@ -104,14 +85,12 @@ public class ClientsController : ControllerBase
         }
     }
 
-    [Authorize]
-    [HttpDelete("[action]/{id}")]
-    public async Task<IActionResult> DeleteClient(Guid id)
+    [HttpDelete("[action]/{id:guid}")]
+    public async Task<ActionResult> Delete(Guid id)
     {
         try
         {
-            var currentUser = User.Identity?.Name ?? "System";
-            var result = await clientService.DeleteClientAsync(id, currentUser);
+            var result = await clientService.DeleteAsync(id);
             
             if (!result)
             {

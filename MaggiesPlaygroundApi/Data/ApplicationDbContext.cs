@@ -34,6 +34,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 	public DbSet<PersonAddress> PersonAddresses { get; set; } = null!;
 	public DbSet<PersonPhone> PersonPhones { get; set; } = null!;
 	public DbSet<PersonEmail> PersonEmails { get; set; } = null!;
+	public DbSet<PersonClient> PersonClients { get; set; } = null!;
 
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
@@ -572,6 +573,24 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 			entity.HasOne(pe => pe.Email)
 				.WithMany()
 				.HasForeignKey(pe => pe.EmailId)
+				.OnDelete(DeleteBehavior.Cascade);
+		});
+
+		// Configure PersonClient lookup table
+		builder.Entity<PersonClient>(entity =>
+		{
+			entity.Property(e => e.EnteredBy).HasMaxLength(100);
+			entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+			
+			// Configure foreign key relationships
+			entity.HasOne(pc => pc.Person)
+				.WithMany()
+				.HasForeignKey(pc => pc.PersonId)
+				.OnDelete(DeleteBehavior.Cascade);
+				
+			entity.HasOne(pc => pc.Client)
+				.WithMany()
+				.HasForeignKey(pc => pc.ClientId)
 				.OnDelete(DeleteBehavior.Cascade);
 		});
 	}

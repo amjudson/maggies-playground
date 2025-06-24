@@ -6,16 +6,16 @@ namespace MaggiesPlaygroundApi.Services;
 
 public class PersonEmailService : IPersonEmailService
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ApplicationDbContext context;
 
     public PersonEmailService(ApplicationDbContext context)
     {
-        _context = context;
+        this.context = context;
     }
 
     public async Task<IEnumerable<PersonEmailDto>> GetAllAsync()
     {
-        return await _context.PersonEmails
+        return await context.PersonEmails
             .Include(pe => pe.Person)
             .Include(pe => pe.Email)
             .ThenInclude(e => e!.EmailType)
@@ -56,7 +56,7 @@ public class PersonEmailService : IPersonEmailService
 
     public async Task<PersonEmailDto?> GetByIdAsync(Guid id)
     {
-        var personEmail = await _context.PersonEmails
+        var personEmail = await context.PersonEmails
             .Include(pe => pe.Person)
             .Include(pe => pe.Email)
             .ThenInclude(e => e!.EmailType)
@@ -100,7 +100,7 @@ public class PersonEmailService : IPersonEmailService
 
     public async Task<IEnumerable<PersonEmailDto>> GetByPersonIdAsync(Guid personId)
     {
-        return await _context.PersonEmails
+        return await context.PersonEmails
             .Include(pe => pe.Person)
             .Include(pe => pe.Email)
             .ThenInclude(e => e!.EmailType)
@@ -141,7 +141,7 @@ public class PersonEmailService : IPersonEmailService
 
     public async Task<IEnumerable<PersonEmailDto>> GetByEmailIdAsync(Guid emailId)
     {
-        return await _context.PersonEmails
+        return await context.PersonEmails
             .Include(pe => pe.Person)
             .Include(pe => pe.Email)
             .ThenInclude(e => e!.EmailType)
@@ -180,7 +180,7 @@ public class PersonEmailService : IPersonEmailService
             .ToListAsync();
     }
 
-    public async Task<PersonEmailDto> CreateAsync(PersonEmailDto personEmailDto, string enteredBy)
+    public async Task<PersonEmailDto> CreateAsync(PersonEmailDto personEmailDto)
     {
         var personEmail = new PersonEmail
         {
@@ -189,45 +189,44 @@ public class PersonEmailService : IPersonEmailService
             EmailId = personEmailDto.EmailId,
             Active = true,
             CreatedDate = DateTime.UtcNow,
-            EnteredBy = enteredBy
+            EnteredBy = personEmailDto.EnteredBy
         };
 
-        _context.PersonEmails.Add(personEmail);
-        await _context.SaveChangesAsync();
+        context.PersonEmails.Add(personEmail);
+        await context.SaveChangesAsync();
 
         return await GetByIdAsync(personEmail.PersonEmailId) ?? personEmailDto;
     }
 
-    public async Task<PersonEmailDto> UpdateAsync(Guid id, PersonEmailDto personEmailDto, string enteredBy)
+    public async Task<PersonEmailDto> UpdateAsync(Guid id, PersonEmailDto personEmailDto)
     {
-        var personEmail = await _context.PersonEmails.FindAsync(id);
+        var personEmail = await context.PersonEmails.FindAsync(id);
         if (personEmail == null)
             throw new ArgumentException("PersonEmail not found");
 
         personEmail.PersonId = personEmailDto.PersonId;
         personEmail.EmailId = personEmailDto.EmailId;
-        personEmail.Active = personEmailDto.Active;
-        personEmail.EnteredBy = enteredBy;
+        personEmail.EnteredBy = personEmailDto.EnteredBy;
 
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
         return await GetByIdAsync(id) ?? personEmailDto;
     }
 
     public async Task<bool> DeleteAsync(Guid id)
     {
-        var personEmail = await _context.PersonEmails.FindAsync(id);
+        var personEmail = await context.PersonEmails.FindAsync(id);
         if (personEmail == null)
             return false;
 
         personEmail.Active = false;
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
 
         return true;
     }
 
     public async Task<bool> ExistsAsync(Guid id)
     {
-        return await _context.PersonEmails.AnyAsync(pe => pe.PersonEmailId == id && pe.Active);
+        return await context.PersonEmails.AnyAsync(pe => pe.PersonEmailId == id && pe.Active);
     }
 } 
